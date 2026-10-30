@@ -71,6 +71,8 @@ section.page.on{display:block}
 .hero{background:linear-gradient(135deg,var(--t1soft),var(--t2soft));border:1px solid var(--line);border-radius:18px;padding:26px 22px;margin-bottom:22px}
 .hero h1{margin:0 0 .3em;font-size:1.8rem}
 .hero p{max-width:760px;color:var(--muted);margin:0}
+.hero .intro p{max-width:820px;margin:.55em 0 0;color:var(--ink)}
+.hero .intro p:first-child{margin-top:0;color:var(--muted)}
 .kicker{font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
 
 .grid{display:grid;gap:14px}
@@ -258,8 +260,18 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--muted);f
   <div class="hero">
     <div class="kicker"><span class="th">2303221 นิเวศวิทยา · คณะวิทยาศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย</span><span class="en">2303221 Ecology · Faculty of Science, Chulalongkorn University</span></div>
     <h1><span class="th">เรียน ดู ลองจำลอง แล้วทดสอบตัวเอง</span><span class="en">Learn, watch, run the models, then test yourself</span></h1>
-    <p class="th">เว็บแอปนี้รวมเนื้อหา 2 หัวข้อของ รศ.ดร.พงษ์ชัย ดำรงโรจน์วัฒนา: การจัดการระบบนิเวศ และความรู้เบื้องต้นเกี่ยวกับแบบจำลองทางนิเวศ พร้อมวิดีโอบรรยาย แบบจำลองที่ปรับค่าได้ แบบทดสอบ คำถามอภิปราย และเอกสาร PDF</p>
-    <p class="en">This web app gathers two topics taught by Assoc. Prof. Dr. Pongchai Dumrongrojwatthana: ecosystem management and an introduction to ecological modelling, with lecture videos, models you can change, quizzes, discussion questions and PDF handouts.</p>
+    <div class="th intro">
+      <p>สื่อการสอนนี้รวมเนื้อหา 2 หัวข้อของ รศ.ดร.พงษ์ชัย ดำรงโรจน์วัฒนา: การจัดการระบบนิเวศ และความรู้เบื้องต้นเกี่ยวกับแบบจำลองทางนิเวศ พร้อมวิดีโอบรรยาย แบบจำลองที่ปรับค่าได้ แบบทดสอบ คำถามอภิปราย และเอกสารประกอบ PDF</p>
+      <p>เนื้อหาหลักที่ควรเตรียมเพื่อการสอบ ได้แก่ <a href="#videos">วิดีโอบรรยาย 4 คลิป</a> (การจัดการฯ 3 คลิป + แบบจำลอง 1 คลิป) และศึกษากรณีศึกษา โดยเฉพาะเรื่อง <a href="#t2/forest">การประเมินมูลค่าระบบนิเวศ</a>และ<a href="pdf/Decharut2010_Economics_without_Economic_Justice.pdf" target="_blank" rel="noopener">เศรษฐศาสตร์ที่ไร้เศรษฐธรรม</a> (ข้อสอบ เน้นตามวัตถุประสงค์การเรียนรู้ที่ระบุในสไลด์ ไม่เน้นเนื้อหาที่ลึกมาก)</p>
+      <p>ส่วนอื่น ๆ ใน web โดยเฉพาะแบบจำลองต่าง ๆ ที่ปรับค่าตัวแปรได้ และ link ไปยังแบบจำลองอื่น ๆ (เป็นผลงานของนิสิตในแลป ทั้ง senior project, วิทยานิพนธ์ และงานวิจัย) นั้น อาจารย์ได้ให้ Ai สร้าง/รวบรวมขึ้น เพื่อให้นิสิตที่สนใจ ทดลองใช้แบบจำลองแบบที่ไม่เน้นการมีส่วนร่วม ได้ทดลองเปลี่ยนตัวแปรและสังเกตพฤติกรรมของระบบที่เปลี่ยนไป (ไม่นำไปออกข้อสอบ)</p>
+      <p>เมื่อนิสิตศึกษา VDO ทั้งหมดแล้ว ให้นิสิตไปที่<a href="#appendix">ภาคผนวก</a> เพื่อทำแบบประเมิน ซึ่งเป็นส่วนหนึ่งของคะแนนเก็บในรายวิชานี้</p>
+    </div>
+    <div class="en intro">
+      <p>These teaching materials bring together two topics by Assoc. Prof. Dr. Pongchai Dumrongrojwatthana: ecosystem management and an introduction to ecological modelling, with lecture videos, models you can change, quizzes, discussion questions and PDF materials.</p>
+      <p>The core content to prepare for the exam is the <a href="#videos">4 lecture videos</a> (3 on ecosystem management + 1 on modelling) and the case studies, especially <a href="#t2/forest">ecosystem valuation</a> and <a href="pdf/Decharut2010_Economics_without_Economic_Justice.pdf" target="_blank" rel="noopener">“Economics without economic justice”</a>. The exam follows the learning objectives stated in the slides and does not go into great depth.</p>
+      <p>The other parts of this site, especially the models with adjustable variables and the links to other models (work by students in the lab: senior projects, theses and research), were created or compiled by AI at the instructor's request. They let interested students try non-participatory models, change the variables and watch how the system's behaviour changes (not examined).</p>
+      <p>After you have watched all the videos, go to the <a href="#appendix">Appendix</a> to complete the assessment form, which is part of the coursework score for this course.</p>
+    </div>
   </div>
 
   <div class="grid g2">
