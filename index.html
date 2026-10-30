@@ -756,6 +756,7 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--muted);f
               <li><b>Extension and communication</b>: civil suits against more than 2,000 farmers whose fields overlap forest land; 34 members of the land reform network alone were sued for over 32 million baht → questions from many parts of society (see below).</li>
             </ol>
             <h4><span class="th">ต้นทุนทดแทน (replacement cost) คิดอย่างไร</span><span class="en">How replacement cost works</span></h4>
+            <p class="muted" style="font-size:.9rem"><span class="th">รายละเอียดใน</span><span class="en">Details in the</span> <a href="pdf/DNP_Manual_Forest_Damage_Model.pdf" target="_blank" rel="noopener"><span class="th">คู่มือการใช้แบบจำลองฯ (กรมอุทยานฯ)</span><span class="en">model user manual (DNP, in Thai)</span></a></p>
             <ul class="th"><li><b>น้ำ</b>: ปริมาตรน้ำที่สูญหาย = ความสูงน้ำที่สูญหาย × พื้นที่ → จำนวนรถบรรทุกน้ำขึ้นไปฉีดพรม × ค่าเช่ารถ</li><li><b>ดิน</b>: ปริมาตรดิน = น้ำหนักดินที่สูญหาย ÷ ความหนาแน่นดิน → จำนวนรถบรรทุกดินขึ้นไปเทปู × ค่าเช่ารถ</li><li><b>ธาตุอาหาร</b>: แปลงเป็นแม่ปุ๋ย 21-0-0, 0-46-0, 0-0-60 × ราคาปุ๋ย</li><li><b>อากาศร้อน</b>: ปริมาตรอากาศ = พื้นที่ × ความสูงต้นไม้ → มวลอากาศ × ความร้อนจำเพาะ × อุณหภูมิที่สูงขึ้น = ความร้อนที่ต้องลด → ชั่วโมงเดินเครื่องปรับอากาศ 1 ตัน (BTU) × ค่าไฟ</li></ul>
             <ul class="en"><li><b>Water</b>: lost volume = lost depth × area → number of water trucks to spray it back × truck hire.</li><li><b>Soil</b>: volume = lost soil weight ÷ soil density → number of trucks to bring soil back × truck hire.</li><li><b>Nutrients</b>: converted to fertilizer (21-0-0, 0-46-0, 0-0-60) × fertilizer price.</li><li><b>Hotter air</b>: air volume = area × tree height → air mass × specific heat × temperature rise = heat to remove → hours of a 1-ton air conditioner (BTU) × electricity price.</li></ul>
           </div>
@@ -785,8 +786,8 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--muted);f
 
     <div class="card" style="margin-top:14px">
       <h3><span class="th">เครื่องคำนวณ B: แบบจำลองจากค่าความหลากหลายทางชีวภาพ (BDV)</span><span class="en">Calculator B: model driven by the biodiversity value (BDV)</span></h3>
-      <p class="th">จากงานวิจัยของ พงษ์ศักดิ์ วิทวัสชุติกุล และคณะ (2553) แบบจำลองมูลค่าความหลากหลายทางชีวภาพของระบบนิเวศป่าต้นน้ำ (เชียงดาว เชียงใหม่ 2547–2550) สมการ (2)–(9) ใช้ตามเอกสาร ส่วนราคาต่อหน่วยคำนวณย้อนจากตารางที่ 5–6 ของเอกสาร (แก้ไขได้)</p>
-      <p class="en">Based on Pongsak Witthawatchutikul et al. (2010), a model of the biodiversity value of headwater forest ecosystems (Chiang Dao, Chiang Mai, 2004–2007). Equations (2)–(9) are taken as published; the unit prices were worked back from tables 5–6 of that report (you can edit them).</p>
+      <p class="th">จากงานวิจัยของ พงษ์ศักดิ์ วิทวัสชุติกุล และคณะ (2553) <a href="pdf/DNP2010_Forest_Watershed_Biodiversity_Value_Model.pdf" target="_blank" rel="noopener">แบบจำลองมูลค่าความหลากหลายทางชีวภาพของระบบนิเวศป่าต้นน้ำ</a> (เชียงดาว เชียงใหม่ 2547–2550) สมการ (2)–(9) ใช้ตามเอกสาร ส่วนราคาต่อหน่วยคำนวณย้อนจากตารางที่ 5–6 ของเอกสาร (แก้ไขได้)</p>
+      <p class="en">Based on Pongsak Witthawatchutikul et al. (2010), <a href="pdf/DNP2010_Forest_Watershed_Biodiversity_Value_Model.pdf" target="_blank" rel="noopener">a model of the biodiversity value of headwater forest ecosystems</a> (in Thai) (Chiang Dao, Chiang Mai, 2004–2007). Equations (2)–(9) are taken as published; the unit prices were worked back from tables 5–6 of that report (you can edit them).</p>
       <div class="seg noprint" id="fbMode"><button data-m="lu" class="on"><span class="th">เลือกการใช้ที่ดิน (ตาราง 2)</span><span class="en">Pick a land use (table 2)</span></button><button data-m="calc"><span class="th">คำนวณ BDV จากโครงสร้างป่า</span><span class="en">Compute BDV from forest structure</span></button></div>
       <div class="controls" id="fbLU">
         <label class="ctl"><span class="th">ชนิดป่า / การใช้ที่ดิน</span><span class="en">Forest / land use</span><select id="fb_lu"></select></label>
@@ -824,8 +825,8 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--muted);f
           <ul class="th"><li>แบบจำลองถูกต้องมากน้อยเพียงใด ยอมรับได้หรือไม่</li><li>ควรใช้เพื่อการอ้างอิง (เทียบเป็นตัวเงิน) เช่น เปรียบเทียบการสร้าง/ไม่สร้างเขื่อน มากกว่าใช้ฟ้องร้อง</li><li>ข้อถกเถียงทางวิทยาศาสตร์เรื่องโลกร้อนในเวลานั้น</li></ul>
           <ul class="en"><li>How accurate is the model, and is it acceptable?</li><li>It should be used as a reference (in money terms), e.g. to compare building or not building a dam, rather than in lawsuits.</li><li>Scientific debate about global warming at the time.</li></ul></div>
         <div><h4><span class="th">ด้านความยุติธรรม</span><span class="en">Justice</span></h4>
-          <ul class="th"><li>ตัวการบุกรุกทำลายป่าไม่ใช่ชาวบ้าน แต่เป็นนายทุน</li><li>บังคับใช้กับรีสอร์ท การสร้างบ้านพัก ตัดถนนเข้าอุทยานฯ ด้วยมาตรฐานเดียวกันหรือไม่</li><li>ประเทศอุตสาหกรรมที่ปล่อยก๊าซเรือนกระจกยังไม่ยอมรับการประเมินลักษณะนี้ และยังซื้อขายคาร์บอนกับประเทศด้อยพัฒนา</li><li>ดูบทความ “เศรษฐศาสตร์ที่ไร้เศรษฐธรรม” (เดชรัต สุขกำเนิด, 2553)</li></ul>
-          <ul class="en"><li>The main forest destroyers are investors, not villagers.</li><li>Is the same standard applied to resorts, staff housing and roads into national parks?</li><li>Industrial countries that emit greenhouse gases do not accept this kind of valuation, yet buy carbon credits from poorer countries.</li><li>See the article “Economics without economic justice” (Decharut Sukkumnoed, 2010).</li></ul></div>
+          <ul class="th"><li>ตัวการบุกรุกทำลายป่าไม่ใช่ชาวบ้าน แต่เป็นนายทุน</li><li>บังคับใช้กับรีสอร์ท การสร้างบ้านพัก ตัดถนนเข้าอุทยานฯ ด้วยมาตรฐานเดียวกันหรือไม่</li><li>ประเทศอุตสาหกรรมที่ปล่อยก๊าซเรือนกระจกยังไม่ยอมรับการประเมินลักษณะนี้ และยังซื้อขายคาร์บอนกับประเทศด้อยพัฒนา</li><li>ดูบทความ <a href="pdf/Decharut2010_Economics_without_Economic_Justice.pdf" target="_blank" rel="noopener">“เศรษฐศาสตร์ที่ไร้เศรษฐธรรม”</a> (เดชรัต สุขกำเนิด, 2553)</li></ul>
+          <ul class="en"><li>The main forest destroyers are investors, not villagers.</li><li>Is the same standard applied to resorts, staff housing and roads into national parks?</li><li>Industrial countries that emit greenhouse gases do not accept this kind of valuation, yet buy carbon credits from poorer countries.</li><li>See the article <a href="pdf/Decharut2010_Economics_without_Economic_Justice.pdf" target="_blank" rel="noopener">“Economics without economic justice”</a> (Decharut Sukkumnoed, 2010; in Thai).</li></ul></div>
       </div>
     </div>
   </div>
@@ -1049,12 +1050,10 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--muted);f
     </div>
   </div>
   <div class="card" style="margin-top:14px">
-    <h3><span class="th">เอกสารอ่านเพิ่มเติม (ในระบบ MyCourseVille)</span><span class="en">Further reading (on MyCourseVille; in Thai)</span></h3>
-    <ul>
-      <li>พงษ์ศักดิ์ วิทวัสชุติกุล และคณะ (2553) แบบจำลองมูลค่าความหลากหลายทางชีวภาพของระบบนิเวศป่าต้นน้ำ. กรมอุทยานแห่งชาติ สัตว์ป่า และพันธุ์พืช.</li>
-      <li>กลุ่มวิจัยต้นน้ำ (ม.ป.ป.) คู่มือการใช้แบบจำลองสำหรับประเมินค่าเสียหายทางสิ่งแวดล้อมบางประการหลังการทำลายป่าไม้. สำนักอนุรักษ์และจัดการต้นน้ำ กรมอุทยานแห่งชาติ สัตว์ป่า และพันธุ์พืช.</li>
-      <li>เดชรัต สุขกำเนิด (2553) เศรษฐศาสตร์ที่ไร้เศรษฐธรรม: ข้อวิพากษ์แบบจำลองการคิดมูลค่าความเสียหาย.</li>
-    </ul>
+    <h3><span class="th">เอกสารอ่านเพิ่มเติม (กรณีที่ 1 มูลค่าป่าไม้)</span><span class="en">Further reading (case 1, forest value; in Thai)</span></h3>
+    <div class="doc"><div class="ic">PDF</div><div><a href="pdf/DNP2010_Forest_Watershed_Biodiversity_Value_Model.pdf" target="_blank" rel="noopener">พงษ์ศักดิ์ วิทวัสชุติกุล และคณะ (2553) แบบจำลองมูลค่าความหลากหลายทางชีวภาพของระบบนิเวศป่าต้นน้ำ. กรมอุทยานแห่งชาติ สัตว์ป่า และพันธุ์พืช</a><div class="muted" style="font-size:.82rem">11 <span class="th">หน้า</span><span class="en">pages</span> · 0.3 MB · <span class="th">ใช้ในเครื่องคำนวณ B</span><span class="en">used in calculator B</span></div></div></div>
+    <div class="doc"><div class="ic">PDF</div><div><a href="pdf/DNP_Manual_Forest_Damage_Model.pdf" target="_blank" rel="noopener">กลุ่มวิจัยต้นน้ำ (ม.ป.ป.) คู่มือการใช้แบบจำลองสำหรับประเมินค่าเสียหายทางสิ่งแวดล้อมบางประการหลังการทำลายป่าไม้. สำนักอนุรักษ์และจัดการต้นน้ำ กรมอุทยานแห่งชาติ สัตว์ป่า และพันธุ์พืช</a><div class="muted" style="font-size:.82rem">8 <span class="th">หน้า</span><span class="en">pages</span> · 0.2 MB</div></div></div>
+    <div class="doc"><div class="ic">PDF</div><div><a href="pdf/Decharut2010_Economics_without_Economic_Justice.pdf" target="_blank" rel="noopener">เดชรัต สุขกำเนิด (2553) เศรษฐศาสตร์ที่ไร้เศรษฐธรรม: ข้อวิพากษ์แบบจำลองการคิดมูลค่าความเสียหาย</a><div class="muted" style="font-size:.82rem">12 <span class="th">หน้า</span><span class="en">pages</span> · 0.2 MB</div></div></div>
   </div>
 </section>
 
