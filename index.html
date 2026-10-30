@@ -53,10 +53,16 @@ header.top{background:var(--surface);border-bottom:1px solid var(--line);positio
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);min-width:0}
 .logo{width:34px;height:34px;flex:0 0 34px}
 .brand b{display:block;font-size:1.02rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.brand span{display:block;font-size:.8rem;color:var(--muted);white-space:nowrap}
+.brand span{display:block;font-size:.8rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand>div{min-width:0;overflow:hidden}
+.brand span span{display:inline}
 .spacer{flex:1}
 .langbtn{border:1px solid var(--line);background:var(--surface2);color:var(--ink);border-radius:999px;padding:5px 12px;font:inherit;font-size:.88rem;cursor:pointer;white-space:nowrap}
 .langbtn:hover{border-color:var(--t1)}
+.visits{display:flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface2);border-radius:999px;padding:3px 5px 3px 10px;text-decoration:none;color:var(--ink);font-size:.85rem;white-space:nowrap;flex:0 0 auto}
+.visits:hover{border-color:var(--t1)}
+.visits img{height:20px;display:block;border-radius:4px}
+@media (max-width:560px){.visits .vlab{display:none}.visits{padding:3px}}
 nav.main{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding-bottom:6px}
 nav.main::-webkit-scrollbar{display:none}
 nav.main a{flex:0 0 auto;text-decoration:none;color:var(--muted);padding:6px 12px;border-radius:8px;font-size:.95rem;font-weight:600}
@@ -239,6 +245,7 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--muted);f
         <span><span class="th">การจัดการระบบนิเวศ · แบบจำลองทางนิเวศ</span><span class="en">Ecosystem management · Ecological modelling</span></span></div>
       </a>
       <div class="spacer"></div>
+      <a class="visits hide" id="visits" href="https://hits.sh/tenrm.github.io/ecology-2303221/" target="_blank" rel="noopener"><span class="vlab">👁 <span class="th">ผู้เข้าชม</span><span class="en">Visitors</span></span></a>
       <button class="langbtn" id="langBtn" type="button" aria-label="Switch language">EN</button>
     </div>
     <nav class="main" id="mainNav">
@@ -1544,6 +1551,15 @@ Object.keys(DOCS).forEach(function(id){$('#'+id).innerHTML=DOCS[id].map(function
 /* ---------- bilingual <option>s ("ไทย · English — suffix") ---------- */
 var OPTS=$$('select option').filter(function(o){return o.textContent.indexOf(' · ')>0}).map(function(o){var t=o.textContent,suf='',i=t.indexOf(' — ');if(i>0){suf=t.slice(i);t=t.slice(0,i)}var a=t.split(' · ');return {o:o,th:a[0],en:a[1],suf:suf}});
 onRender(function(){OPTS.forEach(function(x){x.o.textContent=(lang==='en'?x.en:x.th)+x.suf})});
+
+/* ---------- visitor counter (hits.sh: counts page loads, no cookies; only on the live site) ---------- */
+(function(){var a=$('#visits');if(!a||location.hostname!=='tenrm.github.io')return;
+  var img=new Image();img.alt='today / total';img.height=20;
+  img.src='https://hits.sh/tenrm.github.io/ecology-2303221.svg?view=today-total&style=flat-square&label=today%20%2F%20total&color=2e7d4f';
+  img.onload=function(){a.classList.remove('hide')};a.appendChild(img);
+  a.title=L('จำนวนผู้เข้าชม (วันนี้ / ทั้งหมด) — กดเพื่อดูสถิติ','Visitors (today / total) — click for statistics');
+  onRender(function(){a.title=L('จำนวนผู้เข้าชม (วันนี้ / ทั้งหมด) — กดเพื่อดูสถิติ','Visitors (today / total) — click for statistics')});
+})();
 
 /* ---------- init ---------- */
 var qp=(location.search.match(/[?&]lang=(th|en)/)||[])[1];
