@@ -1082,6 +1082,10 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--muted);f
     <div class="doc"><div class="ic">PDF</div><div><a href="pdf/DNP_Manual_Forest_Damage_Model.pdf" target="_blank" rel="noopener">กลุ่มวิจัยต้นน้ำ (ม.ป.ป.) คู่มือการใช้แบบจำลองสำหรับประเมินค่าเสียหายทางสิ่งแวดล้อมบางประการหลังการทำลายป่าไม้. สำนักอนุรักษ์และจัดการต้นน้ำ กรมอุทยานแห่งชาติ สัตว์ป่า และพันธุ์พืช</a><div class="muted" style="font-size:.82rem">8 <span class="th">หน้า</span><span class="en">pages</span> · 0.2 MB</div></div></div>
     <div class="doc"><div class="ic">PDF</div><div><a href="pdf/Decharut2010_Economics_without_Economic_Justice.pdf" target="_blank" rel="noopener">เดชรัต สุขกำเนิด (2553) เศรษฐศาสตร์ที่ไร้เศรษฐธรรม: ข้อวิพากษ์แบบจำลองการคิดมูลค่าความเสียหาย</a><div class="muted" style="font-size:.82rem">12 <span class="th">หน้า</span><span class="en">pages</span> · 0.2 MB</div></div></div>
   </div>
+  <div class="card" style="margin-top:14px">
+    <h3><span class="th">เอกสารอ่านเพิ่มเติม (กรณีที่ 2 และ 3)</span><span class="en">Further reading (cases 2 and 3; in Thai)</span></h3>
+    <div id="docs3"></div>
+  </div>
 </section>
 
 <!-- ================= APPENDIX ================= -->
@@ -1543,8 +1547,9 @@ var DOCS={docs1:[
  ['04_Introduction_to_modelling.pdf','สไลด์ ความรู้เบื้องต้นเกี่ยวกับแบบจำลองทางนิเวศ','Slides: introduction to ecological modelling','39','6.1'],
  ['05_Case1_ForestValue.pdf','สไลด์ กรณีที่ 1 แบบจำลองมูลค่าของระบบนิเวศป่าไม้','Slides: case 1, forest ecosystem value model','14','2.4'],
  ['06_Case2_EcologicalFootprint.pdf','สไลด์ กรณีที่ 2 แบบจำลองรอยประทับทางนิเวศ','Slides: case 2, ecological footprint model','22','4.3'],
+ ['07_Case_DoiTiew_Nan_2021.pdf','สไลด์ เกมและสถานการณ์จำลอง บ้านดอยติ้ว จ.น่าน','Slides: gaming & simulation at Doi Tiew, Nan','25','6.2']],
+ docs3:[
  ['Article_EcologicalFootprint_PD.pdf','บทความ รอยประทับทางนิเวศ (พงษ์ชัย ดำรงโรจน์วัฒนา)','Article: ecological footprint (Pongchai Dumrongrojwatthana, Thai)','2','0.2'],
- ['07_Case_DoiTiew_Nan_2021.pdf','สไลด์ เกมและสถานการณ์จำลอง บ้านดอยติ้ว จ.น่าน','Slides: gaming & simulation at Doi Tiew, Nan','25','6.2'],
  ['TSJLD2016_DoiTiew_Companion_Modelling.pdf','บทความ แบบจำลองเพื่อนคู่คิดเพื่อการจัดการทรัพยากรที่ดินและป่าไม้ (TSJLD 2016)','Article: companion modelling for land and forest management (TSJLD 2016, Thai)','19','1.1']]};
 Object.keys(DOCS).forEach(function(id){$('#'+id).innerHTML=DOCS[id].map(function(d){return '<div class="doc"><div class="ic">PDF</div><div><a href="pdf/'+d[0]+'" target="_blank" rel="noopener">'+T(d[1],d[2])+'</a><div class="muted" style="font-size:.82rem">'+d[3]+' '+T('หน้า','pages')+' · '+d[4]+' MB</div></div></div>'}).join('')});
 
