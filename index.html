@@ -119,7 +119,9 @@ blockquote{margin:10px 0;padding:8px 14px;border-left:3px solid var(--line);colo
 table{border-collapse:collapse;width:100%;font-size:.92rem}
 th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
 th{background:var(--surface2);font-weight:700}
-td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+table{overflow-wrap:normal}
+#fpTable td:first-child{min-width:170px}
 .tablewrap{overflow-x:auto;margin:8px 0 12px}
 .steps{counter-reset:s;list-style:none;padding:0}
 .steps li{counter-increment:s;position:relative;padding:6px 0 6px 40px}
@@ -756,6 +758,7 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--muted);f
               <li><b>Extension and communication</b>: civil suits against more than 2,000 farmers whose fields overlap forest land; 34 members of the land reform network alone were sued for over 32 million baht → questions from many parts of society (see below).</li>
             </ol>
             <h4><span class="th">ต้นทุนทดแทน (replacement cost) คิดอย่างไร</span><span class="en">How replacement cost works</span></h4>
+            <p class="muted" style="font-size:.9rem"><span class="th">รายละเอียดใน</span><span class="en">Details in the</span> <a href="pdf/DNP_Manual_Forest_Damage_Model.pdf" target="_blank" rel="noopener"><span class="th">คู่มือการใช้แบบจำลองฯ (กรมอุทยานฯ)</span><span class="en">model user manual (DNP, in Thai)</span></a></p>
             <ul class="th"><li><b>น้ำ</b>: ปริมาตรน้ำที่สูญหาย = ความสูงน้ำที่สูญหาย × พื้นที่ → จำนวนรถบรรทุกน้ำขึ้นไปฉีดพรม × ค่าเช่ารถ</li><li><b>ดิน</b>: ปริมาตรดิน = น้ำหนักดินที่สูญหาย ÷ ความหนาแน่นดิน → จำนวนรถบรรทุกดินขึ้นไปเทปู × ค่าเช่ารถ</li><li><b>ธาตุอาหาร</b>: แปลงเป็นแม่ปุ๋ย 21-0-0, 0-46-0, 0-0-60 × ราคาปุ๋ย</li><li><b>อากาศร้อน</b>: ปริมาตรอากาศ = พื้นที่ × ความสูงต้นไม้ → มวลอากาศ × ความร้อนจำเพาะ × อุณหภูมิที่สูงขึ้น = ความร้อนที่ต้องลด → ชั่วโมงเดินเครื่องปรับอากาศ 1 ตัน (BTU) × ค่าไฟ</li></ul>
             <ul class="en"><li><b>Water</b>: lost volume = lost depth × area → number of water trucks to spray it back × truck hire.</li><li><b>Soil</b>: volume = lost soil weight ÷ soil density → number of trucks to bring soil back × truck hire.</li><li><b>Nutrients</b>: converted to fertilizer (21-0-0, 0-46-0, 0-0-60) × fertilizer price.</li><li><b>Hotter air</b>: air volume = area × tree height → air mass × specific heat × temperature rise = heat to remove → hours of a 1-ton air conditioner (BTU) × electricity price.</li></ul>
           </div>
@@ -785,8 +788,8 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--muted);f
 
     <div class="card" style="margin-top:14px">
       <h3><span class="th">เครื่องคำนวณ B: แบบจำลองจากค่าความหลากหลายทางชีวภาพ (BDV)</span><span class="en">Calculator B: model driven by the biodiversity value (BDV)</span></h3>
-      <p class="th">จากงานวิจัยของ พงษ์ศักดิ์ วิทวัสชุติกุล และคณะ (2553) แบบจำลองมูลค่าความหลากหลายทางชีวภาพของระบบนิเวศป่าต้นน้ำ (เชียงดาว เชียงใหม่ 2547–2550) สมการ (2)–(9) ใช้ตามเอกสาร ส่วนราคาต่อหน่วยคำนวณย้อนจากตารางที่ 5–6 ของเอกสาร (แก้ไขได้)</p>
-      <p class="en">Based on Pongsak Witthawatchutikul et al. (2010), a model of the biodiversity value of headwater forest ecosystems (Chiang Dao, Chiang Mai, 2004–2007). Equations (2)–(9) are taken as published; the unit prices were worked back from tables 5–6 of that report (you can edit them).</p>
+      <p class="th">จากงานวิจัยของ พงษ์ศักดิ์ วิทวัสชุติกุล และคณะ (2553) <a href="pdf/DNP2010_Forest_Watershed_Biodiversity_Value_Model.pdf" target="_blank" rel="noopener">แบบจำลองมูลค่าความหลากหลายทางชีวภาพของระบบนิเวศป่าต้นน้ำ</a> (เชียงดาว เชียงใหม่ 2547–2550) สมการ (2)–(9) ใช้ตามเอกสาร ส่วนราคาต่อหน่วยคำนวณย้อนจากตารางที่ 5–6 ของเอกสาร (แก้ไขได้)</p>
+      <p class="en">Based on Pongsak Witthawatchutikul et al. (2010), <a href="pdf/DNP2010_Forest_Watershed_Biodiversity_Value_Model.pdf" target="_blank" rel="noopener">a model of the biodiversity value of headwater forest ecosystems</a> (in Thai) (Chiang Dao, Chiang Mai, 2004–2007). Equations (2)–(9) are taken as published; the unit prices were worked back from tables 5–6 of that report (you can edit them).</p>
       <div class="seg noprint" id="fbMode"><button data-m="lu" class="on"><span class="th">เลือกการใช้ที่ดิน (ตาราง 2)</span><span class="en">Pick a land use (table 2)</span></button><button data-m="calc"><span class="th">คำนวณ BDV จากโครงสร้างป่า</span><span class="en">Compute BDV from forest structure</span></button></div>
       <div class="controls" id="fbLU">
         <label class="ctl"><span class="th">ชนิดป่า / การใช้ที่ดิน</span><span class="en">Forest / land use</span><select id="fb_lu"></select></label>
@@ -824,8 +827,8 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--muted);f
           <ul class="th"><li>แบบจำลองถูกต้องมากน้อยเพียงใด ยอมรับได้หรือไม่</li><li>ควรใช้เพื่อการอ้างอิง (เทียบเป็นตัวเงิน) เช่น เปรียบเทียบการสร้าง/ไม่สร้างเขื่อน มากกว่าใช้ฟ้องร้อง</li><li>ข้อถกเถียงทางวิทยาศาสตร์เรื่องโลกร้อนในเวลานั้น</li></ul>
           <ul class="en"><li>How accurate is the model, and is it acceptable?</li><li>It should be used as a reference (in money terms), e.g. to compare building or not building a dam, rather than in lawsuits.</li><li>Scientific debate about global warming at the time.</li></ul></div>
         <div><h4><span class="th">ด้านความยุติธรรม</span><span class="en">Justice</span></h4>
-          <ul class="th"><li>ตัวการบุกรุกทำลายป่าไม่ใช่ชาวบ้าน แต่เป็นนายทุน</li><li>บังคับใช้กับรีสอร์ท การสร้างบ้านพัก ตัดถนนเข้าอุทยานฯ ด้วยมาตรฐานเดียวกันหรือไม่</li><li>ประเทศอุตสาหกรรมที่ปล่อยก๊าซเรือนกระจกยังไม่ยอมรับการประเมินลักษณะนี้ และยังซื้อขายคาร์บอนกับประเทศด้อยพัฒนา</li><li>ดูบทความ “เศรษฐศาสตร์ที่ไร้เศรษฐธรรม” (เดชรัต สุขกำเนิด, 2553)</li></ul>
-          <ul class="en"><li>The main forest destroyers are investors, not villagers.</li><li>Is the same standard applied to resorts, staff housing and roads into national parks?</li><li>Industrial countries that emit greenhouse gases do not accept this kind of valuation, yet buy carbon credits from poorer countries.</li><li>See the article “Economics without economic justice” (Decharut Sukkumnoed, 2010).</li></ul></div>
+          <ul class="th"><li>ตัวการบุกรุกทำลายป่าไม่ใช่ชาวบ้าน แต่เป็นนายทุน</li><li>บังคับใช้กับรีสอร์ท การสร้างบ้านพัก ตัดถนนเข้าอุทยานฯ ด้วยมาตรฐานเดียวกันหรือไม่</li><li>ประเทศอุตสาหกรรมที่ปล่อยก๊าซเรือนกระจกยังไม่ยอมรับการประเมินลักษณะนี้ และยังซื้อขายคาร์บอนกับประเทศด้อยพัฒนา</li><li>ดูบทความ <a href="pdf/Decharut2010_Economics_without_Economic_Justice.pdf" target="_blank" rel="noopener">“เศรษฐศาสตร์ที่ไร้เศรษฐธรรม”</a> (เดชรัต สุขกำเนิด, 2553)</li></ul>
+          <ul class="en"><li>The main forest destroyers are investors, not villagers.</li><li>Is the same standard applied to resorts, staff housing and roads into national parks?</li><li>Industrial countries that emit greenhouse gases do not accept this kind of valuation, yet buy carbon credits from poorer countries.</li><li>See the article <a href="pdf/Decharut2010_Economics_without_Economic_Justice.pdf" target="_blank" rel="noopener">“Economics without economic justice”</a> (Decharut Sukkumnoed, 2010; in Thai).</li></ul></div>
       </div>
     </div>
   </div>
@@ -877,19 +880,20 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--muted);f
     </div>
 
     <div class="card" style="margin-top:6px">
-      <h3><span class="th">ข้อมูลโลก 1961–2007 (gha ต่อคน)</span><span class="en">World data 1961–2007 (gha per person)</span></h3>
+      <h3><span class="th">ข้อมูลโลก 1961–2026 (gha ต่อคน)</span><span class="en">World data 1961–2026 (gha per person)</span></h3>
+      <div class="seg noprint" id="fpEd" style="margin-bottom:8px"><button data-e="e26" class="on"><span class="th">ฉบับ 2026 (ล่าสุด)</span><span class="en">2026 edition (latest)</span></button><button data-e="e10"><span class="th">ฉบับ 2010 (ตารางในสไลด์)</span><span class="en">2010 edition (slide table)</span></button></div>
       <div class="legend" id="fpLeg"></div>
       <canvas class="chart" id="fpChart"></canvas>
       <div class="tablewrap"><table id="fpTable"></table></div>
-      <p class="muted" style="font-size:.85rem"><span class="th">ที่มา: Global Footprint Network, National Footprint Accounts 2010 edition (ตารางในสไลด์กรณีที่ 2) ผลรวมอาจไม่ตรงเพราะการปัดเศษ “วันหนี้นิเวศโดยประมาณ” = 365 ÷ (EF/BC) คำนวณในหน้านี้</span><span class="en">Source: Global Footprint Network, National Footprint Accounts 2010 edition (the table in the case 2 slides). Totals may not add up due to rounding. “Approx. overshoot day” = 365 ÷ (EF/BC), computed on this page.</span></p>
+      <div class="muted" style="font-size:.85rem" id="fpNote"></div>
     </div>
 
     <div class="card" style="margin-top:14px">
       <h3><span class="th">จำลองสถานการณ์ถึงปี 2050</span><span class="en">Scenario to 2050</span><span class="demo-tag"><span class="th">แบบจำลองสาธิต</span><span class="en">teaching demo</span></span></h3>
-      <p class="th">เริ่มจากปี 2007 (ประชากร 6.7 พันล้านคน EF 2.7 gha/คน BC 1.8 gha/คน) ปรับอัตราการเปลี่ยนแปลงต่อปี แล้วดูว่าในปี 2050 ต้องใช้โลกกี่ใบ (เอกสารประกอบการสอนระบุว่าปี 2050 ต้องใช้โลกราว 2 ใบ)</p>
-      <p class="en">Start from 2007 (6.7 billion people, EF 2.7 gha/person, BC 1.8 gha/person), set the yearly rates of change, and see how many Earths we need in 2050 (the handout states about 2 Earths by 2050).</p>
+      <p class="th">เริ่มจากปี 2025 (ค่าประมาณของ Global Footprint Network ฉบับ 2026: ประชากร 8.23 พันล้านคน EF 2.51 gha/คน BC 1.48 gha/คน หรือราว 1.7 โลก) ปรับอัตราการเปลี่ยนแปลงต่อปี แล้วดูว่าในปี 2050 ต้องใช้โลกกี่ใบ (เอกสารประกอบการสอนระบุว่าปี 2050 ต้องใช้โลกราว 2 ใบ)</p>
+      <p class="en">Start from 2025 (Global Footprint Network 2026 edition estimates: 8.23 billion people, EF 2.51 gha/person, BC 1.48 gha/person, about 1.7 Earths), set the yearly rates of change, and see how many Earths we need in 2050 (the handout states about 2 Earths by 2050).</p>
       <div class="controls">
-        <label class="ctl"><span class="th">ประชากรเพิ่ม (%/ปี)</span><span class="en">Population growth (%/yr)</span> <b data-o="sc_p"></b><input type="range" id="sc_p" min="-0.5" max="2" step="0.05" value="0.9"></label>
+        <label class="ctl"><span class="th">ประชากรเพิ่ม (%/ปี)</span><span class="en">Population growth (%/yr)</span> <b data-o="sc_p"></b><input type="range" id="sc_p" min="-0.5" max="2" step="0.05" value="0.8"></label>
         <label class="ctl"><span class="th">EF ต่อคน เปลี่ยน (%/ปี)</span><span class="en">EF per person change (%/yr)</span> <b data-o="sc_e"></b><input type="range" id="sc_e" min="-3" max="2" step="0.1" value="0"></label>
         <label class="ctl"><span class="th">ศักยภาพชีวภาพรวมของโลก เปลี่ยน (%/ปี)</span><span class="en">Total biocapacity change (%/yr)</span> <b data-o="sc_b"></b><input type="range" id="sc_b" min="-1" max="1" step="0.05" value="0"></label>
       </div>
@@ -900,9 +904,9 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--muted);f
     <div class="grid g2" style="margin-top:14px">
       <div class="card">
         <h3><span class="th">ส่วนประกอบของรอยประทับ</span><span class="en">Footprint components</span></h3>
-        <p class="muted th">ปรับแต่ละด้าน (gha/คน) แล้วดูว่าต้องใช้โลกกี่ใบ เทียบกับ BC 1.8 gha/คน (ปี 2007)</p>
-        <p class="muted en">Change each component (gha/person) and see how many Earths it takes, against BC 1.8 gha/person (2007).</p>
-        <div class="row noprint" style="margin-bottom:6px"><button class="btn" data-fpp="2007">World 2007</button><button class="btn" data-fpp="1961">World 1961</button><button class="btn" data-fpp="halfc"><span class="th">ลดคาร์บอนครึ่งหนึ่ง</span><span class="en">Halve carbon</span></button></div>
+        <p class="muted th">ปรับแต่ละด้าน (gha/คน) แล้วดูว่าต้องใช้โลกกี่ใบ เทียบกับ BC 1.50 gha/คน (ปี 2023, ฉบับ 2026)</p>
+        <p class="muted en">Change each component (gha/person) and see how many Earths it takes, against BC 1.50 gha/person (2023, 2026 edition).</p>
+        <div class="row noprint" style="margin-bottom:6px"><button class="btn" data-fpp="2023">World 2023</button><button class="btn" data-fpp="1961">World 1961</button><button class="btn" data-fpp="halfc"><span class="th">ลดคาร์บอนครึ่งหนึ่ง</span><span class="en">Halve carbon</span></button></div>
         <div id="fpComp"></div>
         <div class="stats" id="fpCompStats"></div>
       </div>
@@ -1049,12 +1053,10 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--muted);f
     </div>
   </div>
   <div class="card" style="margin-top:14px">
-    <h3><span class="th">เอกสารอ่านเพิ่มเติม (ในระบบ MyCourseVille)</span><span class="en">Further reading (on MyCourseVille; in Thai)</span></h3>
-    <ul>
-      <li>พงษ์ศักดิ์ วิทวัสชุติกุล และคณะ (2553) แบบจำลองมูลค่าความหลากหลายทางชีวภาพของระบบนิเวศป่าต้นน้ำ. กรมอุทยานแห่งชาติ สัตว์ป่า และพันธุ์พืช.</li>
-      <li>กลุ่มวิจัยต้นน้ำ (ม.ป.ป.) คู่มือการใช้แบบจำลองสำหรับประเมินค่าเสียหายทางสิ่งแวดล้อมบางประการหลังการทำลายป่าไม้. สำนักอนุรักษ์และจัดการต้นน้ำ กรมอุทยานแห่งชาติ สัตว์ป่า และพันธุ์พืช.</li>
-      <li>เดชรัต สุขกำเนิด (2553) เศรษฐศาสตร์ที่ไร้เศรษฐธรรม: ข้อวิพากษ์แบบจำลองการคิดมูลค่าความเสียหาย.</li>
-    </ul>
+    <h3><span class="th">เอกสารอ่านเพิ่มเติม (กรณีที่ 1 มูลค่าป่าไม้)</span><span class="en">Further reading (case 1, forest value; in Thai)</span></h3>
+    <div class="doc"><div class="ic">PDF</div><div><a href="pdf/DNP2010_Forest_Watershed_Biodiversity_Value_Model.pdf" target="_blank" rel="noopener">พงษ์ศักดิ์ วิทวัสชุติกุล และคณะ (2553) แบบจำลองมูลค่าความหลากหลายทางชีวภาพของระบบนิเวศป่าต้นน้ำ. กรมอุทยานแห่งชาติ สัตว์ป่า และพันธุ์พืช</a><div class="muted" style="font-size:.82rem">11 <span class="th">หน้า</span><span class="en">pages</span> · 0.3 MB · <span class="th">ใช้ในเครื่องคำนวณ B</span><span class="en">used in calculator B</span></div></div></div>
+    <div class="doc"><div class="ic">PDF</div><div><a href="pdf/DNP_Manual_Forest_Damage_Model.pdf" target="_blank" rel="noopener">กลุ่มวิจัยต้นน้ำ (ม.ป.ป.) คู่มือการใช้แบบจำลองสำหรับประเมินค่าเสียหายทางสิ่งแวดล้อมบางประการหลังการทำลายป่าไม้. สำนักอนุรักษ์และจัดการต้นน้ำ กรมอุทยานแห่งชาติ สัตว์ป่า และพันธุ์พืช</a><div class="muted" style="font-size:.82rem">8 <span class="th">หน้า</span><span class="en">pages</span> · 0.2 MB</div></div></div>
+    <div class="doc"><div class="ic">PDF</div><div><a href="pdf/Decharut2010_Economics_without_Economic_Justice.pdf" target="_blank" rel="noopener">เดชรัต สุขกำเนิด (2553) เศรษฐศาสตร์ที่ไร้เศรษฐธรรม: ข้อวิพากษ์แบบจำลองการคิดมูลค่าความเสียหาย</a><div class="muted" style="font-size:.82rem">12 <span class="th">หน้า</span><span class="en">pages</span> · 0.2 MB</div></div></div>
   </div>
 </section>
 
@@ -1280,34 +1282,64 @@ function drawFB(){
 onRender(function(){fillLU();drawFB()});
 
 /* ---------- footprint ---------- */
-var FY=[1961,1965,1970,1975,1980,1985,1990,1995,2000,2005,2007];
-var FD={pop:[3.1,3.3,3.7,4.1,4.4,4.8,5.3,5.7,6.1,6.5,6.7],ef:[2.4,2.5,2.8,2.8,2.8,2.6,2.7,2.6,2.5,2.7,2.7],crop:[1.1,1.1,1.0,0.9,0.8,0.8,0.7,0.7,0.6,0.6,0.6],graz:[.4,.4,.3,.3,.3,.2,.2,.2,.2,.2,.2],forest:[.4,.4,.4,.4,.4,.3,.3,.3,.3,.3,.3],fish:[.1,.1,.1,.1,.1,.1,.1,.1,.1,.1,.1],carbon:[.3,.5,.9,1.0,1.1,1.1,1.2,1.2,1.2,1.4,1.4],built:[.1,.1,.1,.1,.1,.1,.1,.1,.1,.1,.1],bc:[3.7,3.5,3.1,2.9,2.6,2.4,2.3,2.1,2.0,1.8,1.8],ratio:[0.63,0.73,0.88,0.97,1.06,1.07,1.18,1.24,1.29,1.45,1.51]};
+/* Global Footprint Network, National Footprint and Biocapacity Accounts 2026 edition (data.footprintnetwork.org, World = 5001; read 30 Oct 2026). 2024-2025 = GFN estimates (no land-type split); 2026 = nowcast via Earth Overshoot Day (30 Jul 2026). */
+var GFN={y0:1961,ef:[2.197,2.209,2.152,2.155,2.162,2.278,2.402,2.408,2.429,2.618,2.628,2.573,2.709,2.674,2.634,2.672,2.668,2.725,2.768,2.539,2.502,2.422,2.325,2.441,2.479,2.476,2.497,2.539,2.542,2.525,2.433,2.34,2.325,2.378,2.402,2.443,2.416,2.383,2.452,2.499,2.528,2.421,2.461,2.556,2.589,2.606,2.667,2.659,2.539,2.666,2.711,2.69,2.709,2.662,2.601,2.558,2.628,2.631,2.596,2.432,2.565,2.586,2.565,2.531,2.511],
+ bc:[3.173,3.129,3.061,3.007,2.95,2.912,2.863,2.821,2.765,2.72,2.681,2.617,2.593,2.532,2.49,2.458,2.417,2.4,2.353,2.312,2.29,2.266,2.218,2.209,2.18,2.145,2.114,2.066,2.054,2.043,1.996,1.992,1.955,1.941,1.904,1.899,1.881,1.862,1.842,1.818,1.806,1.781,1.756,1.752,1.727,1.711,1.694,1.693,1.666,1.655,1.646,1.617,1.621,1.608,1.591,1.58,1.579,1.556,1.546,1.531,1.524,1.51,1.501,1.488,1.476],
+ carbon:[0.928,0.938,0.887,0.894,0.901,1.006,1.122,1.122,1.16,1.353,1.365,1.334,1.448,1.439,1.422,1.449,1.46,1.503,1.558,1.352,1.315,1.234,1.15,1.24,1.284,1.286,1.307,1.372,1.367,1.346,1.299,1.219,1.232,1.28,1.318,1.351,1.326,1.299,1.371,1.421,1.465,1.368,1.406,1.479,1.522,1.548,1.612,1.611,1.517,1.628,1.665,1.658,1.654,1.606,1.556,1.51,1.572,1.579,1.557,1.404,1.531,1.561,1.547],
+ crop:[0.408,0.415,0.41,0.412,0.409,0.423,0.422,0.429,0.425,0.429,0.434,0.417,0.432,0.415,0.412,0.421,0.42,0.439,0.43,0.417,0.429,0.442,0.431,0.453,0.455,0.449,0.447,0.427,0.438,0.448,0.43,0.428,0.419,0.424,0.411,0.426,0.428,0.427,0.429,0.424,0.419,0.412,0.413,0.429,0.423,0.424,0.425,0.437,0.431,0.437,0.443,0.433,0.451,0.451,0.452,0.452,0.459,0.451,0.452,0.448,0.449,0.445,0.444]};
+var ED={
+ e26:{y:[1961,1965,1970,1975,1980,1985,1990,1995,2000,2005,2010,2015,2020,2023,2024,2025,2026],mark:{2024:'*',2025:'*',2026:'**'},
+  pop:[3.06,3.33,3.69,4.07,4.45,4.87,5.33,5.76,6.17,6.59,7.02,7.47,7.89,8.09,8.16,8.23,8.30],
+  ef:[2.197,2.162,2.618,2.634,2.539,2.479,2.525,2.402,2.499,2.589,2.666,2.601,2.432,2.565,2.531,2.511,null],
+  crop:[.408,.409,.429,.412,.417,.455,.448,.411,.424,.423,.437,.452,.448,.444,null,null,null],
+  graz:[.275,.267,.245,.245,.23,.209,.198,.187,.172,.161,.149,.137,.127,.128,null,null,null],
+  forest:[.442,.433,.422,.393,.388,.371,.368,.32,.315,.309,.281,.275,.272,.261,null,null,null],
+  fish:[.114,.118,.13,.121,.107,.106,.106,.107,.101,.1,.09,.09,.083,.085,null,null,null],
+  carbon:[.928,.901,1.353,1.422,1.352,1.284,1.346,1.318,1.421,1.522,1.628,1.556,1.404,1.547,null,null,null],
+  built:[.03,.034,.038,.042,.045,.054,.06,.059,.065,.074,.081,.091,.099,.101,null,null,null],
+  bc:[3.173,2.95,2.72,2.49,2.312,2.18,2.043,1.904,1.818,1.727,1.655,1.591,1.531,1.501,1.488,1.476,null],
+  eod:[null,null,null,[12,12],[11,29],[11,17],[10,23],[10,17],[9,23],[9,1],[8,15],[8,12],[8,18],[8,2],[8,1],[8,1],[7,30]],dec:2},
+ e10:{y:[1961,1965,1970,1975,1980,1985,1990,1995,2000,2005,2007],mark:{},pop:[3.1,3.3,3.7,4.1,4.4,4.8,5.3,5.7,6.1,6.5,6.7],ef:[2.4,2.5,2.8,2.8,2.8,2.6,2.7,2.6,2.5,2.7,2.7],crop:[1.1,1.1,1.0,0.9,0.8,0.8,0.7,0.7,0.6,0.6,0.6],graz:[.4,.4,.3,.3,.3,.2,.2,.2,.2,.2,.2],forest:[.4,.4,.4,.4,.4,.3,.3,.3,.3,.3,.3],fish:[.1,.1,.1,.1,.1,.1,.1,.1,.1,.1,.1],carbon:[.3,.5,.9,1.0,1.1,1.1,1.2,1.2,1.2,1.4,1.4],built:[.1,.1,.1,.1,.1,.1,.1,.1,.1,.1,.1],bc:[3.7,3.5,3.1,2.9,2.6,2.4,2.3,2.1,2.0,1.8,1.8],ratio:[0.63,0.73,0.88,0.97,1.06,1.07,1.18,1.24,1.29,1.45,1.51],dec:1}};
+ED.e26.ratio=ED.e26.ef.map(function(v,i){return v==null?+(365/211).toFixed(2):+(v/ED.e26.bc[i]).toFixed(2)});
+var fpEd='e26';
 var COMP=[['crop','พื้นที่เพาะปลูก','Cropland'],['graz','ทุ่งเลี้ยงสัตว์','Grazing land'],['forest','ป่าไม้','Forest'],['fish','แหล่งประมง','Fishing grounds'],['carbon','คาร์บอน','Carbon'],['built','สิ่งปลูกสร้าง','Built-up land']];
 function overshoot(ratio){if(ratio<=1)return L('ไม่เกิน','none');var d=Math.round(365/ratio);var dt=new Date(2001,0,d);return dt.toLocaleDateString(lang==='en'?'en-GB':'th-TH',{day:'numeric',month:'short'})}
+function eodText(md){if(!md)return L('ไม่เกิน','none');return new Date(2001,md[0]-1,md[1]).toLocaleDateString(lang==='en'?'en-GB':'th-TH',{day:'numeric',month:'short'})}
 function drawFP(){
   if(!$('#fpChart').offsetParent)return;
-  var S=[{k:'ef',th:'รอยประทับรวม (EF)',en:'Total footprint (EF)',c:col(5)},{k:'bc',th:'ศักยภาพชีวภาพ (BC)',en:'Biocapacity (BC)',c:col(1)},{k:'carbon',th:'คาร์บอน',en:'Carbon',c:col(4),dash:[5,4]},{k:'crop',th:'พื้นที่เพาะปลูก',en:'Cropland',c:col(3),dash:[5,4]}];
+  var D=ED[fpEd],S=[{k:'ef',th:'รอยประทับรวม (EF)',en:'Total footprint (EF)',c:col(5)},{k:'bc',th:'ศักยภาพชีวภาพ (BC)',en:'Biocapacity (BC)',c:col(1)},{k:'carbon',th:'คาร์บอน',en:'Carbon',c:col(4),dash:[5,4]},{k:'crop',th:'พื้นที่เพาะปลูก',en:'Cropland',c:col(3),dash:[5,4]}];
   legend($('#fpLeg'),S.map(function(s){return {color:s.c,label:T(s.th,s.en)}}));
-  lineChart($('#fpChart'),{series:S.map(function(s){return {pts:FY.map(function(y,i){return [y,FD[s.k][i]]}),color:s.c,dash:s.dash,dots:true}}),xLabel:L('ปี ค.ศ.','Year'),yLabel:L('gha ต่อคน','gha per person'),yMin:0});
-  var rows=[['pop','ประชากรโลก (พันล้าน)','World population (billion)']].concat([['ef','รอยประทับรวม','Total ecological footprint']]).concat(COMP.map(function(c){return [c[0],'&nbsp;&nbsp;'+c[1],'&nbsp;&nbsp;'+c[2]]})).concat([['bc','ศักยภาพชีวภาพรวม','Total biocapacity'],['ratio','EF ÷ BC (จำนวนโลก)','EF ÷ BC (Earths)']]);
-  $('#fpTable').innerHTML='<tr><th></th>'+FY.map(function(y){return '<th class="num">'+y+'</th>'}).join('')+'</tr>'+rows.map(function(r){return '<tr><td>'+T(r[1],r[2])+'</td>'+FD[r[0]].map(function(v){return '<td class="num">'+v.toFixed(r[0]==='ratio'?2:1)+'</td>'}).join('')+'</tr>'}).join('')
-   +'<tr><td>'+T('วันหนี้นิเวศโดยประมาณ','Approx. overshoot day')+'</td>'+FD.ratio.map(function(v){return '<td class="num">'+overshoot(v)+'</td>'}).join('')+'</tr>';
+  var series;
+  if(fpEd==='e26'){series=[];S.forEach(function(s){var arr=GFN[s.k],pts=arr.map(function(v,i){return [GFN.y0+i,v]}).filter(function(p){return p[1]!=null});
+      var main=pts.filter(function(p){return p[0]<=2023}),est=pts.filter(function(p){return p[0]>=2023});
+      series.push({pts:main,color:s.c,dash:s.dash});if(est.length>1)series.push({pts:est,color:s.c,dash:[2,3]})})}
+  else series=S.map(function(s){return {pts:D.y.map(function(y,i){return [y,D[s.k][i]]}),color:s.c,dash:s.dash,dots:true}});
+  lineChart($('#fpChart'),{series:series,xLabel:L('ปี ค.ศ.','Year'),yLabel:L('gha ต่อคน','gha per person'),yMin:0});
+  var rows=[['pop','ประชากรโลก (พันล้าน)','World population (billion)'],['ef','รอยประทับรวม','Total ecological footprint']].concat(COMP.map(function(c){return [c[0],'&nbsp;&nbsp;'+c[1],'&nbsp;&nbsp;'+c[2]]})).concat([['bc','ศักยภาพชีวภาพรวม','Total biocapacity'],['ratio','EF ÷ BC (จำนวนโลก)','EF ÷ BC (Earths)']]);
+  var cell=function(k,v,y){if(v==null)return '–';var d=k==='ratio'?2:k==='pop'?(fpEd==='e26'?2:1):D.dec;return (D.mark[y]==='**'&&k==='ratio'?'≈':'')+v.toFixed(d)};
+  $('#fpTable').innerHTML='<tr><th></th>'+D.y.map(function(y){return '<th class="num">'+y+(D.mark[y]||'')+'</th>'}).join('')+'</tr>'+rows.map(function(r){return '<tr><td>'+T(r[1],r[2])+'</td>'+D[r[0]].map(function(v,i){return '<td class="num">'+cell(r[0],v,D.y[i])+'</td>'}).join('')+'</tr>'}).join('')
+   +'<tr><td>'+(fpEd==='e26'?T('Earth Overshoot Day (วันหนี้นิเวศ)','Earth Overshoot Day'):T('วันหนี้นิเวศโดยประมาณ','Approx. overshoot day'))+'</td>'+D.y.map(function(y,i){return '<td class="num">'+(fpEd==='e26'?eodText(D.eod[i]):overshoot(D.ratio[i]))+'</td>'}).join('')+'</tr>';
+  $('#fpNote').innerHTML=fpEd==='e26'
+   ?T('ที่มา: Global Footprint Network, National Footprint and Biocapacity Accounts 2026 Edition (ข้อมูลถึงปี 2023) จาก data.footprintnetwork.org (World) และ overshootday.org (อ่านเมื่อ 30 ต.ค. 2026) · * 2024–2025 = ค่าประมาณของ GFN (ยังไม่แยกรายด้าน; เส้นประในกราฟ) · ** 2026 = ค่าคาดการณ์ (nowcast) จาก Earth Overshoot Day 30 ก.ค. 2026 → จำนวนโลก ≈ 365 ÷ 211 · GFN คำนวณย้อนหลังทุกปีใหม่ทุกฉบับ ค่าจึงไม่ตรงกับตารางในสไลด์ (ฉบับ 2010) เช่น คาร์บอนปี 1961 = 0.93 (เดิม 0.3) — กดปุ่มด้านบนเพื่อเปรียบเทียบ นี่คือตัวอย่างของขั้นตอน “ปรับปรุงแบบจำลอง”',
+      'Source: Global Footprint Network, National Footprint and Biocapacity Accounts 2026 Edition (data to 2023), from data.footprintnetwork.org (World) and overshootday.org (read 30 Oct 2026) · * 2024–2025 = GFN estimates (no land-type split; dotted in the chart) · ** 2026 = nowcast from Earth Overshoot Day, 30 July 2026 → Earths ≈ 365 ÷ 211 · GFN recalculates all past years in every edition, so values differ from the slide table (2010 edition), e.g. carbon in 1961 = 0.93 (was 0.3) — use the buttons above to compare. This is an example of the “revise the model” step.')
+   :T('ที่มา: Global Footprint Network, National Footprint Accounts 2010 edition (ตารางในสไลด์กรณีที่ 2) ผลรวมอาจไม่ตรงเพราะการปัดเศษ “วันหนี้นิเวศโดยประมาณ” = 365 ÷ (EF/BC) คำนวณในหน้านี้','Source: Global Footprint Network, National Footprint Accounts 2010 edition (the table in the case 2 slides). Totals may not add up due to rounding. “Approx. overshoot day” = 365 ÷ (EF/BC), computed on this page.');
 }
+$('#fpEd').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;fpEd=b.dataset.e;$$('#fpEd button').forEach(function(x){x.classList.toggle('on',x===b)});drawFP()});
 onRender(drawFP);
 ['sc_p','sc_e','sc_b'].forEach(function(id){bindOut(id);$('#'+id).addEventListener('input',drawSC)});
 function drawSC(){
   var p=num('sc_p')/100,e=num('sc_e')/100,b=num('sc_b')/100,pts=[],last;
-  for(var y=2007;y<=2050;y++){var n=y-2007,pop=6.7*Math.pow(1+p,n),ef=2.7*Math.pow(1+e,n),bct=1.8*6.7*Math.pow(1+b,n),bc=bct/pop,ea=ef/bc;pts.push([y,ea]);last={pop:pop,ef:ef,bc:bc,ea:ea}}
+  for(var y=2025;y<=2050;y++){var n=y-2025,pop=8.23*Math.pow(1+p,n),ef=2.511*Math.pow(1+e,n),bct=1.476*8.23*Math.pow(1+b,n),bc=bct/pop,ea=ef/bc;pts.push([y,ea]);last={pop:pop,ef:ef,bc:bc,ea:ea}}
   stats($('#scStats'),[{k:L('ประชากร 2050','Population 2050'),v:fmt(last.pop,1),u:L('พันล้านคน','billion')},{k:L('EF ต่อคน 2050','EF per person 2050'),v:fmt(last.ef,2),u:'gha'},{k:L('BC ต่อคน 2050','BC per person 2050'),v:fmt(last.bc,2),u:'gha'},{k:L('ต้องใช้โลก (2050)','Earths needed (2050)'),v:fmt(last.ea,2),u:L('วันหนี้นิเวศ ≈ ','overshoot day ≈ ')+overshoot(last.ea)}]);
-  if($('#scChart').offsetParent)lineChart($('#scChart'),{series:[{pts:FY.map(function(y,i){return [y,FD.ratio[i]]}),color:col(3),dots:true},{pts:pts,color:col(5)}],xLabel:L('ปี ค.ศ. (จุด = ข้อมูล 1961–2007, เส้นแดง = สถานการณ์จำลอง)','Year (dots = data 1961–2007, red line = scenario)'),yLabel:L('จำนวนโลก','Earths'),yMin:0,hlines:[{y:1,label:L('1 โลก','1 Earth')}]});
+  if($('#scChart').offsetParent)lineChart($('#scChart'),{series:[{pts:GFN.ef.map(function(v,i){return [GFN.y0+i,v/GFN.bc[i]]}),color:col(3)},{pts:[[2026,365/211]],color:col(3),dots:true},{pts:pts,color:col(5)}],xLabel:L('ปี ค.ศ. (เส้นส้ม = GFN ฉบับ 2026 ปี 1961–2025, จุด = 2026 nowcast, เส้นแดง = สถานการณ์จำลอง)','Year (orange = GFN 2026 edition 1961–2025, dot = 2026 nowcast, red = scenario)'),yLabel:L('จำนวนโลก','Earths'),yMin:0,hlines:[{y:1,label:L('1 โลก','1 Earth')}]});
 }
 onRender(drawSC);
-var FPC=store.get('fpc',null)||{crop:.6,graz:.2,forest:.3,fish:.1,carbon:1.4,built:.1};
-$('#fpComp').innerHTML=COMP.map(function(c){return '<label class="ctl">'+T(c[1],c[2])+' <b data-o="fc_'+c[0]+'"></b><input type="range" id="fc_'+c[0]+'" min="0" max="3" step="0.05" value="'+FPC[c[0]]+'"></label>'}).join('');
+var FPC=store.get('fpc26',null)||{crop:.444,graz:.128,forest:.261,fish:.085,carbon:1.547,built:.101};
+$('#fpComp').innerHTML=COMP.map(function(c){return '<label class="ctl">'+T(c[1],c[2])+' <b data-o="fc_'+c[0]+'"></b><input type="range" id="fc_'+c[0]+'" min="0" max="3" step="0.01" value="'+FPC[c[0]]+'"></label>'}).join('');
 COMP.forEach(function(c){bindOut('fc_'+c[0],function(v){return v.toFixed(2)});$('#fc_'+c[0]).addEventListener('input',drawComp)});
-$$('[data-fpp]').forEach(function(b){b.addEventListener('click',function(){var k=b.dataset.fpp;COMP.forEach(function(c){var el=$('#fc_'+c[0]);if(k==='2007')el.value=FD[c[0]][10];else if(k==='1961')el.value=FD[c[0]][0];else if(c[0]==='carbon')el.value=(+el.value/2).toFixed(2);el.dispatchEvent(new Event('input'))})})});
-function drawComp(){var v={},tot=0,big=null;COMP.forEach(function(c){v[c[0]]=num('fc_'+c[0]);tot+=v[c[0]];if(!big||v[c[0]]>v[big[0]])big=c});store.set('fpc',v);
-  stats($('#fpCompStats'),[{k:L('รอยประทับรวม','Total footprint'),v:fmt(tot,2),u:L('gha ต่อคน','gha per person')},{k:L('ต้องใช้โลก','Earths needed'),v:fmt(tot/1.8,2),u:'BC = 1.8 gha'},{k:L('ด้านที่ใหญ่ที่สุด','Largest component'),v:'<span style="font-size:1rem">'+L(big[1],big[2])+'</span>',u:fmt(100*v[big[0]]/(tot||1),0)+'%'}])}
+$$('[data-fpp]').forEach(function(b){b.addEventListener('click',function(){var k=b.dataset.fpp;COMP.forEach(function(c){var el=$('#fc_'+c[0]);if(k==='2023')el.value=ED.e26[c[0]][13];else if(k==='1961')el.value=ED.e26[c[0]][0];else if(c[0]==='carbon')el.value=(+el.value/2).toFixed(2);el.dispatchEvent(new Event('input'))})})});
+function drawComp(){var v={},tot=0,big=null;COMP.forEach(function(c){v[c[0]]=num('fc_'+c[0]);tot+=v[c[0]];if(!big||v[c[0]]>v[big[0]])big=c});store.set('fpc26',v);
+  stats($('#fpCompStats'),[{k:L('รอยประทับรวม','Total footprint'),v:fmt(tot,2),u:L('gha ต่อคน','gha per person')},{k:L('ต้องใช้โลก','Earths needed'),v:fmt(tot/1.501,2),u:'BC = 1.50 gha (2023)'},{k:L('ด้านที่ใหญ่ที่สุด','Largest component'),v:'<span style="font-size:1rem">'+L(big[1],big[2])+'</span>',u:fmt(100*v[big[0]]/(tot||1),0)+'%'}])}
 onRender(drawComp);
 ['wf_c','wf_h'].forEach(function(id){bindOut(id);$('#'+id).addEventListener('input',drawWF)});
 function drawWF(){var c=num('wf_c')*140*365,h=num('wf_h')*2400*52;stats($('#wfStats'),[{k:L('กาแฟ','Coffee'),v:fmt(c,0),u:L('ลิตร/ปี','L/yr')},{k:L('แฮมเบอร์เกอร์','Hamburgers'),v:fmt(h,0),u:L('ลิตร/ปี','L/yr')},{k:L('รวม','Total'),v:fmt((c+h)/1000,1),u:L('ลูกบาศก์เมตร/ปี','m³/yr')}])}
@@ -1449,7 +1481,7 @@ var Q2=[
  ['แบบจำลองมูลค่าป่าไม้ตีค่าผลกระทบเป็นเงินด้วยวิธีใด','How does the forest value model turn impacts into money?',[['ราคาตลาดของไม้ซุงเท่านั้น','Only the market price of logs'],['ต้นทุนทดแทน (replacement cost) เช่น ค่ารถบรรทุกน้ำ/ดิน ปุ๋ย ค่าไฟเครื่องปรับอากาศ','Replacement cost, e.g. hiring water/soil trucks, fertilizer, air-conditioning electricity'],['ความเต็มใจจ่ายของนักท่องเที่ยว','Tourists\' willingness to pay'],['ราคาคาร์บอนเครดิต','Carbon credit prices']],1,'คิดค่าใช้จ่ายที่ต้องใช้เพื่อทดแทนสิ่งที่สูญเสียไป','It counts what it would cost to replace what was lost.'],
  ['กรมป่าไม้ใช้มูลค่า 150,000 บาท/ไร่ เพื่ออะไร','What did the Royal Forest Department use 150,000 baht/rai for?',[['จ่ายค่าชดเชยให้เกษตรกร','Compensating farmers'],['ฟ้องคดีแพ่งเรียกค่าเสียหายจากผู้บุกรุกป่า','Civil suits for damages against forest encroachers'],['ซื้อที่ดินคืนจากเอกชน','Buying land back from private owners'],['ขายคาร์บอนเครดิต','Selling carbon credits']],1,'ฟ้องเกษตรกรกว่า 2,000 ราย จึงเกิดคำถามด้านความถูกต้องและความยุติธรรม','More than 2,000 farmers were sued, raising questions of accuracy and justice.'],
  ['รอยประทับทางนิเวศมีหน่วยเป็นอะไร','What is the unit of the ecological footprint?',[['ตันคาร์บอนต่อปี','Tonnes of carbon per year'],['เฮกตาร์ (โลก) ต่อคน (1 เฮกตาร์ = 6.25 ไร่)','(Global) hectares per person (1 ha = 6.25 rai)'],['ลิตรต่อคน','Litres per person'],['บาทต่อไร่','Baht per rai']],1,'เป็นพื้นที่ทั้งบกและน้ำที่ใช้ผลิตและรองรับของเสีย','It is the land and water area used for production and waste absorption.'],
- ['ปี 2007 อัตราส่วน EF ÷ BC = 1.51 หมายความว่าอย่างไร','In 2007 EF ÷ BC = 1.51. What does that mean?',[['มนุษย์ใช้ทรัพยากรเท่ากับโลกราว 1.5 ใบ','Humanity used about 1.5 Earths'],['โลกยังเหลือศักยภาพอีก 51%','Earth still has 51% spare capacity'],['ประชากรเพิ่มขึ้น 51%','Population grew by 51%'],['รอยประทับลดลง 1.51 เท่า','The footprint fell 1.51-fold']],0,'เกิน 1 คือใช้เกินกว่าที่โลกผลิตและรองรับได้ในหนึ่งปี','Above 1 means using more than Earth can produce and absorb in a year.'],
+ ['Earth Overshoot Day ปี 2026 ตรงกับวันที่ 30 ก.ค. (EF ÷ BC ≈ 1.7) หมายความว่าอย่างไร','Earth Overshoot Day 2026 fell on 30 July (EF ÷ BC ≈ 1.7). What does that mean?',[['มนุษย์ใช้ทรัพยากรเท่ากับโลกราว 1.7 ใบ ทรัพยากรที่โลกสร้างได้ทั้งปีถูกใช้หมดภายในสิ้นเดือนกรกฎาคม','Humanity uses about 1.7 Earths; a whole year of Earth\'s regeneration is used up by the end of July'],['โลกยังเหลือศักยภาพอีก 70%','Earth still has 70% spare capacity'],['ประชากรเพิ่มขึ้น 70% ในปีนั้น','Population grew by 70% that year'],['หลังวันที่ 30 ก.ค. มนุษย์หยุดใช้ทรัพยากร','After 30 July humans stop using resources']],0,'วันที่ = 365 × BC ÷ EF; ค่าเกิน 1 คือใช้เกินกว่าที่โลกผลิตและรองรับได้ในหนึ่งปี (Global Footprint Network, ฉบับ 2026)','Date = 365 × BC ÷ EF; a ratio above 1 means using more than Earth can produce and absorb in a year (Global Footprint Network, 2026 edition).'],
  ['กรณีดอยติ้ว จ.น่าน ใช้เครื่องมือใดในการเรียนรู้ร่วมกันระหว่างผู้เลี้ยงวัวและเจ้าหน้าที่ป่าไม้','In the Doi Tiew case, which tool did herders and foresters use to learn together?',[['แบบสอบถามทางไปรษณีย์','A postal questionnaire'],['เกมสวมบทบาทสมมุติร่วมกับแบบจำลองตัวแทนบนคอมพิวเตอร์ (CORMAS)','A role-playing game with a computer agent-based model (CORMAS)'],['ภาพถ่ายดาวเทียมเพียงอย่างเดียว','Satellite images only'],['การออกกฎหมายใหม่','A new law']],1,'Companion modelling: นำไปสู่แผนร่วม เช่น แปลงหญ้ารูซี่หมุนเวียนตามฤดูกาล','Companion modelling led to a joint plan, e.g. a seasonally rotated ruzi pasture.'],
  ['กาแฟ 1 แก้ว มีรอยประทับทางน้ำประมาณเท่าใด (ตามเอกสาร)','About how much water does one cup of coffee take (per the handout)?',[['0.2 ลิตร','0.2 litres'],['14 ลิตร','14 litres'],['140 ลิตร','140 litres'],['2,400 ลิตร','2,400 litres']],2,'2,400 ลิตรคือแฮมเบอร์เกอร์ 1 ชิ้น','2,400 litres is one hamburger.']];
 function quiz(id,data){
