@@ -1,0 +1,1501 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>นิเวศวิทยา 2303221 · Ecology Webapp</title>
+<meta name="description" content="2303221 Ecology: Ecosystem management and Introduction to ecological modelling — lessons, videos, interactive models and quizzes (TH/EN).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f7f2; --surface:#ffffff; --surface2:#eef3ec; --ink:#1c2a21; --muted:#56665b; --line:#d8e2d6;
+  --t1:#2e7d4f; --t1soft:#e3f1e8; --t2:#1d6a86; --t2soft:#e1eff5; --accent:#b8681f; --accentsoft:#f8ecdf;
+  --ok:#2e7d4f; --bad:#b3372e; --warn:#9a6b00;
+  --c1:#2e7d4f; --c2:#1d6a86; --c3:#b8681f; --c4:#7b4fa0; --c5:#b3372e; --c6:#5f7a1f;
+  --radius:12px; --shadow:0 1px 2px rgba(0,0,0,.05),0 4px 14px rgba(20,40,25,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121813; --surface:#1a221c; --surface2:#212b23; --ink:#e4ece5; --muted:#a3b2a7; --line:#33413a;
+    --t1:#6cc48f; --t1soft:#1f3326; --t2:#6bb8d6; --t2soft:#1a2e37; --accent:#e3a161; --accentsoft:#38281a;
+    --ok:#6cc48f; --bad:#ef7d72; --warn:#e0b34f;
+    --c1:#6cc48f; --c2:#6bb8d6; --c3:#e3a161; --c4:#b996dc; --c5:#ef7d72; --c6:#b4cf6a;
+    --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+    --bg:#121813; --surface:#1a221c; --surface2:#212b23; --ink:#e4ece5; --muted:#a3b2a7; --line:#33413a;
+    --t1:#6cc48f; --t1soft:#1f3326; --t2:#6bb8d6; --t2soft:#1a2e37; --accent:#e3a161; --accentsoft:#38281a;
+    --ok:#6cc48f; --bad:#ef7d72; --warn:#e0b34f;
+    --c1:#6cc48f; --c2:#6bb8d6; --c3:#e3a161; --c4:#b996dc; --c5:#ef7d72; --c6:#b4cf6a;
+    --shadow:none;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;overflow-wrap:anywhere;background:var(--bg);color:var(--ink);font:16px/1.65 "Sarabun",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif}
+html[lang="th"] .en{display:none!important}
+html[lang="en"] .th{display:none!important}
+a{color:var(--t2)}
+h1,h2,h3,h4{line-height:1.3;margin:1.2em 0 .5em}
+h2{font-size:1.45rem} h3{font-size:1.18rem} h4{font-size:1.02rem}
+p{margin:.5em 0 .8em}
+ul,ol{padding-left:1.3em;margin:.4em 0 .9em}
+li{margin:.15em 0}
+small,.muted{color:var(--muted)}
+code,.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.92em}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+
+/* header */
+header.top{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.topbar{display:flex;align-items:center;gap:12px;padding:10px 0}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);min-width:0}
+.logo{width:34px;height:34px;flex:0 0 34px}
+.brand b{display:block;font-size:1.02rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand span{display:block;font-size:.8rem;color:var(--muted);white-space:nowrap}
+.spacer{flex:1}
+.langbtn{border:1px solid var(--line);background:var(--surface2);color:var(--ink);border-radius:999px;padding:5px 12px;font:inherit;font-size:.88rem;cursor:pointer;white-space:nowrap}
+.langbtn:hover{border-color:var(--t1)}
+nav.main{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding-bottom:6px}
+nav.main::-webkit-scrollbar{display:none}
+nav.main a{flex:0 0 auto;text-decoration:none;color:var(--muted);padding:6px 12px;border-radius:8px;font-size:.95rem;font-weight:600}
+nav.main a:hover{background:var(--surface2);color:var(--ink)}
+nav.main a.on{background:var(--ink);color:var(--surface)}
+
+main{padding:18px 0 60px}
+section.page{display:none}
+section.page.on{display:block}
+
+/* hero */
+.hero{background:linear-gradient(135deg,var(--t1soft),var(--t2soft));border:1px solid var(--line);border-radius:18px;padding:26px 22px;margin-bottom:22px}
+.hero h1{margin:0 0 .3em;font-size:1.8rem}
+.hero p{max-width:760px;color:var(--muted);margin:0}
+.kicker{font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:760px){.g2,.g3{grid-template-columns:minmax(0,1fr)}}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow)}
+.card h3:first-child,.card h4:first-child{margin-top:0}
+.topic-card{display:block;text-decoration:none;color:var(--ink);border-top:5px solid var(--t1)}
+.topic-card.t2{border-top-color:var(--t2)}
+.topic-card:hover{transform:translateY(-1px)}
+.topic-card .num{font-size:.85rem;font-weight:700;color:var(--t1)}
+.topic-card.t2 .num{color:var(--t2)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{font-size:.8rem;background:var(--surface2);border:1px solid var(--line);border-radius:999px;padding:2px 10px;color:var(--muted)}
+
+/* sub nav */
+.subnav{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 18px}
+.subnav button{font:inherit;font-size:.92rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 14px;cursor:pointer}
+.subnav button:hover{border-color:var(--t1)}
+.t1 .subnav button.on{background:var(--t1);border-color:var(--t1);color:#fff}
+.t2 .subnav button.on{background:var(--t2);border-color:var(--t2);color:#fff}
+.sub{display:none}
+.sub.on{display:block}
+.pagehead{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.pagehead h2{margin:0}
+.badge{display:inline-block;font-size:.78rem;font-weight:700;border-radius:6px;padding:2px 8px;background:var(--t1soft);color:var(--t1)}
+.t2 .badge{background:var(--t2soft);color:var(--t2)}
+
+/* lesson */
+.lesson{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:20px;align-items:start}
+@media (max-width:900px){.lesson{grid-template-columns:minmax(0,1fr)}}
+.lesson aside{position:sticky;top:110px}
+@media (max-width:900px){.lesson aside{position:static;order:-1}}
+details.part{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);margin:0 0 12px;box-shadow:var(--shadow)}
+details.part>summary{cursor:pointer;list-style:none;padding:14px 18px;font-weight:700;display:flex;gap:10px;align-items:center}
+details.part>summary::-webkit-details-marker{display:none}
+details.part>summary::before{content:"▸";color:var(--muted);transition:transform .15s}
+details.part[open]>summary::before{transform:rotate(90deg)}
+details.part .body{padding:0 18px 14px}
+.callout{border-left:4px solid var(--accent);background:var(--accentsoft);padding:10px 14px;border-radius:0 10px 10px 0;margin:10px 0}
+.callout.green{border-color:var(--t1);background:var(--t1soft)}
+.callout.blue{border-color:var(--t2);background:var(--t2soft)}
+blockquote{margin:10px 0;padding:8px 14px;border-left:3px solid var(--line);color:var(--muted);font-style:italic}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:var(--surface2);font-weight:700}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap{overflow-x:auto;margin:8px 0 12px}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;position:relative;padding:6px 0 6px 40px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:6px;width:28px;height:28px;border-radius:50%;background:var(--t2);color:#fff;font-weight:700;display:grid;place-items:center;font-size:.9rem}
+.pdca{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0}
+@media (max-width:640px){.pdca{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pdca div{border-radius:10px;padding:10px;color:#fff;font-weight:700;text-align:center}
+.pdca div span{display:block;font-weight:400;font-size:.85rem;opacity:.95}
+
+/* video */
+.vid{position:relative;border-radius:10px;overflow:hidden;background:#000;aspect-ratio:16/9;cursor:pointer}
+.vid img{width:100%;height:100%;object-fit:cover;display:block;opacity:.85}
+.vid .play{position:absolute;inset:0;display:grid;place-items:center}
+.vid .play i{width:64px;height:44px;border-radius:12px;background:#c4302b;display:grid;place-items:center;box-shadow:0 2px 10px rgba(0,0,0,.35)}
+.vid .play i::after{content:"";border-left:16px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
+.vid .dur{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.75);color:#fff;font-size:.78rem;padding:1px 6px;border-radius:4px}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vidcap{font-size:.9rem;margin:6px 0 2px;font-weight:600}
+.vidlist{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:860px){.vidlist{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.vidlist{grid-template-columns:1fr}}
+
+/* forms */
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 16px;margin:8px 0 12px}
+label.ctl{display:block;font-size:.88rem;color:var(--muted)}
+label.ctl b{color:var(--ink);font-weight:700}
+input[type=range]{width:100%;accent-color:var(--t2)}
+.t1 input[type=range]{accent-color:var(--t1)}
+input[type=number],input[type=text],select,textarea{font:inherit;font-size:.95rem;width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+textarea{min-height:80px;resize:vertical}
+.btn{font:inherit;font-size:.92rem;font-weight:600;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 14px;cursor:pointer}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--t2);border-color:var(--t2);color:#fff}
+.t1 .btn.primary{background:var(--t1);border-color:var(--t1)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{font:inherit;font-size:.9rem;border:0;background:var(--surface);color:var(--ink);padding:6px 12px;cursor:pointer;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button.on{background:var(--ink);color:var(--surface)}
+.check{display:flex;gap:8px;align-items:flex-start;font-size:.93rem;margin:4px 0}
+.check input{margin-top:5px}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:10px 0}
+.stat{background:var(--surface2);border-radius:10px;padding:10px 12px}
+.stat .k{font-size:.8rem;color:var(--muted)}
+.stat .v{font-size:1.35rem;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.2}
+.stat .u{font-size:.78rem;color:var(--muted)}
+.chart{width:100%;height:300px;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:.85rem;color:var(--muted);margin:4px 0}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:5px;vertical-align:middle}
+.bars .bar{display:grid;grid-template-columns:minmax(110px,38%) 1fr 92px;gap:8px;align-items:center;font-size:.88rem;margin:4px 0}
+.bars .track{background:var(--surface2);border-radius:6px;height:16px;overflow:hidden}
+.bars .fill{height:100%;border-radius:6px}
+.bars .val{text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:520px){.bars .bar{grid-template-columns:1fr 70px}.bars .track{grid-column:1/-1;order:3}}
+.demo-tag{display:inline-block;font-size:.75rem;font-weight:700;color:var(--warn);border:1px solid currentColor;border-radius:6px;padding:0 6px;margin-left:6px;vertical-align:middle}
+
+/* sorter */
+.sorter .item{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin:6px 0}
+.sorter .item .txt{flex:1 1 260px}
+.sorter .opts{display:flex;flex-wrap:wrap;gap:4px}
+.sorter .opts button{font:inherit;font-size:.82rem;border:1px solid var(--line);background:var(--surface2);color:var(--ink);border-radius:6px;padding:3px 8px;cursor:pointer}
+.sorter .opts button.on{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.sorter .item.right{border-color:var(--ok);box-shadow:inset 4px 0 0 var(--ok)}
+.sorter .item.wrong{border-color:var(--bad);box-shadow:inset 4px 0 0 var(--bad)}
+.result{font-weight:700;margin:8px 0}
+
+/* quiz */
+.q{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin:0 0 12px}
+.q .qt{font-weight:700;margin-bottom:8px}
+.q .op{display:block;width:100%;text-align:left;font:inherit;font-size:.95rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:7px 10px;margin:5px 0;cursor:pointer}
+.q .op:hover{border-color:var(--ink)}
+.q .op.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--surface))}
+.q .op.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surface))}
+.q .ex{display:none;font-size:.92rem;margin-top:8px;padding:8px 10px;border-radius:8px;background:var(--surface2)}
+.q.done .ex{display:block}
+.score{position:sticky;top:104px;z-index:5;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-bottom:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+
+/* docs */
+.doc{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}
+.doc:last-child{border-bottom:0}
+.doc .ic{flex:0 0 38px;height:46px;border-radius:6px;background:var(--accentsoft);color:var(--accent);display:grid;place-items:center;font-size:.72rem;font-weight:700}
+.doc a{font-weight:600}
+.linkcard{display:flex;gap:14px;text-decoration:none;color:var(--ink);align-items:flex-start}
+.linkcard .ic{flex:0 0 46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:1.4rem;background:var(--t1soft)}
+.linkcard:hover h3{text-decoration:underline}
+
+footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--muted);font-size:.85rem}
+.answer textarea{min-height:90px}
+.hide{display:none!important}
+
+@media print{
+  header.top,nav,.subnav,.noprint,footer,.btn,.langbtn{display:none!important}
+  body{background:#fff;color:#000}
+  section.page{display:none!important}
+  section.page.on{display:block!important}
+  .sub{display:none!important}
+  .sub.on{display:block!important}
+  .card,.q,details.part{box-shadow:none;break-inside:avoid}
+  details.part .body{display:block}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="topbar">
+      <a class="brand" href="#home">
+        <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="var(--t1)"/><path d="M11 27c0-9 6-15 18-16-1 12-7 18-16 18" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><path d="M11 29c4-6 8-9 13-12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        <div><b><span class="th">นิเวศวิทยา 2303221</span><span class="en">2303221 Ecology</span></b>
+        <span><span class="th">การจัดการระบบนิเวศ · แบบจำลองทางนิเวศ</span><span class="en">Ecosystem management · Ecological modelling</span></span></div>
+      </a>
+      <div class="spacer"></div>
+      <button class="langbtn" id="langBtn" type="button" aria-label="Switch language">EN</button>
+    </div>
+    <nav class="main" id="mainNav">
+      <a href="#home" data-p="home"><span class="th">หน้าแรก</span><span class="en">Home</span></a>
+      <a href="#t1" data-p="t1"><span class="th">1 · การจัดการระบบนิเวศ</span><span class="en">1 · Ecosystem management</span></a>
+      <a href="#t2" data-p="t2"><span class="th">2 · แบบจำลองทางนิเวศ</span><span class="en">2 · Ecological modelling</span></a>
+      <a href="#videos" data-p="videos"><span class="th">วิดีโอ</span><span class="en">Videos</span></a>
+      <a href="#more" data-p="more"><span class="th">ตัวอย่างแบบจำลองอื่น ๆ</span><span class="en">More models</span></a>
+      <a href="#docs" data-p="docs"><span class="th">เอกสาร PDF</span><span class="en">PDF documents</span></a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ================= HOME ================= -->
+<section class="page" id="p-home">
+  <div class="hero">
+    <div class="kicker"><span class="th">2303221 นิเวศวิทยา · คณะวิทยาศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย</span><span class="en">2303221 Ecology · Faculty of Science, Chulalongkorn University</span></div>
+    <h1><span class="th">เรียน ดู ลองจำลอง แล้วทดสอบตัวเอง</span><span class="en">Learn, watch, run the models, then test yourself</span></h1>
+    <p class="th">เว็บแอปนี้รวมเนื้อหา 2 หัวข้อของ รศ.ดร.พงษ์ชัย ดำรงโรจน์วัฒนา: การจัดการระบบนิเวศ และความรู้เบื้องต้นเกี่ยวกับแบบจำลองทางนิเวศ พร้อมวิดีโอบรรยาย แบบจำลองที่ปรับค่าได้ แบบทดสอบ คำถามอภิปราย และเอกสาร PDF</p>
+    <p class="en">This web app gathers two topics taught by Assoc. Prof. Dr. Pongchai Dumrongrojwatthana: ecosystem management and an introduction to ecological modelling, with lecture videos, models you can change, quizzes, discussion questions and PDF handouts.</p>
+  </div>
+
+  <div class="grid g2">
+    <a class="card topic-card" href="#t1">
+      <div class="num"><span class="th">หัวข้อที่ 1</span><span class="en">Topic 1</span></div>
+      <h3><span class="th">การจัดการระบบนิเวศ</span><span class="en">Ecosystem management</span></h3>
+      <p class="muted th">ทำไมต้องจัดการระบบนิเวศ โศกนาฏกรรมทรัพย์สินร่วม แนวคิดและหลักการ และวงจร P-D-C-A</p>
+      <p class="muted en">Why manage ecosystems, the tragedy of the commons, concepts and principles, and the P-D-C-A cycle.</p>
+      <div class="chips"><span class="chip">VDO ×3</span><span class="chip"><span class="th">เกมทรัพย์สินร่วม</span><span class="en">Commons game</span></span><span class="chip">P-D-C-A</span><span class="chip"><span class="th">แบบทดสอบ</span><span class="en">Quiz</span></span></div>
+    </a>
+    <a class="card topic-card t2" href="#t2">
+      <div class="num"><span class="th">หัวข้อที่ 2</span><span class="en">Topic 2</span></div>
+      <h3><span class="th">แบบจำลองทางนิเวศวิทยา</span><span class="en">Ecological modelling</span></h3>
+      <p class="muted th">ความหมาย ประเภท ประโยชน์ ข้อจำกัด ขั้นตอนการสร้างแบบจำลอง และกรณีศึกษา: มูลค่าป่าไม้ รอยประทับทางนิเวศ และเกมจำลองที่ดอยติ้ว จ.น่าน</p>
+      <p class="muted en">Definition, types, benefits, limits, the modelling steps, and case studies: forest value, ecological footprint and the role-playing game at Doi Tiew, Nan.</p>
+      <div class="chips"><span class="chip">VDO ×3</span><span class="chip">Logistic</span><span class="chip"><span class="th">มูลค่าป่าไม้</span><span class="en">Forest value</span></span><span class="chip">Ecological footprint</span><span class="chip"><span class="th">แบบทดสอบ</span><span class="en">Quiz</span></span></div>
+    </a>
+  </div>
+
+  <h3><span class="th">แนะนำการใช้งาน</span><span class="en">How to use this site</span></h3>
+  <div class="grid g3">
+    <div class="card"><h4>1 · <span class="th">อ่านและดูวิดีโอ</span><span class="en">Read and watch</span></h4><p class="th">แต่ละหัวข้อมีสรุปเนื้อหาเรียงตามสไลด์ และวิดีโอบรรยายของตอนนั้นอยู่ข้าง ๆ</p><p class="en">Each topic has a summary that follows the slides, with that part's lecture video beside it.</p></div>
+    <div class="card"><h4>2 · <span class="th">ลองแบบจำลอง</span><span class="en">Try the models</span></h4><p class="th">ปรับค่าตัวแปรแล้วดูผลทันที เช่น เกมทรัพย์สินร่วม การเติบโตแบบ logistic มูลค่าป่าไม้ และรอยประทับทางนิเวศ</p><p class="en">Change the inputs and see the results at once: the commons game, logistic growth, forest value and the ecological footprint.</p></div>
+    <div class="card"><h4>3 · <span class="th">ทดสอบและอภิปราย</span><span class="en">Test and discuss</span></h4><p class="th">ทำแบบทดสอบพร้อมเฉลย และตอบคำถามอภิปราย คำตอบเก็บไว้ในเครื่องของนิสิต และสั่งพิมพ์/บันทึกเป็น PDF ได้</p><p class="en">Take the quizzes (with explanations) and answer the discussion questions. Answers stay in your browser and can be printed or saved as PDF.</p></div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+    <div class="row" style="justify-content:space-between">
+      <h3 style="margin:0"><span class="th">วิดีโอบรรยาย (Ecology-2026)</span><span class="en">Lecture videos (Ecology-2026)</span></h3>
+      <a href="https://www.youtube.com/playlist?list=PLSkhCc7k9KW5VD1hKmVct38A_XB73Reww" target="_blank" rel="noopener"><span class="th">เปิด playlist ใน YouTube ↗</span><span class="en">Open the playlist on YouTube ↗</span></a>
+    </div>
+    <p class="muted"><span class="th">6 คลิป ประมาณ 3 ชั่วโมง 31 นาที</span><span class="en">6 clips, about 3 h 31 min in total</span></p>
+    <div class="vidlist" id="homeVids"></div>
+  </div>
+</section>
+
+<!-- ================= TOPIC 1 ================= -->
+<section class="page t1" id="p-t1">
+  <div class="pagehead"><span class="badge"><span class="th">หัวข้อที่ 1</span><span class="en">Topic 1</span></span>
+    <h2><span class="th">การจัดการระบบนิเวศ</span><span class="en">Ecosystem management</span> <small class="muted">(Ecosystem management)</small></h2></div>
+  <div class="subnav" data-group="t1">
+    <button data-s="lesson"><span class="th">บทเรียน + VDO</span><span class="en">Lesson + video</span></button>
+    <button data-s="commons"><span class="th">เกมทรัพย์สินร่วม</span><span class="en">Commons game</span></button>
+    <button data-s="act"><span class="th">กิจกรรมจัดกลุ่ม</span><span class="en">Sorting activities</span></button>
+    <button data-s="disc"><span class="th">คำถามอภิปราย</span><span class="en">Discussion</span></button>
+    <button data-s="quiz"><span class="th">แบบทดสอบ</span><span class="en">Quiz</span></button>
+  </div>
+
+  <!-- T1 lesson -->
+  <div class="sub" data-sub="lesson">
+    <div class="card" style="margin-bottom:14px">
+      <h3><span class="th">วัตถุประสงค์การเรียนรู้</span><span class="en">Learning objectives</span></h3>
+      <ol class="th">
+        <li>ระบุปัญหาที่เกิดขึ้นกับระบบนิเวศในปัจจุบันได้</li>
+        <li>อธิบายความหมายและความจำเป็นของการจัดการระบบนิเวศได้</li>
+        <li>ระบุแนวคิดและหลักการจัดการระบบนิเวศได้</li>
+        <li>ยกตัวอย่างวิธีการอนุรักษ์ที่นำมาใช้ในการจัดการระบบนิเวศได้</li>
+        <li>อธิบายและยกตัวอย่างกระบวนการในการจัดการระบบนิเวศ (Plan-Do-Check-Act)</li>
+        <li>ระบุความสำคัญของแผนการจัดการระบบนิเวศได้</li>
+        <li>ประยุกต์ใช้ความรู้ด้านนิเวศในการจัดการทรัพยากรธรรมชาติได้</li>
+      </ol>
+      <ol class="en">
+        <li>Identify the problems that ecosystems face today.</li>
+        <li>Explain what ecosystem management is and why it is needed.</li>
+        <li>Identify the concepts and principles of ecosystem management.</li>
+        <li>Give examples of conservation methods used in ecosystem management.</li>
+        <li>Explain and give examples of the management process (Plan-Do-Check-Act).</li>
+        <li>State why an ecosystem management plan matters.</li>
+        <li>Apply ecological knowledge to natural resource management.</li>
+      </ol>
+    </div>
+
+    <!-- Part 1 -->
+    <div class="lesson">
+      <div>
+        <details class="part" open>
+          <summary><span class="th">ตอนที่ 1 · ทำไมต้องจัดการระบบนิเวศ</span><span class="en">Part 1 · Why manage ecosystems?</span></summary>
+          <div class="body">
+            <h4><span class="th">บทเรียนจากเกม ReHab สถานการณ์ที่ 1</span><span class="en">Lessons from the ReHab game, scenario 1</span></h4>
+            <ul class="th">
+              <li>มวลชีวภาพลดลง → สูญเสียถิ่นที่อยู่อาศัย (habitat loss) ค่า K ลดลง</li>
+              <li>ลูกนกไม่เกิด → การสูญพันธุ์ (genetic / species loss)</li>
+              <li>การแก่งแย่งทรัพยากรในระบบนิเวศ → มีผู้ชนะและผู้แพ้</li>
+              <li>รายได้ไม่เท่าเทียมกัน → คนรวย–คนจน การกระจายรายได้ ความไม่มั่นคงของรายได้ (income insecurity)</li>
+              <li>ความขัดแย้งระหว่างชาวบ้านที่ลักลอบตัดไม้กับเจ้าหน้าที่ → ปัญหาสังคม</li>
+              <li>ระบบนิเวศเสียเสถียรภาพ ไม่สามารถทำหน้าที่ได้</li>
+            </ul>
+            <ul class="en">
+              <li>Biomass falls → habitat loss, lower carrying capacity (K).</li>
+              <li>No chicks hatch → extinction (genetic / species loss).</li>
+              <li>Competition for resources → winners and losers.</li>
+              <li>Unequal income → rich and poor, income distribution, income insecurity.</li>
+              <li>Conflict between villagers who cut trees illegally and officials → social problems.</li>
+              <li>The ecosystem loses stability and can no longer function.</li>
+            </ul>
+            <p class="th">ในพื้นที่เดียวกันมีความต้องการที่แตกต่างกัน เช่น หาหญ้าเลี้ยงสัตว์ ทำสวนยาง ปลูกข้าวไร่ ปลูกลิ้นจี่ ทำเหมือง ตัดไม้สร้างบ้าน สร้างฝายเก็บน้ำ สร้างถนน เก็บของป่า และอนุรักษ์ป่า</p>
+            <p class="en">The same area carries many different wishes: grazing, rubber, upland rice, lychee, mining, timber for houses, check dams, roads, forest products, and forest conservation.</p>
+
+            <h4><span class="th">สถานการณ์ระบบนิเวศในปัจจุบัน</span><span class="en">The situation today</span></h4>
+            <ul class="th">
+              <li>ความซับซ้อนและความไม่แน่นอนสูง จากปัจจัยธรรมชาติและนโยบายรัฐ</li>
+              <li>ความขัดแย้งระหว่างสังคมมนุษย์ (ใช้มากเกินไป: over-use) กับระบบนิเวศ — ความสามารถสูงสุดในการรองรับ (carrying capacity) และการเน้นการเติบโตทางเศรษฐกิจ (GDP) มากกว่าความสุข (GHP)</li>
+              <li>สาเหตุ: นักนิเวศขาดความสนใจปัญหาเศรษฐกิจ นักเศรษฐศาสตร์ขาดความสนใจระบบนิเวศ ขาดการให้มูลค่าระบบนิเวศที่เหมาะสม ขาดการสื่อสารระหว่างสองฝ่าย และขาดจริยธรรมในการอยู่ร่วมกันระหว่างมนุษย์กับระบบนิเวศ</li>
+            </ul>
+            <ul class="en">
+              <li>High complexity and uncertainty, from natural factors and state policy.</li>
+              <li>Conflict between human over-use and the ecosystem: carrying capacity, and a focus on economic growth (GDP) rather than happiness (GHP).</li>
+              <li>Causes: ecologists pay little attention to economics, economists pay little attention to ecosystems, ecosystems are not valued properly, the two sides do not talk, and there is no shared ethic for living with ecosystems.</li>
+            </ul>
+            <div class="callout"><b><span class="th">ตัวอย่าง: ป่าชายเลน กับ นากุ้ง</span><span class="en">Example: mangrove versus shrimp farm</span></b>
+              <p class="th" style="margin:.3em 0 0">ในมุมของเอกชน การเปลี่ยนป่าชายเลนเป็นนากุ้งดูคุ้มค่ากว่า แต่เมื่อคิดมูลค่าสาธารณะของป่าชายเลน (การป้องกันชายฝั่ง แหล่งอนุบาลสัตว์น้ำ ไม้และของป่า) และต้นทุนที่สังคมต้องจ่ายจากนากุ้ง (เงินอุดหนุน มลพิษ ค่าฟื้นฟู) ผลกลับกัน (สไลด์ตอนที่ 1; ที่มา Millennium Ecosystem Assessment; Sathirathai &amp; Barbier 2001)</p>
+              <p class="en" style="margin:.3em 0 0">From a private view, turning mangroves into shrimp ponds looks more profitable. Once the public values of mangroves (coastal protection, fish nursery, timber and non-timber products) and the costs that society pays for shrimp farms (subsidies, pollution, restoration) are counted, the result reverses (Part 1 slides; sources: Millennium Ecosystem Assessment; Sathirathai &amp; Barbier 2001).</p></div>
+
+            <h4><span class="th">โศกนาฏกรรมทรัพย์สินร่วม (tragedy of the commons)</span><span class="en">The tragedy of the commons</span></h4>
+            <p class="th">การใช้ทรัพยากรจากระบบมากเกินไป Hardin (1968) อธิบายว่าทรัพย์สินที่หลายคนถือครองร่วมกันจะถูกทำลายหรือใช้มากเกินไปจนเสื่อมโทรม ตัวอย่าง: การจับจองพื้นที่ป่าทำการเกษตร การเก็บของป่า การทำประมง → ลองเล่น <a href="#t1/commons">เกมทรัพย์สินร่วม</a></p>
+            <p class="en">Over-use of a shared resource. Hardin (1968) argued that property held in common by many people is destroyed or overused until it deteriorates. Examples: clearing forest for farms, collecting forest products, fishing → try the <a href="#t1/commons">commons game</a>.</p>
+            <p class="th">ระบบนิเวศเมืองก็เช่นกัน มีปัจจัยนำเข้า (พลังงาน อาหาร น้ำ วัตถุดิบ สินค้า เงิน ข้อมูล) และปัจจัยส่งออก (ขยะ ความร้อน มลพิษอากาศและน้ำ ก๊าซเรือนกระจก เสียง ความมั่งคั่ง ความคิด)</p>
+            <p class="en">A city is an ecosystem too, with inputs (energy, food, water, raw materials, goods, money, information) and outputs (solid waste, waste heat, air and water pollutants, greenhouse gases, noise, wealth, ideas).</p>
+
+            <h4><span class="th">ต้นเหตุ: ความสัมพันธ์ระหว่างมนุษย์กับระบบนิเวศ</span><span class="en">Root cause: how humans relate to ecosystems</span></h4>
+            <ul class="th">
+              <li>จากการพึ่งพิง (rely on) → มองสิ่งมีชีวิตต่าง ๆ เป็นศัตรู (eliminate)</li>
+              <li>การปฏิวัติเกษตร อุตสาหกรรม วิทยาศาสตร์ สาธารณสุข และเศรษฐกิจ</li>
+              <li>แนวคิดเอาชนะธรรมชาติ และการลดบทบาทของความเชื่อ/ศาสนา</li>
+              <li>การพัฒนาด้านวัตถุ กับ การพัฒนาด้านจิตใจ — จาก <i>Homo sapiens</i> สู่ “Homo economicus”</li>
+            </ul>
+            <ul class="en">
+              <li>From relying on other living things → treating them as enemies to eliminate.</li>
+              <li>The agricultural, industrial, scientific, public-health and economic revolutions.</li>
+              <li>The idea of conquering nature, and the declining role of beliefs and religion.</li>
+              <li>Material versus spiritual development — from <i>Homo sapiens</i> to “Homo economicus”.</li>
+            </ul>
+            <p class="th">ตัวอย่าง: พิธีบวงสรวงก่อนจับปลาบึกที่บ้านหาดไคร้ ซึ่งเดิมเป็น “พิธีป่า” ของชุมชน ได้กลายเป็นงานส่งเสริมการท่องเที่ยวของจังหวัด ความศักดิ์สิทธิ์และความผูกพันระหว่างคนกับธรรมชาติลดลง (ศิลปวัฒนธรรม, silpa-mag.com)</p>
+            <p class="en">Example: the ritual before catching the Mekong giant catfish at Ban Hat Khrai was once a community forest rite; it has become a provincial tourism event, and the bond between people and nature has weakened (Silpa Wattanatham, silpa-mag.com).</p>
+
+            <h4><span class="th">เราจัดการระบบนิเวศได้หรือไม่? — โลกทัศน์ 3 แบบ</span><span class="en">Can we manage ecosystems? Three worldviews</span></h4>
+            <div class="tablewrap"><table>
+              <tr><th>Planetary management</th><th>Stewardship</th><th>Environmental wisdom</th></tr>
+              <tr>
+                <td><span class="th">มนุษย์แยกจากธรรมชาติ และจัดการธรรมชาติเพื่อตอบความต้องการที่เพิ่มขึ้นได้ ด้วยความคิดสร้างสรรค์และเทคโนโลยี ทรัพยากรไม่หมด การเติบโตทางเศรษฐกิจไม่มีขีดจำกัด ความสำเร็จขึ้นกับการจัดการระบบค้ำจุนชีวิตของโลกเพื่อประโยชน์ของเราเป็นหลัก</span><span class="en">We are apart from nature and can manage it to meet growing needs. Thanks to ingenuity and technology we will not run out of resources; economic growth is essentially unlimited. Success depends on managing Earth's life-support systems mostly for our benefit.</span></td>
+                <td><span class="th">เรามีความรับผิดชอบเชิงจริยธรรมในการเป็นผู้ดูแลโลก ทรัพยากรอาจไม่หมดแต่ไม่ควรใช้อย่างสิ้นเปลือง ส่งเสริมการเติบโตที่เป็นมิตรต่อสิ่งแวดล้อม ความสำเร็จขึ้นกับการจัดการเพื่อประโยชน์ของเราและของธรรมชาติ</span><span class="en">We have an ethical duty to be caring stewards of the Earth. We may not run out of resources, but they should not be wasted. Encourage environmentally beneficial growth. Success depends on managing life-support systems for us and for the rest of nature.</span></td>
+                <td><span class="th">เราเป็นส่วนหนึ่งของธรรมชาติและพึ่งพิงธรรมชาติทั้งหมด ธรรมชาติมีอยู่เพื่อทุกชีวิต ทรัพยากรมีจำกัด ส่งเสริมการเติบโตที่ค้ำจุนโลก ความสำเร็จขึ้นกับการเรียนรู้ว่าธรรมชาติค้ำจุนตัวเองอย่างไร แล้วนำมาใช้ในความคิดและการกระทำ</span><span class="en">We are part of and totally dependent on nature, which exists for all species. Resources are limited. Encourage earth-sustaining growth. Success depends on learning how nature sustains itself and bringing those lessons into how we think and act.</span></td>
+              </tr></table></div>
+            <p class="th"><b>Biosphere II</b> (University of Arizona) เป็นตัวอย่างโลกทัศน์แบบ planetary management: พื้นที่ 12,700 ตร.ม. 7 ไบโอม สร้างปี 1987–1991 ทดลองปี 1991–1993 มีมนุษย์ 8 คนอาศัยในระบบปิด แต่ควบคุมวงจรก๊าซต่าง ๆ ไม่ได้ โดยเฉพาะ CO<sub>2</sub> ทั้งที่ลงทุนราว 200 ล้านดอลลาร์สหรัฐ (1985–2007)</p>
+            <p class="en"><b>Biosphere II</b> (University of Arizona) illustrates the planetary-management worldview: 12,700 m², 7 biomes, built 1987–1991, run 1991–1993 with 8 people inside a closed system. The gas cycles, especially CO<sub>2</sub>, could not be controlled, despite about US$200 million invested (1985–2007).</p>
+            <div class="callout green th">ถ้าความรู้ไม่พอ…ก็ไม่ต้องจัดการ ปล่อยไปตามกระบวนการของธรรมชาติ (เกิดขึ้น ตั้งอยู่ ดับไป)? แต่ถ้าไม่ทำอะไรเลย ระบบนิเวศจะเสื่อมโทรมลงไปเรื่อย ๆ และส่งผลย้อนกลับต่อสังคมมนุษย์จนเกินจะฟื้นฟู — เราจะรับสภาพนั้นได้หรือไม่ และควรทำอย่างไร?</div>
+            <div class="callout green en">If our knowledge is not enough, should we leave nature to its own processes (arise, persist, pass away)? But if we do nothing, ecosystems keep degrading and feed back on human society until recovery is impossible. Can we accept that, and what should we do?</div>
+          </div>
+        </details>
+      </div>
+      <aside><div class="vid" data-v="1"></div><div class="vidcap"></div></aside>
+    </div>
+
+    <!-- Part 2 -->
+    <div class="lesson">
+      <div>
+        <details class="part">
+          <summary><span class="th">ตอนที่ 2 · แนวคิดและหลักการจัดการระบบนิเวศ</span><span class="en">Part 2 · Concepts and principles</span></summary>
+          <div class="body">
+            <p class="th"><b>การจัดการระบบนิเวศ</b> คือกระบวนการ/ขั้นตอนการดำเนินการที่มีขอบเขต วัตถุประสงค์ แผนงาน กิจกรรมที่ชัดเจนและมีจุดสิ้นสุด เพื่อบรรลุเป้าหมายคือการใช้ประโยชน์จากระบบนิเวศอย่างยั่งยืน โดยอาศัยหลักการทางอนุรักษ์วิทยา (conservation biology) และมาตรการทางกฎหมาย เศรษฐศาสตร์และสังคม</p>
+            <p class="en"><b>Ecosystem management</b> is a process with a clear scope, objectives, plans, activities and an end point, aiming at sustainable use of the ecosystem. It relies on conservation biology together with legal, economic and social measures.</p>
+            <h4><span class="th">เป้าหมาย</span><span class="en">Goals</span></h4>
+            <ul class="th"><li>คงไว้ซึ่งโครงสร้างและหน้าที่การทำงานของระบบนิเวศ (structure, processes, functions/services)</li><li>คงไว้ซึ่งระดับความหลากหลายทางชีวภาพที่เหมาะสม</li><li>ตอบสนองความต้องการของคนรุ่นปัจจุบัน โดยรักษาโอกาสการใช้ประโยชน์ของรุ่นลูกรุ่นหลาน</li></ul>
+            <ul class="en"><li>Keep the ecosystem's structure, processes and functions/services.</li><li>Keep appropriate levels of biodiversity.</li><li>Meet the needs of the present generation while keeping options open for future generations.</li></ul>
+            <h4><span class="th">แนวคิด</span><span class="en">Approaches</span></h4>
+            <ul class="th">
+              <li><b>Anthropocentric / human-centric</b>: เน้นการใช้ประโยชน์ของมนุษย์</li>
+              <li><b>Bio-centric / eco-centric</b>: เน้นสุขภาพของระบบนิเวศ (ecological health: process, function, resilience)</li>
+              <li><b>Sustainable development</b>: “การพัฒนาที่ตอบสนองความต้องการของคนรุ่นปัจจุบันโดยไม่ลดทอนความสามารถของคนรุ่นต่อไป” (Brundtland Commission, <i>Our Common Future</i>, 1987)</li>
+              <li>Ecosystem-based กับ species-based และ top-down กับ bottom-up</li>
+            </ul>
+            <ul class="en">
+              <li><b>Anthropocentric / human-centric</b>: focus on human use.</li>
+              <li><b>Bio-centric / eco-centric</b>: focus on ecological health (processes, functions, resilience).</li>
+              <li><b>Sustainable development</b>: development that meets the needs of the present without compromising the ability of future generations to meet their own needs (Brundtland Commission, <i>Our Common Future</i>, 1987).</li>
+              <li>Ecosystem-based versus species-based, and top-down versus bottom-up.</li>
+            </ul>
+            <div class="tablewrap"><table>
+              <tr><th colspan="2">Ecosystem management: a paradigm shift</th></tr>
+              <tr><th>FROM</th><th>TO</th></tr>
+              <tr><td>Individual species</td><td>Ecosystems</td></tr>
+              <tr><td>Small spatial scale</td><td>Multiple scales</td></tr>
+              <tr><td>Short-term perspective</td><td>Long-term perspective</td></tr>
+              <tr><td>Humans: independent of ecosystems</td><td>Humans: integral part of ecosystems</td></tr>
+              <tr><td>Management separated from research</td><td>Adaptive management</td></tr>
+              <tr><td>Managing commodities</td><td>Sustaining production potential for goods and services</td></tr>
+            </table></div>
+            <h4><span class="th">วิธีการที่ใช้ (อนุรักษ์วิทยา)</span><span class="en">Methods (conservation biology)</span></h4>
+            <ul class="th"><li>ตัวแปรพื้นฐาน: สสาร พลังงาน พื้นที่ (K) ความหลากหลาย</li><li>วิธีการหลัก: การปกปัก (preservation) ใช้อย่างยั่งยืน (sustainable use) ฟื้นฟู (restoration) / สร้างทดแทน (replacement)</li><li>มาตรการทางกฎหมาย เศรษฐศาสตร์ และการสื่อสาร เช่น การจับกุมดำเนินคดี ภาษีสิ่งแวดล้อม การสื่อสารเรื่องสิ่งแวดล้อม</li></ul>
+            <ul class="en"><li>Basic variables: matter, energy, area (K), diversity.</li><li>Main methods: preservation, sustainable use, restoration / replacement.</li><li>Legal, economic and communication measures, e.g. law enforcement, environmental taxes, environmental communication.</li></ul>
+            <h4><span class="th">หลักการจัดการระบบนิเวศ</span><span class="en">Principles</span></h4>
+            <ul class="th">
+              <li>เข้าใจระบบที่จะจัดการทั้งด้านนิเวศ สังคม และเศรษฐศาสตร์: โครงสร้างและปฏิสัมพันธ์ พลวัตขององค์ประกอบ หน้าที่ ศักยภาพการรองรับ ศักยภาพการฟื้นฟูตัวเอง รูปแบบการใช้ประโยชน์</li>
+              <li>ในพื้นที่หนึ่ง ๆ ต้องคำนึงถึงทรัพยากรชนิดอื่นไปพร้อมกัน และต้องไม่แยกมนุษย์ออกจากระบบนิเวศ</li>
+              <li>มนุษย์สร้างทรัพยากรบางชนิดขึ้นมาในช่วงสั้น ๆ ไม่ได้ การจัดการอย่างยั่งยืนจึงจำเป็นต่ออนาคต</li>
+              <li>ทุกโครงการพัฒนามีผลกระทบ นักจัดการต้องทำให้ผลกระทบน้อยที่สุด บางครั้งต้องใช้มาตรการทางกฎหมาย</li>
+              <li>คำนึงถึงการมีส่วนร่วมของผู้มีส่วนเกี่ยวข้องทุกเพศ ทุกวัย ทุกภาคส่วน — งานที่ขาดความเข้าใจและการยอมรับมักล้มเหลว</li>
+              <li>พิจารณาแบบองค์รวม (holistic management)</li>
+            </ul>
+            <ul class="en">
+              <li>Understand the system ecologically, socially and economically: structure and interactions, dynamics, functions, carrying capacity, resilience, patterns of use.</li>
+              <li>In any area, consider other resources at the same time, and never separate people from the ecosystem.</li>
+              <li>Some resources cannot be recreated in the short term, so sustainable management is necessary for the future.</li>
+              <li>Every development project has impacts; managers must keep them as small as possible, sometimes with legal measures.</li>
+              <li>Involve stakeholders of every gender, age and sector — work done without their understanding and acceptance tends to fail.</li>
+              <li>Think holistically (holistic management).</li>
+            </ul>
+            <div class="callout green"><b><span class="th">คุณสมบัติของนักจัดการ</span><span class="en">What a manager needs</span></b>
+              <ul class="th" style="margin-bottom:0"><li>มีทั้งความรู้ (scientific knowledge) และกลยุทธ์ (tactics) — ปัญหาเดียวกันแต่บริบทสังคมต่างกัน กลยุทธ์จึงต่างกัน: “เข้าใจ เข้าถึง พัฒนา”</li><li>มองระบบและวางแผนแบบครบวงจร</li><li>ยอมรับความผิดพลาด พร้อมปรับปรุงตัวเองและวิธีการเสมอ (adaptive management)</li><li>เป็นนักสื่อสารที่ดี</li></ul>
+              <ul class="en" style="margin-bottom:0"><li>Both scientific knowledge and tactics — the same problem in a different social context needs different tactics: “understand, reach out, develop”.</li><li>Systems thinking and full-cycle planning.</li><li>Accepting mistakes and always improving oneself and the methods (adaptive management).</li><li>Being a good communicator.</li></ul></div>
+          </div>
+        </details>
+      </div>
+      <aside><div class="vid" data-v="2"></div><div class="vidcap"></div></aside>
+    </div>
+
+    <!-- Part 3 -->
+    <div class="lesson">
+      <div>
+        <details class="part">
+          <summary><span class="th">ตอนที่ 3 · กระบวนการจัดการระบบนิเวศ (P-D-C-A)</span><span class="en">Part 3 · The management process (P-D-C-A)</span></summary>
+          <div class="body">
+            <div class="pdca">
+              <div style="background:var(--c1)">P · Plan<span class="th">วางแผน</span><span class="en">plan</span></div>
+              <div style="background:var(--c2)">D · Do<span class="th">ลงมือปฏิบัติ</span><span class="en">carry out</span></div>
+              <div style="background:var(--c3)">C · Check<span class="th">ติดตามตรวจสอบ</span><span class="en">monitor</span></div>
+              <div style="background:var(--c4)">A · Act<span class="th">ทบทวน/สร้างมาตรฐาน</span><span class="en">review / standardise</span></div>
+            </div>
+            <h4>I. Plan</h4>
+            <p class="th">วางแนวทางการจัดการอย่างเหมาะสมบนพื้นฐานของหลักการอนุรักษ์ เป้าหมายพื้นฐาน: สร้างความตระหนัก สร้างความร่วมมือและการมีส่วนร่วม สร้างความเชื่อมั่น โปร่งใส ตรวจสอบได้ หาช่องทางสนับสนุน (การเงินและแรงงาน) และเพิ่มศักยภาพของผู้มีส่วนเกี่ยวข้อง</p>
+            <p class="en">Set out suitable management based on conservation principles. Basic aims: raise awareness, build cooperation and participation, build trust and transparency, find support (money and labour), and build stakeholders' capacity.</p>
+            <ul class="th">
+              <li><b>ประเมินสถานภาพระบบนิเวศ/ภัยคุกคาม</b> เพื่อให้ได้ข้อมูลพื้นฐานทั้งทางนิเวศ เศรษฐกิจ สังคม (rapid หรือ conventional assessment) เช่น ผลปฏิบัติการของนิสิตที่อุทยาน 100 ปี (CP), อาคารมหิตลาธิเบศร (MH) และสามย่านมิตรทาวน์ (SM)</li>
+              <li><b>วิเคราะห์ผู้มีส่วนเกี่ยวข้อง (stakeholder analysis)</b> เพื่อรู้ว่าใครได้-เสีย กฎหมายและระเบียบใดเกี่ยวข้อง มีหลายวิธี เช่น importance/influence technique</li>
+              <li><b>สร้างแผนและพิจารณาอนุมัติแผน</b>: วัตถุประสงค์ชัดเจน กิจกรรม/มาตรการที่ไม่ขัดต่อศีลธรรม จัดลำดับความสำคัญระยะสั้น กลาง ยาว ระบุกรอบเวลา ตัวชี้วัด งบประมาณ ผู้รับผิดชอบ</li>
+              <li>กิจกรรมในแผนควรครอบคลุม: สำรวจพื้นที่ ป้องกัน ใช้ประโยชน์อย่างยั่งยืน ฟื้นฟู และ <b>CEPA</b> (Communication, Capacity building, Education, Participation, Awareness raising)</li>
+            </ul>
+            <ul class="en">
+              <li><b>Assess ecosystem status and threats</b> to get baseline ecological, economic and social data (rapid or conventional assessment), e.g. student field results at Centenary Park (CP), the Mahitaladhibesra Building (MH) and Samyan Mitrtown (SM).</li>
+              <li><b>Stakeholder analysis</b>: who gains and who loses, and which laws and rules apply. Many methods exist, e.g. the importance/influence technique.</li>
+              <li><b>Write and approve the plan</b>: clear objectives, ethical activities and measures, priorities for the short, medium and long term, time frame, indicators, budget, people in charge.</li>
+              <li>Activities should cover: surveys, protection, sustainable use, restoration and <b>CEPA</b> (Communication, Capacity building, Education, Participation, Awareness raising).</li>
+            </ul>
+            <h4>II. Do</h4>
+            <p class="th">เป็นสิ่งจำเป็นที่สุดในการจัดการ ต้องพิจารณา ระยะเวลา งบประมาณ กำลังคน และการบริหารความเสี่ยง (มีมาตรการรองรับเหตุสุดวิสัย ปรับแผนได้เมื่อจำเป็น)</p>
+            <p class="en">The most essential step. Consider time, budget, manpower and risk management (have measures for unforeseen events; adjust the plan when needed).</p>
+            <h4>III. Check</h4>
+            <p class="th">ประเมินผลตามตัวชี้วัดที่กำหนดไว้ในแผน เช่น มีศูนย์เรียนรู้เพิ่มขึ้นไม่น้อยกว่า 20 แห่งต่อปี, พื้นที่ป่าเพิ่มขึ้นไม่น้อยกว่าร้อยละ 0.5 ในเวลา 5 ปี</p>
+            <p class="en">Evaluate against the indicators set in the plan, e.g. at least 20 new learning centres per year; forest area up by at least 0.5% in 5 years.</p>
+            <h4>IV. Act</h4>
+            <p class="th">นำผลไปปรับปรุงกระบวนการ: สิ่งใดคงไว้ สิ่งใดต้องปรับ (กลับไปวางแผนใหม่) และสร้างมาตรฐานการดำเนินงานให้โครงการอื่นในอนาคต</p>
+            <p class="en">Use the results to improve the process: what to keep and what to change (back to planning), and set standards for future projects.</p>
+            <div class="callout green"><b><span class="th">สรุป</span><span class="en">Summary</span></b>
+              <ol class="th" style="margin-bottom:0"><li>ปัญหาในระบบนิเวศเกิดจากกิจกรรมของมนุษย์เป็นหลัก</li><li>นักนิเวศและนักเศรษฐศาสตร์ต้องร่วมมือกัน</li><li>การจัดการต้องอาศัยหลักอนุรักษ์วิทยาและมาตรการอื่นประกอบ</li><li>กระบวนการจัดการมี 4 ขั้นตอน: P-D-C-A</li><li>การประเมินสถานภาพระบบนิเวศและผู้มีส่วนเกี่ยวข้องจำเป็นต่อการวางแผนที่ถูกต้องและเป็นที่ยอมรับร่วมกัน</li><li>ระบบนิเวศ (สสาร พลังงาน พื้นที่ ความหลากหลาย) เปลี่ยนแปลงตลอดเวลา จำเป็นต้องช่วยกันดูแลรักษา รวมถึงมนุษย์ซึ่งเป็นสิ่งมีชีวิตชนิดหนึ่งด้วย</li></ol>
+              <ol class="en" style="margin-bottom:0"><li>Ecosystem problems come mainly from human activities.</li><li>Ecologists and economists must work together.</li><li>Management needs conservation biology plus other measures.</li><li>The process has four steps: P-D-C-A.</li><li>Assessing the ecosystem and its stakeholders is needed for a sound plan that people accept.</li><li>Ecosystems (matter, energy, area, diversity) are always changing; we all need to care for them, humans included as one species among many.</li></ol></div>
+          </div>
+        </details>
+      </div>
+      <aside><div class="vid" data-v="3"></div><div class="vidcap"></div></aside>
+    </div>
+  </div>
+
+  <!-- T1 commons -->
+  <div class="sub" data-sub="commons">
+    <div class="card">
+      <h3><span class="th">เกมทรัพย์สินร่วม: ป่าหรือแหล่งปลาของหมู่บ้าน</span><span class="en">Commons game: a village forest or fishing ground</span><span class="demo-tag"><span class="th">แบบจำลองสาธิต</span><span class="en">teaching demo</span></span></h3>
+      <p class="th">ทรัพยากรร่วม (R) เติบโตแบบ logistic ตามสมการในหัวข้อที่ 2: R<sub>t+1</sub> = R<sub>t</sub> + rR<sub>t</sub>(1 − R<sub>t</sub>/K) − H<sub>t</sub> โดย H คือปริมาณที่ผู้ใช้ทุกคนเก็บรวมกันในปีนั้น ผู้ใช้แต่ละคนต้องการทรัพยากรเพิ่มขึ้นทุกปี (ประชากรและความต้องการเพิ่ม) ผลผลิตสูงสุดที่ยั่งยืน (MSY) = rK/4 ที่ R = K/2</p>
+      <p class="en">The shared resource (R) grows logistically, using the equation from Topic 2: R<sub>t+1</sub> = R<sub>t</sub> + rR<sub>t</sub>(1 − R<sub>t</sub>/K) − H<sub>t</sub>, where H is what all users take together that year. Each user wants a little more every year (more people, more demand). The maximum sustainable yield (MSY) = rK/4, reached at R = K/2.</p>
+      <div class="seg noprint" id="cmMode"><button data-m="sim" class="on"><span class="th">เปรียบเทียบกติกา 3 แบบ</span><span class="en">Compare 3 rules</span></button><button data-m="play"><span class="th">เล่นเอง ปีต่อปี</span><span class="en">Play year by year</span></button></div>
+    </div>
+
+    <div class="card" id="cmSim" style="margin-top:12px">
+      <div class="controls">
+        <label class="ctl"><span class="th">อัตราการเพิ่ม r</span><span class="en">Growth rate r</span> <b data-o="cm_r"></b><input type="range" id="cm_r" min="0.1" max="0.8" step="0.05" value="0.4"></label>
+        <label class="ctl"><span class="th">ขีดความสามารถรองรับ K (หน่วย)</span><span class="en">Carrying capacity K (units)</span> <b data-o="cm_K"></b><input type="range" id="cm_K" min="200" max="2000" step="100" value="1000"></label>
+        <label class="ctl"><span class="th">จำนวนผู้ใช้ N (คน/ครัวเรือน)</span><span class="en">Number of users N</span> <b data-o="cm_N"></b><input type="range" id="cm_N" min="2" max="40" step="1" value="10"></label>
+        <label class="ctl"><span class="th">ความต้องการเริ่มต้นต่อคน (หน่วย/ปี)</span><span class="en">Starting demand per user (units/yr)</span> <b data-o="cm_d"></b><input type="range" id="cm_d" min="1" max="20" step="0.5" value="3"></label>
+        <label class="ctl"><span class="th">ความต้องการเพิ่มขึ้น (%/ปี)</span><span class="en">Demand growth (%/yr)</span> <b data-o="cm_g"></b><input type="range" id="cm_g" min="0" max="10" step="0.5" value="5"></label>
+        <label class="ctl"><span class="th">โควตา (สัดส่วนของ MSY)</span><span class="en">Quota (share of MSY)</span> <b data-o="cm_q"></b><input type="range" id="cm_q" min="0.2" max="1.5" step="0.05" value="0.8"></label>
+        <label class="ctl"><span class="th">จำนวนปี</span><span class="en">Years</span> <b data-o="cm_T"></b><input type="range" id="cm_T" min="10" max="80" step="5" value="60"></label>
+      </div>
+      <div class="legend" id="cmLeg"></div>
+      <canvas class="chart" id="cmChart"></canvas>
+      <canvas class="chart" id="cmChartH" style="height:220px"></canvas>
+      <div class="tablewrap"><table id="cmTable"></table></div>
+      <div class="callout green">
+        <p class="th" style="margin:0"><b>กติกา</b> — (A) ต่างคนต่างเก็บ: ทุกคนเก็บตามความต้องการเท่าที่มีให้เก็บ (open access) · (B) โควตาคงที่: รวมกันไม่เกิน โควตา × MSY แบ่งเท่ากัน · (C) จัดการแบบปรับตัว (P-D-C-A): ทุกปีตรวจปริมาณทรัพยากร (Check) แล้วเก็บไม่เกิน r/2 ของที่เหลือ (Act) ทำให้ R เข้าใกล้ K/2</p>
+        <p class="en" style="margin:0"><b>Rules</b> — (A) Open access: everyone takes what they want while there is any left. · (B) Fixed quota: the total never exceeds quota × MSY, shared equally. · (C) Adaptive management (P-D-C-A): every year the stock is checked (Check) and at most r/2 of it is taken (Act), which keeps R near K/2.</p>
+      </div>
+      <p class="muted th">ลองดู: เพิ่ม N หรืออัตราการเพิ่มความต้องการ → กติกา A ล่มเร็วขึ้นเท่าไร? ตั้งโควตาเกิน 1.0 × MSY จะเกิดอะไรขึ้น? ลด r (ทรัพยากรฟื้นตัวช้า เช่น ป่า) แล้วเปรียบเทียบกับ r สูง (เช่น ปลาขนาดเล็ก)</p>
+      <p class="muted en">Try: raise N or demand growth — how much sooner does rule A collapse? Set the quota above 1.0 × MSY — what happens? Lower r (slow recovery, like a forest) and compare with a high r (like small fish).</p>
+    </div>
+
+    <div class="card hide" id="cmPlay" style="margin-top:12px">
+      <p class="th">คุณเป็นผู้ใช้ 1 คนจาก N คน ทุกปีเลือกว่าจะเก็บเท่าไร ผู้ใช้คนอื่นทำตามพฤติกรรมที่เลือก เป้าหมาย: ได้ผลผลิตสะสมมากที่สุด <b>และ</b> ทรัพยากรยังเหลือเมื่อครบ 30 ปี</p>
+      <p class="en">You are one of N users. Each year choose how much to take; the others follow the behaviour you pick. Goal: the largest total harvest <b>and</b> a resource that still exists after 30 years.</p>
+      <div class="controls">
+        <label class="ctl"><span class="th">ผู้ใช้คนอื่น</span><span class="en">Other users</span>
+          <select id="pl_beh">
+            <option value="greedy">ต่างคนต่างเก็บ (เพิ่มขึ้น 5%/ปี) · Open access (+5%/yr)</option>
+            <option value="quota">ทำตามข้อตกลงโควตา MSY/N · Keep the MSY/N quota</option>
+            <option value="copy">ทำตามคุณ (เก็บเท่าคุณ) · Copy you</option>
+          </select></label>
+        <label class="ctl"><span class="th">จำนวนผู้ใช้ N</span><span class="en">Users N</span>
+          <select id="pl_N"><option>5</option><option selected>10</option><option>20</option></select></label>
+        <label class="ctl"><span class="th">ปีนี้คุณจะเก็บ (หน่วย)</span><span class="en">Your take this year (units)</span> <b data-o="pl_h"></b><input type="range" id="pl_h" min="0" max="40" step="1" value="8"></label>
+      </div>
+      <div class="row noprint"><button class="btn primary" id="pl_go"><span class="th">เก็บผลผลิตปีนี้ ▶</span><span class="en">Harvest this year ▶</span></button><button class="btn" id="pl_reset"><span class="th">เริ่มใหม่</span><span class="en">Restart</span></button></div>
+      <div class="stats" id="plStats"></div>
+      <canvas class="chart" id="plChart" style="height:240px"></canvas>
+      <div class="result" id="plMsg"></div>
+    </div>
+  </div>
+
+  <!-- T1 activities -->
+  <div class="sub" data-sub="act">
+    <div class="card">
+      <h3><span class="th">กิจกรรม 1: กิจกรรมนี้อยู่ในขั้นใดของ P-D-C-A?</span><span class="en">Activity 1: which P-D-C-A step is this?</span></h3>
+      <p class="muted"><span class="th">เลือกขั้นตอนให้ทุกข้อ แล้วกด “ตรวจคำตอบ”</span><span class="en">Pick a step for every item, then press “Check answers”.</span></p>
+      <div class="sorter" id="sortPDCA"></div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <h3><span class="th">กิจกรรม 2: ข้อความนี้เป็นโลกทัศน์แบบใด?</span><span class="en">Activity 2: which worldview is this?</span></h3>
+      <div class="sorter" id="sortWV"></div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <h3><span class="th">กิจกรรม 3: Ecosystem management — FROM หรือ TO?</span><span class="en">Activity 3: Ecosystem management — FROM or TO?</span></h3>
+      <div class="sorter" id="sortShift"></div>
+    </div>
+  </div>
+
+  <!-- T1 discussion -->
+  <div class="sub" data-sub="disc">
+    <div class="card">
+      <h3><span class="th">คำถามอภิปราย (จากสไลด์)</span><span class="en">Discussion questions (from the slides)</span></h3>
+      <p class="muted"><span class="th">คำตอบบันทึกไว้ในเบราว์เซอร์ของเครื่องนี้เท่านั้น กด “พิมพ์ / บันทึก PDF” เพื่อส่งงาน</span><span class="en">Answers are saved only in this browser. Use “Print / save PDF” to hand in.</span></p>
+      <div class="controls"><label class="ctl"><span class="th">ชื่อ–กลุ่ม (ไม่บังคับ)</span><span class="en">Name / group (optional)</span><input type="text" data-ans="t1_name"></label></div>
+      <div id="t1Disc"></div>
+      <div class="row noprint"><button class="btn primary" data-print="t1"><span class="th">พิมพ์ / บันทึก PDF</span><span class="en">Print / save PDF</span></button></div>
+    </div>
+  </div>
+
+  <!-- T1 quiz -->
+  <div class="sub" data-sub="quiz"><div id="quiz1"></div></div>
+</section>
+
+<!-- ================= TOPIC 2 ================= -->
+<section class="page t2" id="p-t2">
+  <div class="pagehead"><span class="badge"><span class="th">หัวข้อที่ 2</span><span class="en">Topic 2</span></span>
+    <h2><span class="th">แบบจำลองทางนิเวศวิทยา</span><span class="en">Ecological modelling</span> <small class="muted">(Intro. to ecological modelling)</small></h2></div>
+  <div class="subnav" data-group="t2">
+    <button data-s="lesson"><span class="th">บทเรียน + VDO</span><span class="en">Lesson + video</span></button>
+    <button data-s="logistic"><span class="th">ทดลอง: logistic</span><span class="en">Lab: logistic</span></button>
+    <button data-s="forest"><span class="th">กรณี 1: มูลค่าป่าไม้</span><span class="en">Case 1: forest value</span></button>
+    <button data-s="footprint"><span class="th">กรณี 2: รอยประทับทางนิเวศ</span><span class="en">Case 2: ecological footprint</span></button>
+    <button data-s="game"><span class="th">กรณี 3: เกมจำลอง จ.น่าน</span><span class="en">Case 3: gaming in Nan</span></button>
+    <button data-s="act"><span class="th">กิจกรรมจัดกลุ่ม</span><span class="en">Sorting activities</span></button>
+    <button data-s="disc"><span class="th">คำถามอภิปราย</span><span class="en">Discussion</span></button>
+    <button data-s="quiz"><span class="th">แบบทดสอบ</span><span class="en">Quiz</span></button>
+  </div>
+
+  <!-- T2 lesson -->
+  <div class="sub" data-sub="lesson">
+    <div class="lesson">
+      <div>
+        <div class="card" style="margin-bottom:12px">
+          <h3><span class="th">วัตถุประสงค์การเรียนรู้</span><span class="en">Learning objectives</span></h3>
+          <ul class="th"><li>ระบุความหมายของแบบจำลองและแบบจำลองทางนิเวศวิทยา และยกตัวอย่างได้</li><li>ระบุประโยชน์และข้อจำกัดของการใช้แบบจำลอง</li><li>ระบุความแตกต่างของแบบจำลองเพื่อการเรียนรู้และแบบจำลองเพื่อการคาดการณ์</li><li>ระบุลักษณะของแบบจำลองที่ดี</li><li>ยกตัวอย่างการประยุกต์ใช้แบบจำลองเพื่อการจัดการระบบนิเวศ</li></ul>
+          <ul class="en"><li>Define a model and an ecological model, with examples.</li><li>State the benefits and limits of using models.</li><li>Tell models for learning apart from models for prediction.</li><li>Describe what makes a good model.</li><li>Give examples of models used for ecosystem management.</li></ul>
+        </div>
+        <details class="part" open>
+          <summary><span class="th">แบบจำลองคืออะไร และมีกี่ประเภท</span><span class="en">What is a model, and what kinds are there?</span></summary>
+          <div class="body">
+            <p class="th"><b>แบบจำลอง (model)</b> คือสิ่งที่เป็นตัวแทนสภาพความเป็นจริง (representation of reality) ที่มีความซับซ้อนน้อยกว่า เป็นรูปแบบย่อที่อธิบายปรากฏการณ์/กระบวนการทางธรรมชาติ และเน้นลักษณะสำคัญของสิ่งต่าง ๆ <b>แบบจำลองทางนิเวศวิทยา</b> คือสมการ แผนภาพ หรือสิ่งที่แสดงโครงสร้างและ/หรือปฏิสัมพันธ์ระหว่างปัจจัยต่าง ๆ ในระบบที่ศึกษา</p>
+            <p class="en">A <b>model</b> is a representation of reality that is less complex than reality: a simplified form that explains a natural phenomenon or process and highlights the key features. An <b>ecological model</b> is an equation, diagram or object that shows the structure and/or interactions among factors in the system studied.</p>
+            <ol>
+              <li><b><span class="th">แบบจำลองทางคณิตศาสตร์</span><span class="en">Mathematical model</span></b> — <span class="th">เช่น การเติบโตแบบ logistic</span><span class="en">e.g. logistic growth</span>: <span class="mono">x<sub>t+1</sub> = x<sub>t</sub> + r·x<sub>t</sub>(1 − x<sub>t</sub>/K)</span> <span class="th">(r = อัตราการสืบพันธุ์, K = ขีดความสามารถรองรับ) → <a href="#t2/logistic">ลองทดลอง</a></span><span class="en">(r = reproduction rate, K = carrying capacity) → <a href="#t2/logistic">try it</a></span></li>
+              <li><b><span class="th">แบบจำลองทางความคิด</span><span class="en">Conceptual model</span></b>
+                <ul class="th"><li>แบบคำบรรยาย (narrative): เช่น ต้นไม้ = สูง &gt; 1.3 ม. และ DBH &gt; 4.5 ซม.; ไม้หนุ่ม/ไม้พุ่ม = สูง &gt; 1.3 ม. DBH &lt; 4.5 ซม.; กล้าไม้/ไม้ล้มลุก = สูง &lt; 1.3 ม.</li><li>แบบแผนภาพ: block diagram, causal loop diagram และ stock–flow diagram (system dynamics), แผนภาพการเปลี่ยนแปลงสถานะ (state transition) ของสังคมพืช, pictorial diagram เช่น วัฏจักรน้ำ</li></ul>
+                <ul class="en"><li>Narrative: e.g. tree = height &gt; 1.3 m and DBH &gt; 4.5 cm; sapling/shrub = height &gt; 1.3 m, DBH &lt; 4.5 cm; seedling/herb = height &lt; 1.3 m.</li><li>Diagrams: block diagram, causal loop and stock–flow diagrams (system dynamics), state-transition diagram of vegetation, pictorial diagrams such as the water cycle.</li></ul></li>
+              <li><b><span class="th">แบบจำลองเชิงกายภาพ</span><span class="en">Physical model</span></b> — <span class="th">แบบจำลองภูมิประเทศ 2–3 มิติ ระบบนิเวศจำลอง (microcosm) Ecotron และ Biosphere II รวมถึงเกมและสถานการณ์จำลอง (gaming &amp; simulation) เช่น เกมสวมบทบาทสมมุติ (role-playing game)</span><span class="en">2–3-D terrain models, microcosms, Ecotron and Biosphere II, as well as gaming &amp; simulation such as role-playing games.</span></li>
+              <li><b><span class="th">แบบจำลองคอมพิวเตอร์</span><span class="en">Computational model</span></b> — <span class="th">non-spatial (ไม่แสดงข้อมูลเชิงพื้นที่ เช่น logistic, พลวัตประชากร) และ spatial (ใช้ข้อมูลเชิงพื้นที่ เช่น GIS, individual/agent-based model: ABM)</span><span class="en">non-spatial (no spatial data, e.g. logistic, population dynamics) and spatial (uses spatial data, e.g. GIS, individual- or agent-based models: ABM).</span></li>
+            </ol>
+            <p class="th">จำนวนบทความวิชาการด้าน ecology + learning + model เพิ่มขึ้นอย่างต่อเนื่อง (Google Scholar, 1961–2006; Jørgensen 2005)</p>
+            <p class="en">The number of papers on ecology + learning + model has risen steadily (Google Scholar, 1961–2006; Jørgensen 2005).</p>
+          </div>
+        </details>
+        <details class="part">
+          <summary><span class="th">ทำไมต้องใช้แบบจำลอง: ประโยชน์และข้อจำกัด</span><span class="en">Why use models: benefits and limits</span></summary>
+          <div class="body">
+            <p class="th"><b>เหตุผล</b>: ระบบนิเวศซับซ้อน มีปฏิสัมพันธ์หลากหลาย การเปลี่ยนแปลงคาดการณ์ล่วงหน้าได้ยาก และการติดตามข้อมูลบางอย่างในธรรมชาติทำได้ยากและใช้เวลานาน</p>
+            <p class="en"><b>Why</b>: ecosystems are complex with many interactions, change is hard to predict, and some data are hard and slow to collect in the field.</p>
+            <div class="grid g2">
+              <div><h4><span class="th">ประโยชน์</span><span class="en">Benefits</span></h4>
+                <ul class="th"><li>ทดสอบทฤษฎีในห้องปฏิบัติการในเวลาจำกัด</li><li>เข้าใจพลวัตของระบบ โดยเฉพาะคุณสมบัติที่เกิดขึ้นใหม่ (emergent property)</li><li>วิเคราะห์ปัจจัยที่มีผลโดยเพิ่ม/ลดตัวแปร</li><li>จำลองซ้ำได้หลายครั้ง ลดความเสี่ยงจากการทดลองจริง</li><li>นำไปสู่คำถาม/ทฤษฎีใหม่</li><li>ประกอบการตัดสินใจ (decision support) ทั้ง top-down และ bottom-up</li><li>ส่งเสริมการเรียนรู้ เพิ่มศักยภาพการจัดการแบบยืดหยุ่น (adaptive management) ผ่านการแลกเปลี่ยนระหว่างสร้างและใช้แบบจำลอง</li></ul>
+                <ul class="en"><li>Test theories in the lab within limited time.</li><li>Understand system dynamics, especially emergent properties.</li><li>Analyse which factors matter by changing variables.</li><li>Run many repeated simulations, avoiding the risks of real experiments.</li><li>Lead to new questions and theories.</li><li>Support decisions, both top-down and bottom-up.</li><li>Support learning and adaptive management through discussion while building and using the model.</li></ul></div>
+              <div><h4><span class="th">ข้อจำกัด</span><span class="en">Limits</span></h4>
+                <ul class="th"><li>เป็นเพียงตัวแทนของระบบ ตัวแปรอาจไม่ครอบคลุม โดยเฉพาะแบบจำลองเพื่อการคาดการณ์ หลายคนจึงไม่เชื่อผลของแบบจำลอง</li><li>ผู้สร้างต้องมีทักษะการคิดเป็นระบบ มองภาพรวม ซึ่งต้องอาศัยประสบการณ์</li></ul>
+                <ul class="en"><li>A model only represents the system; variables may be missing, especially in predictive models, so many people distrust model results.</li><li>Builders need systems thinking and an overall view, which takes experience.</li></ul>
+                <div class="callout blue"><span class="th">ตัวอย่าง: World3 / The Limits to Growth (Meadows, Meadows &amp; Randers, 1972; ปรับปรุง 1992, 2004) จำลองผลของการขยายตัวของมนุษย์บนทรัพยากรที่มีจำกัด</span><span class="en">Example: World3 / The Limits to Growth (Meadows, Meadows &amp; Randers, 1972; updated 1992, 2004) modelled unlimited human expansion on a planet with finite resources.</span></div></div>
+            </div>
+          </div>
+        </details>
+        <details class="part">
+          <summary><span class="th">ลักษณะของแบบจำลองที่ดี</span><span class="en">What makes a good model</span></summary>
+          <div class="body">
+            <ul class="th"><li><b>มีวัตถุประสงค์ชัดเจน</b>: แบบจำลองเพื่อการคาดการณ์ (predictive model) ต้องการข้อมูลปริมาณ/คุณภาพสูงและความเข้าใจระบบสูง ส่วนแบบจำลองเพื่อการเรียนรู้ (heuristic model) ใช้ได้แม้ข้อมูลยังน้อย (Perry &amp; Bond 2004)</li><li><b>มีมาตราพื้นที่และมาตราเวลาที่เหมาะสม</b> ตั้งแต่แปลงตัวอย่างถึงโลก และจากวินาทีถึงยุค</li><li><b>ใช้เป็นเครื่องมือสื่อสาร</b>ระหว่างผู้มีส่วนเกี่ยวข้องได้อย่างเหมาะสม</li></ul>
+            <ul class="en"><li><b>A clear purpose</b>: predictive models need much good data and deep understanding; heuristic (learning) models can work with less (Perry &amp; Bond 2004).</li><li><b>Suitable spatial and temporal scales</b>, from a plot to the globe and from seconds to eons.</li><li><b>A communication tool</b> among stakeholders.</li></ul>
+          </div>
+        </details>
+        <details class="part">
+          <summary><span class="th">ขั้นตอนการสร้างแบบจำลอง 6 ขั้น</span><span class="en">Six steps of modelling</span></summary>
+          <div class="body">
+            <p class="th">การสร้างแบบจำลองมี 2 แบบ: โดยอาศัยผู้เชี่ยวชาญ (non-participatory) และอย่างมีส่วนร่วม (participatory / collaborative modelling)</p>
+            <p class="en">Models can be built by experts (non-participatory) or with stakeholders (participatory / collaborative modelling).</p>
+            <ol class="steps th">
+              <li><b>ตั้งคำถาม วัตถุประสงค์ และสมมุติฐาน</b> — คำถามชัดเจน ไม่กว้างเกินไป หาคำตอบได้</li>
+              <li><b>สร้างแบบจำลองทางความคิด</b> — อาจเป็นขั้นที่สำคัญที่สุด เพราะกำหนดข้อมูลที่ต้องเก็บ ควรอาศัยการมีส่วนร่วมเพื่อให้ครอบคลุมหลายมุมมอง (เช่น ควายป่า: แรงงาน อาหาร เหยื่อของผู้ล่า สัญลักษณ์ของชนเผ่า)</li>
+              <li><b>สร้างแบบจำลอง (implementation)</b> — ใช้หรือไม่ใช้คอมพิวเตอร์ก็ได้ พร้อมตัวชี้วัดแสดงผล</li>
+              <li><b>ตรวจสอบความถูกต้อง</b> (calibration, verification, validation) — เทียบกับข้อมูลจริง หรือให้ผู้มีส่วนเกี่ยวข้องร่วมพิจารณา (social validation; Moss 2008)</li>
+              <li><b>ใช้แบบจำลอง</b> — จำลองสถานการณ์สมมุติ (scenarios) วิเคราะห์ อภิปราย สรุป และเสนอแนะ</li>
+              <li><b>ปรับปรุงและเผยแพร่</b> — เมื่อบริบทเปลี่ยน (นโยบาย ราคา ภัยธรรมชาติ) ต้องปรับปรุง และเผยแพร่ผ่านวารสาร โรงเรียน มหาวิทยาลัย</li>
+            </ol>
+            <ol class="steps en">
+              <li><b>Question, objectives and hypotheses</b> — a clear, answerable question that is not too broad.</li>
+              <li><b>Conceptual model</b> — perhaps the most important step, since it decides what data to collect. Participation brings in many views (e.g. a wild buffalo can mean labour, food, prey for predators or a tribal symbol).</li>
+              <li><b>Implementation</b> — with or without a computer, plus indicators to show results.</li>
+              <li><b>Calibration, verification, validation</b> — compare with real data, or let stakeholders judge the results together (social validation; Moss 2008).</li>
+              <li><b>Use</b> — run scenarios, analyse, discuss, conclude and recommend.</li>
+              <li><b>Revision and communication</b> — revise when the context changes (policy, prices, disasters) and share through journals, schools, universities.</li>
+            </ol>
+            <p class="th">5 ขั้นแรกทำซ้ำสลับไปมาได้: การสร้างและใช้แบบจำลองเป็นกระบวนการที่ทำซ้ำและพัฒนาอยู่เสมอ (iterative &amp; evolving process; commod.org) ตัวอย่างในชั้นเรียนคือปฏิบัติการระบบนิเวศจำลอง (microcosm) 3 สัปดาห์ของนิสิต</p>
+            <p class="en">The first five steps can loop back and forth: building and using a model is an iterative, evolving process (commod.org). In class, the students' three-week microcosm lab follows these steps.</p>
+          </div>
+        </details>
+        <details class="part">
+          <summary><span class="th">ตัวอย่างการใช้แบบจำลอง และสรุป</span><span class="en">Examples and summary</span></summary>
+          <div class="body">
+            <ul class="th"><li><b>Participatory (collaborative) modelling</b>: ReHab (<a href="https://tenrm.github.io/ReHab_modify/" target="_blank" rel="noopener">เล่นออนไลน์</a>), กรณีการเลี้ยงวัวและการปลูกป่า จ.น่าน (<a href="#t2/game">กรณี 3</a>)</li><li><b>Non-participatory modelling</b>: แบบจำลองการประเมินมูลค่าระบบนิเวศป่าไม้ (<a href="#t2/forest">กรณี 1</a>) และแบบจำลองรอยประทับทางนิเวศ (<a href="#t2/footprint">กรณี 2</a>)</li></ul>
+            <ul class="en"><li><b>Participatory (collaborative) modelling</b>: ReHab (<a href="https://tenrm.github.io/ReHab_modify/?lang=en" target="_blank" rel="noopener">play online</a>), cattle raising and reforestation in Nan (<a href="#t2/game">case 3</a>).</li><li><b>Non-participatory modelling</b>: the forest ecosystem valuation model (<a href="#t2/forest">case 1</a>) and the ecological footprint model (<a href="#t2/footprint">case 2</a>).</li></ul>
+            <div class="callout blue"><b><span class="th">สรุป</span><span class="en">Summary</span></b>
+              <ul class="th" style="margin-bottom:0"><li>แบบจำลองมีหลากหลายรูปแบบ และใช้ในนิเวศวิทยามากขึ้น โดยเฉพาะแบบจำลองเชิงพื้นที่</li><li>แบบจำลองที่ดีต้องมีวัตถุประสงค์ชัดเจน มาตราเวลาและพื้นที่เหมาะสม</li><li>ไม่มีแบบจำลองใดสมบูรณ์และใช้ได้กับทุกบริบท</li><li>ควรทำงานร่วมกันระหว่างผู้มีส่วนเกี่ยวข้องและผู้เชี่ยวชาญหลายสาขา เพื่อให้แบบจำลองถูกต้อง เป็นตัวแทนระบบได้ และเกิดการบูรณาการและการเรียนรู้มากที่สุด</li></ul>
+              <ul class="en" style="margin-bottom:0"><li>Models come in many forms and are used more and more in ecology, especially spatial models.</li><li>A good model has a clear purpose and suitable time and space scales.</li><li>No model is complete or fits every context.</li><li>Stakeholders and experts from many fields should work together so the model is sound, represents the system, and brings the most integration and learning.</li></ul></div>
+          </div>
+        </details>
+      </div>
+      <aside><div class="vid" data-v="4"></div><div class="vidcap"></div></aside>
+    </div>
+  </div>
+
+  <!-- T2 logistic -->
+  <div class="sub" data-sub="logistic">
+    <div class="card">
+      <h3><span class="th">ห้องทดลอง: การเติบโตของประชากรแบบ logistic</span><span class="en">Lab: logistic population growth</span></h3>
+      <p><span class="mono">x<sub>t+1</sub> = x<sub>t</sub> + r·x<sub>t</sub>(1 − x<sub>t</sub>/K)</span> — <span class="th">แบบจำลองคณิตศาสตร์แบบ non-spatial ในสไลด์ (เส้นเริ่มต้น X<sub>0</sub> = 20, 500, 1200)</span><span class="en">the non-spatial mathematical model on the slide (starting values X<sub>0</sub> = 20, 500, 1200).</span></p>
+      <div class="controls">
+        <label class="ctl">r <b data-o="lg_r"></b><input type="range" id="lg_r" min="0.005" max="3" step="0.005" value="0.02"></label>
+        <label class="ctl">K <b data-o="lg_K"></b><input type="range" id="lg_K" min="100" max="2000" step="50" value="1000"></label>
+        <label class="ctl"><span class="th">จำนวนช่วงเวลา t</span><span class="en">Time steps t</span> <b data-o="lg_T"></b><input type="range" id="lg_T" min="20" max="1000" step="10" value="1000"></label>
+        <label class="ctl">X<sub>0</sub> <span class="th">(คั่นด้วยจุลภาค)</span><span class="en">(comma separated)</span><input type="text" id="lg_x0" value="20, 500, 1200"></label>
+      </div>
+      <div class="row noprint">
+        <span class="muted"><span class="th">ค่า r ตัวอย่าง:</span><span class="en">Preset r:</span></span>
+        <button class="btn" data-lgr="0.02">0.02</button><button class="btn" data-lgr="0.5">0.5</button><button class="btn" data-lgr="1.8">1.8</button><button class="btn" data-lgr="2.3">2.3</button><button class="btn" data-lgr="2.7">2.7</button>
+      </div>
+      <div class="legend" id="lgLeg"></div>
+      <canvas class="chart" id="lgChart"></canvas>
+      <div class="callout blue" id="lgNote"></div>
+      <p class="th muted">คำถาม: ค่า r บอกอะไร? ทำไมทุกเส้นเข้าสู่ K เมื่อ r เล็ก? เมื่อ r &gt; 2 ประชากรแกว่งหรือคาดเดาไม่ได้ (chaos) แม้เป็นสมการง่าย ๆ — สิ่งนี้บอกอะไรเกี่ยวกับการคาดการณ์ระบบนิเวศ?</p>
+      <p class="en muted">Questions: what does r tell you? Why do all lines approach K when r is small? When r &gt; 2 the population oscillates or becomes unpredictable (chaos) even though the equation is simple — what does that say about predicting ecosystems?</p>
+    </div>
+  </div>
+
+  <!-- T2 forest value -->
+  <div class="sub" data-sub="forest">
+    <div class="lesson">
+      <div>
+        <details class="part" open>
+          <summary><span class="th">แบบจำลองมูลค่าของระบบนิเวศป่าไม้ (คดีโลกร้อน)</span><span class="en">Forest ecosystem value model (the “global warming” lawsuits)</span></summary>
+          <div class="body">
+            <p class="th"><b>ที่มา</b>: พ.ร.บ.ส่งเสริมและรักษาคุณภาพสิ่งแวดล้อมแห่งชาติ พ.ศ. 2535 มาตรา 97 กำหนดให้ผู้ที่ทำลายหรือทำให้ทรัพยากรธรรมชาติหรือสาธารณสมบัติเสียหายโดยมิชอบด้วยกฎหมาย ต้องชดใช้ค่าเสียหายแก่รัฐตามมูลค่าทั้งหมดของทรัพยากรที่ถูกทำลาย กรมป่าไม้และกรมอุทยานฯ จึงต้องประเมินมูลค่าป่า มีการพัฒนาวิธีคำนวณตั้งแต่ พ.ศ. 2531 และตั้งแต่ พ.ศ. 2536 กรมป่าไม้สั่งการให้ดำเนินคดีแพ่งเรียกค่าเสียหายจากผู้บุกรุกป่าต้นน้ำลำธาร</p>
+            <p class="en"><b>Background</b>: Section 97 of the Enhancement and Conservation of National Environmental Quality Act B.E. 2535 (1992) makes anyone who unlawfully destroys natural resources or public property pay the state their full value. The Royal Forest Department and the National Parks Department therefore had to value forests. Methods were developed from 1988, and from 1993 the Royal Forest Department ordered civil suits against encroachers in headwater forests.</p>
+            <ol class="steps th">
+              <li><b>วัตถุประสงค์</b>: ประเมินมูลค่าทรัพยากรป่าไม้ (ป่าดิบชื้น/ป่าดิบเขา ป่าดิบแล้ง ป่าเบญจพรรณ ป่าเต็งรัง ไร่ร้าง)</li>
+              <li><b>แบบจำลองทางความคิด</b>: ปัจจัยภายนอก (น้ำฝน รังสีดวงอาทิตย์ ภูมิประเทศ) และภายใน (ดิน พืชคลุมดิน) → โครงสร้างระบบนิเวศ → บริการ (ผลิตอาหาร ควบคุมน้ำ บรรเทาอากาศ แหล่งเรียนรู้/พักผ่อน) เมื่อป่าลดลง: ฝนน้อยลง อากาศร้อนขึ้น สูญเสียน้ำ ดิน ธาตุอาหาร ดินไม่ดูดซับน้ำฝน (ปรับปรุงจาก พงษ์ศักดิ์ วิทวัสชุติกุล)</li>
+              <li><b>เก็บข้อมูลและสร้างสมการ</b>: วางแปลงเก็บข้อมูล ประเมินมูลค่าทางตรงและทางอ้อมด้วยวิธีต้นทุนทดแทน (replacement cost) เช่น การสูญเสียไนโตรเจน (%) = 0.05(22.32 BA − 1.55) เมื่อ BA = พื้นที่หน้าตัดไม้</li>
+              <li><b>ตรวจสอบความถูกต้อง</b>: ใช้ข้อมูลภาคสนามจากป่าหลายแห่งที่เคยมีการวิจัย</li>
+              <li><b>ใช้แบบจำลอง</b>: ประเมินค่าเสียหาย รวม 150,942.70 บาท/ไร่/ปี → กรมป่าไม้ใช้ 150,000 บาท/ไร่</li>
+              <li><b>ขยายผล/สื่อสาร</b>: ฟ้องคดีแพ่งเกษตรกรที่ทำกินทับซ้อนพื้นที่ป่ากว่า 2,000 ราย ในจำนวนนั้นเป็นสมาชิกเครือข่ายปฏิรูปที่ดิน 34 ราย ถูกฟ้องรวมกว่า 32 ล้านบาท → เกิดคำถามจากหลายภาคส่วน (ดูด้านล่าง)</li>
+            </ol>
+            <ol class="steps en">
+              <li><b>Purpose</b>: value forest resources (moist/hill evergreen, dry evergreen, mixed deciduous, dry dipterocarp forest, abandoned fields).</li>
+              <li><b>Conceptual model</b>: external factors (rain, solar radiation, terrain) and internal ones (soil, ground cover) → ecosystem structure → services (food, water regulation, climate regulation, learning and recreation). When forest shrinks: less rain, hotter air, loss of water, soil and nutrients, soil that no longer absorbs rain (adapted from Pongsak Witthawatchutikul).</li>
+              <li><b>Data and equations</b>: field plots; direct and indirect values by the replacement-cost method, e.g. nitrogen loss (%) = 0.05(22.32 BA − 1.55), where BA = basal area.</li>
+              <li><b>Validation</b>: field data from many previously studied forests.</li>
+              <li><b>Use</b>: damage totals 150,942.70 baht/rai/yr → the Royal Forest Department uses 150,000 baht/rai.</li>
+              <li><b>Extension and communication</b>: civil suits against more than 2,000 farmers whose fields overlap forest land; 34 members of the land reform network alone were sued for over 32 million baht → questions from many parts of society (see below).</li>
+            </ol>
+            <h4><span class="th">ต้นทุนทดแทน (replacement cost) คิดอย่างไร</span><span class="en">How replacement cost works</span></h4>
+            <ul class="th"><li><b>น้ำ</b>: ปริมาตรน้ำที่สูญหาย = ความสูงน้ำที่สูญหาย × พื้นที่ → จำนวนรถบรรทุกน้ำขึ้นไปฉีดพรม × ค่าเช่ารถ</li><li><b>ดิน</b>: ปริมาตรดิน = น้ำหนักดินที่สูญหาย ÷ ความหนาแน่นดิน → จำนวนรถบรรทุกดินขึ้นไปเทปู × ค่าเช่ารถ</li><li><b>ธาตุอาหาร</b>: แปลงเป็นแม่ปุ๋ย 21-0-0, 0-46-0, 0-0-60 × ราคาปุ๋ย</li><li><b>อากาศร้อน</b>: ปริมาตรอากาศ = พื้นที่ × ความสูงต้นไม้ → มวลอากาศ × ความร้อนจำเพาะ × อุณหภูมิที่สูงขึ้น = ความร้อนที่ต้องลด → ชั่วโมงเดินเครื่องปรับอากาศ 1 ตัน (BTU) × ค่าไฟ</li></ul>
+            <ul class="en"><li><b>Water</b>: lost volume = lost depth × area → number of water trucks to spray it back × truck hire.</li><li><b>Soil</b>: volume = lost soil weight ÷ soil density → number of trucks to bring soil back × truck hire.</li><li><b>Nutrients</b>: converted to fertilizer (21-0-0, 0-46-0, 0-0-60) × fertilizer price.</li><li><b>Hotter air</b>: air volume = area × tree height → air mass × specific heat × temperature rise = heat to remove → hours of a 1-ton air conditioner (BTU) × electricity price.</li></ul>
+          </div>
+        </details>
+      </div>
+      <aside><div class="vid" data-v="5"></div><div class="vidcap"></div></aside>
+    </div>
+
+    <div class="card" style="margin-top:6px">
+      <h3><span class="th">เครื่องคำนวณ A: ค่าเสียหายตามสไลด์ (150,942.70 บาท/ไร่/ปี)</span><span class="en">Calculator A: damage values from the slides (150,942.70 baht/rai/yr)</span></h3>
+      <div class="controls">
+        <label class="ctl"><span class="th">พื้นที่ป่าที่ถูกทำลาย (ไร่)</span><span class="en">Forest area destroyed (rai)</span><input type="number" id="fa_area" value="10" min="0" step="0.5"></label>
+        <label class="ctl"><span class="th">จำนวนปีที่คิดค่าเสียหาย</span><span class="en">Years counted</span><input type="number" id="fa_years" value="1" min="1" step="1"></label>
+        <label class="ctl"><span class="th">ค่าเสียหายทางตรงตามชนิดป่า</span><span class="en">Direct damage by forest type</span>
+          <select id="fa_type">
+            <option value="40825.10">ค่าเฉลี่ย · average — 40,825.10</option>
+            <option value="61263.36">ป่าดงดิบ · evergreen — 61,263.36</option>
+            <option value="42577.75">ป่าเบญจพรรณ · mixed deciduous — 42,577.75</option>
+            <option value="18634.19">ป่าเต็งรัง · dry dipterocarp — 18,634.19</option>
+          </select></label>
+      </div>
+      <div id="faChecks"></div>
+      <div class="stats" id="faStats"></div>
+      <div class="bars" id="faBars"></div>
+      <p class="muted"><span class="th">ที่มา: สไลด์กรณีที่ 1 และเอกสารประกอบการสอน หัวข้อ 2.2.5 (“ทำให้ฝนตกน้อยลง = 5,400 บาท/ปี” นับเป็นต่อไร่ต่อปี เพื่อให้ผลรวมเท่ากับ 150,942.70)</span><span class="en">Source: case 1 slides and the handout, section 2.2.5 (“less rain = 5,400 baht/yr” is counted per rai per year so that the total equals 150,942.70).</span></p>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h3><span class="th">เครื่องคำนวณ B: แบบจำลองจากค่าความหลากหลายทางชีวภาพ (BDV)</span><span class="en">Calculator B: model driven by the biodiversity value (BDV)</span></h3>
+      <p class="th">จากงานวิจัยของ พงษ์ศักดิ์ วิทวัสชุติกุล และคณะ (2553) แบบจำลองมูลค่าความหลากหลายทางชีวภาพของระบบนิเวศป่าต้นน้ำ (เชียงดาว เชียงใหม่ 2547–2550) สมการ (2)–(9) ใช้ตามเอกสาร ส่วนราคาต่อหน่วยคำนวณย้อนจากตารางที่ 5–6 ของเอกสาร (แก้ไขได้)</p>
+      <p class="en">Based on Pongsak Witthawatchutikul et al. (2010), a model of the biodiversity value of headwater forest ecosystems (Chiang Dao, Chiang Mai, 2004–2007). Equations (2)–(9) are taken as published; the unit prices were worked back from tables 5–6 of that report (you can edit them).</p>
+      <div class="seg noprint" id="fbMode"><button data-m="lu" class="on"><span class="th">เลือกการใช้ที่ดิน (ตาราง 2)</span><span class="en">Pick a land use (table 2)</span></button><button data-m="calc"><span class="th">คำนวณ BDV จากโครงสร้างป่า</span><span class="en">Compute BDV from forest structure</span></button></div>
+      <div class="controls" id="fbLU">
+        <label class="ctl"><span class="th">ชนิดป่า / การใช้ที่ดิน</span><span class="en">Forest / land use</span><select id="fb_lu"></select></label>
+      </div>
+      <div class="controls hide" id="fbCalc">
+        <label class="ctl"><span class="th">การปกคลุมเรือนยอด CC (%)</span><span class="en">Crown cover CC (%)</span> <b data-o="fb_cc"></b><input type="range" id="fb_cc" min="0" max="100" step="1" value="75"></label>
+        <label class="ctl"><span class="th">จำนวนชั้นเรือนยอด CS</span><span class="en">Canopy strata CS</span> <b data-o="fb_cs"></b><input type="range" id="fb_cs" min="1" max="5" step="1" value="3"></label>
+        <label class="ctl"><span class="th">พื้นที่หน้าตัดลำต้น BA (%)</span><span class="en">Basal area BA (%)</span> <b data-o="fb_ba"></b><input type="range" id="fb_ba" min="0" max="1" step="0.005" value="0.255"></label>
+        <label class="ctl"><span class="th">ความลึกชั้นดิน SD (ม.)</span><span class="en">Soil depth SD (m)</span> <b data-o="fb_sd"></b><input type="range" id="fb_sd" min="0.1" max="3" step="0.05" value="1.5"></label>
+      </div>
+      <div class="controls">
+        <label class="ctl"><span class="th">ปริมาณฝนรายปี (มม.)</span><span class="en">Annual rainfall (mm)</span><input type="number" id="fb_rain" value="1583.6" step="10"></label>
+        <label class="ctl"><span class="th">พื้นที่ (ไร่)</span><span class="en">Area (rai)</span><input type="number" id="fb_area" value="1" min="0" step="0.5"></label>
+      </div>
+      <details class="noprint"><summary class="muted"><span class="th">ราคาต่อหน่วย (แก้ไขได้)</span><span class="en">Unit prices (editable)</span></summary>
+        <div class="controls">
+          <label class="ctl"><span class="th">น้ำ (บาท ต่อ มม. ต่อไร่)</span><span class="en">Water (baht per mm per rai)</span><input type="number" id="fb_pw" value="133.33" step="0.01"></label>
+          <label class="ctl"><span class="th">ไนโตรเจนที่สูญหาย (บาท/กก. N)</span><span class="en">Lost nitrogen (baht/kg N)</span><input type="number" id="fb_pn" value="35.1" step="0.1"></label>
+          <label class="ctl"><span class="th">อากาศร้อนขึ้น (บาท ต่อ °C ต่อไร่)</span><span class="en">Hotter air (baht per °C per rai)</span><input type="number" id="fb_ph" value="25060" step="10"></label>
+          <label class="ctl"><span class="th">ดินสูญหาย (บาท/ไร่)</span><span class="en">Soil loss (baht/rai)</span><input type="number" id="fb_ps" value="600" step="10"></label>
+        </div>
+        <p class="muted" style="font-size:.85rem"><span class="th">น้ำ: 36,800 บาท ÷ 276 มม. = 133.33 (เท่ากันทุกชนิดป่าในตาราง 6); ไนโตรเจน: 1,911.82 บาท ÷ 54.56 กก. ≈ 35.0–35.3; อากาศร้อน: 62,625.74 ÷ 2.5 °C ≈ 25,050 และ 52,651.25 ÷ 2.1 °C ≈ 25,070; ดิน: 600 บาท/ไร่ทุกชนิดป่า ใช้ราคาน้ำเดียวกันกับน้ำท่าที่เพิ่มขึ้น</span><span class="en">Water: 36,800 baht ÷ 276 mm = 133.33 (the same for every forest in table 6); nitrogen: 1,911.82 baht ÷ 54.56 kg ≈ 35.0–35.3; hotter air: 62,625.74 ÷ 2.5 °C ≈ 25,050 and 52,651.25 ÷ 2.1 °C ≈ 25,070; soil: 600 baht/rai for every forest. Increased runoff uses the same water price.</span></p>
+      </details>
+      <div class="stats" id="fbStats"></div>
+      <div class="tablewrap"><table id="fbTable"></table></div>
+      <h4><span class="th">เปรียบเทียบทุกการใช้ที่ดินในตาราง 2</span><span class="en">All land uses in table 2 compared</span></h4>
+      <div class="bars" id="fbBars"></div>
+      <p class="muted" style="font-size:.85rem"><span class="th">หมายเหตุ: ค่าที่ติดลบจากสมการ (BDV ต่ำ) แสดงเป็น 0 ผลไม่ตรงกับตาราง 6 ของเอกสารทั้งหมด เพราะตาราง 6 ใช้ข้อมูลภาคสนามของแต่ละพื้นที่ ใช้เพื่อการเรียนรู้โครงสร้างของแบบจำลองเท่านั้น สมการ BDV = 0.45[(10.46 + 0.11·CC·CS)<sup>0.62</sup> × (25.16 + 45.26·BA·SD)<sup>0.59</sup>]</span><span class="en">Note: negative results from the equations (low BDV) are shown as 0. Results do not match table 6 of the report exactly, because table 6 uses field data from each site. Use this to learn how the model is built. BDV = 0.45[(10.46 + 0.11·CC·CS)<sup>0.62</sup> × (25.16 + 45.26·BA·SD)<sup>0.59</sup>].</span></p>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h3><span class="th">ประเด็นคำถามจากหลายภาคส่วน (การปรับปรุงแบบจำลอง)</span><span class="en">Questions raised by society (improving the model)</span></h3>
+      <div class="grid g2">
+        <div><h4><span class="th">ด้านวิชาการ</span><span class="en">Academic</span></h4>
+          <ul class="th"><li>แบบจำลองถูกต้องมากน้อยเพียงใด ยอมรับได้หรือไม่</li><li>ควรใช้เพื่อการอ้างอิง (เทียบเป็นตัวเงิน) เช่น เปรียบเทียบการสร้าง/ไม่สร้างเขื่อน มากกว่าใช้ฟ้องร้อง</li><li>ข้อถกเถียงทางวิทยาศาสตร์เรื่องโลกร้อนในเวลานั้น</li></ul>
+          <ul class="en"><li>How accurate is the model, and is it acceptable?</li><li>It should be used as a reference (in money terms), e.g. to compare building or not building a dam, rather than in lawsuits.</li><li>Scientific debate about global warming at the time.</li></ul></div>
+        <div><h4><span class="th">ด้านความยุติธรรม</span><span class="en">Justice</span></h4>
+          <ul class="th"><li>ตัวการบุกรุกทำลายป่าไม่ใช่ชาวบ้าน แต่เป็นนายทุน</li><li>บังคับใช้กับรีสอร์ท การสร้างบ้านพัก ตัดถนนเข้าอุทยานฯ ด้วยมาตรฐานเดียวกันหรือไม่</li><li>ประเทศอุตสาหกรรมที่ปล่อยก๊าซเรือนกระจกยังไม่ยอมรับการประเมินลักษณะนี้ และยังซื้อขายคาร์บอนกับประเทศด้อยพัฒนา</li><li>ดูบทความ “เศรษฐศาสตร์ที่ไร้เศรษฐธรรม” (เดชรัต สุขกำเนิด, 2553)</li></ul>
+          <ul class="en"><li>The main forest destroyers are investors, not villagers.</li><li>Is the same standard applied to resorts, staff housing and roads into national parks?</li><li>Industrial countries that emit greenhouse gases do not accept this kind of valuation, yet buy carbon credits from poorer countries.</li><li>See the article “Economics without economic justice” (Decharut Sukkumnoed, 2010).</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- T2 footprint -->
+  <div class="sub" data-sub="footprint">
+    <div class="lesson">
+      <div>
+        <details class="part" open>
+          <summary><span class="th">แบบจำลองเพื่อการประเมินรอยประทับทางนิเวศ (Ecological footprint)</span><span class="en">The ecological footprint model</span></summary>
+          <div class="body">
+            <p class="th"><b>คำถาม</b>: มนุษย์ยุคปัจจุบันใช้ทรัพยากรอย่างยั่งยืน หรือใช้เกินศักยภาพในการรองรับ (carrying capacity: K) ของโลก? ถ้าเกิน K แล้วเราจะทำอย่างไร — การใช้อย่างยั่งยืนคือการใช้ที่ไม่ลดโอกาสของคนรุ่นถัดไป หรือไม่เกินขีดความสามารถในการรองรับของโลก</p>
+            <p class="en"><b>Question</b>: do people today use resources sustainably, or beyond Earth's carrying capacity (K)? If beyond K, what next? Sustainable use means use that does not reduce the options of the next generation, i.e. within Earth's capacity.</p>
+            <p class="th"><b>รอยประทับทางนิเวศ</b> คือพื้นที่ทั้งทางบกและทางน้ำที่ต้องใช้ผลิตสิ่งต่าง ๆ เพื่ออุปโภคบริโภค รวมถึงพื้นที่รองรับ/กำจัดของเสีย มีหน่วยเป็นเฮกตาร์ (โลก) ต่อคน (1 เฮกตาร์ = 10,000 ตร.ม. = 6.25 ไร่) จำแนกพื้นที่ 4–6 แบบ เช่น พื้นที่เพาะปลูก ทุ่งเลี้ยงสัตว์ ป่าไม้ แหล่งประมง พื้นที่ดูดซับคาร์บอน และพื้นที่สิ่งปลูกสร้าง ผลมักแสดงว่า “ต้องใช้โลกกี่ใบ ถ้าทุกคนบนโลกมีวิถีชีวิตแบบเรา”</p>
+            <p class="en">The <b>ecological footprint</b> is the land and water area needed to produce what we consume and to absorb our wastes, in (global) hectares per person (1 ha = 10,000 m² = 6.25 rai). The area is split into 4–6 types, e.g. cropland, grazing land, forest, fishing grounds, carbon uptake land and built-up land. Results are often shown as “how many Earths would we need if everyone lived like us”.</p>
+            <ol class="steps th">
+              <li><b>คำถาม</b>: ใช้เกิน K ของโลกหรือไม่</li>
+              <li><b>แบบจำลองทางความคิด</b>: ข้อมูลการใช้พื้นที่ต่อคนด้านอาหาร น้ำ พลังงาน ที่อยู่อาศัย บริการจากระบบนิเวศ × จำนวนประชากร → เทียบกับศักยภาพการผลิตและรองรับของเสียของโลก (system dynamics: inputs–outputs)</li>
+              <li><b>สร้างแบบจำลองในคอมพิวเตอร์</b> พร้อมหน้าจอกรอกข้อมูลและการแสดงผล</li>
+              <li><b>ตรวจสอบ</b>: ใช้ข้อมูลการบริโภค นำเข้า ส่งออก ผลผลิตในอดีตของแต่ละประเทศ (Global Footprint Network ใช้ข้อมูล 150 ประเทศ)</li>
+              <li><b>ใช้แบบจำลอง</b>: (1) ทำให้ใช้ง่ายทางอินเทอร์เน็ตเพื่อสร้างความตระหนัก (2) จำลองสถานการณ์อย่างละเอียดโดยหน่วยงานผู้สร้าง</li>
+              <li><b>ปรับปรุงและเผยแพร่</b>: ขอข้อมูลเพิ่มจากประเทศอื่น ๆ</li>
+            </ol>
+            <ol class="steps en">
+              <li><b>Question</b>: are we beyond Earth's K?</li>
+              <li><b>Conceptual model</b>: area used per person for food, water, energy, housing and ecosystem services × population → compared with Earth's capacity to produce and absorb wastes (system dynamics: inputs–outputs).</li>
+              <li><b>Computer model</b> with input screens and result displays.</li>
+              <li><b>Validation</b>: past consumption, import, export and production data of each country (the Global Footprint Network uses 150 countries).</li>
+              <li><b>Use</b>: (1) a simple web version to raise awareness; (2) detailed scenarios run by the organisation that built it.</li>
+              <li><b>Revision and communication</b>: more data from other countries.</li>
+            </ol>
+            <div class="callout"><span class="th">ตัวอย่างรอยประทับทางน้ำ: กาแฟ 1 แก้วใช้น้ำราว 140 ลิตร แฮมเบอร์เกอร์ 1 ชิ้นใช้น้ำราว 2,400 ลิตร (UNESCO-IHE อ้างใน พงษ์ชัย ดำรงโรจน์วัฒนา) — 1961: มนุษย์ใช้ 61% ของพื้นที่ผลิตได้ของโลก, 1998: 135%, ถ้าทุกคนใช้ชีวิตแบบชาวอเมริกัน: 400%</span><span class="en">Water example: one cup of coffee takes about 140 litres of water, one hamburger about 2,400 litres (UNESCO-IHE, cited by Pongchai Dumrongrojwatthana). 1961: humans used 61% of Earth's productive area; 1998: 135%; if everyone lived a US lifestyle: 400%.</span></div>
+            <p class="th">ลดรอยประทับได้ด้วย Reduce, Reuse, Repair, Recycle และ Reject แล้วชักชวนครอบครัว เพื่อน ชุมชน ให้ปรับพฤติกรรมด้วยกัน</p>
+            <p class="en">Shrink your footprint with Reduce, Reuse, Repair, Recycle and Reject, then bring family, friends and community along.</p>
+          </div>
+        </details>
+      </div>
+      <aside>
+        <div class="card">
+          <h4><span class="th">ลองคำนวณรอยประทับของตนเอง</span><span class="en">Calculate your own footprint</span></h4>
+          <ul style="margin-bottom:0">
+            <li><a href="https://www.footprintcalculator.org/" target="_blank" rel="noopener">footprintcalculator.org</a> <small class="muted">(Global Footprint Network)</small></li>
+            <li><a href="https://footprint.wwf.org.uk/" target="_blank" rel="noopener">footprint.wwf.org.uk</a> <small class="muted">(WWF UK)</small></li>
+            <li><a href="https://www.footprintnetwork.org/" target="_blank" rel="noopener">footprintnetwork.org</a></li>
+          </ul>
+          <p class="muted" style="font-size:.88rem;margin-bottom:0"><span class="th">แล้วนำผลมาบันทึกในตาราง “ผลของฉันและเพื่อน” ด้านล่าง</span><span class="en">Then record the results in “My and my classmates' results” below.</span></p>
+        </div>
+      </aside>
+    </div>
+
+    <div class="card" style="margin-top:6px">
+      <h3><span class="th">ข้อมูลโลก 1961–2007 (gha ต่อคน)</span><span class="en">World data 1961–2007 (gha per person)</span></h3>
+      <div class="legend" id="fpLeg"></div>
+      <canvas class="chart" id="fpChart"></canvas>
+      <div class="tablewrap"><table id="fpTable"></table></div>
+      <p class="muted" style="font-size:.85rem"><span class="th">ที่มา: Global Footprint Network, National Footprint Accounts 2010 edition (ตารางในสไลด์กรณีที่ 2) ผลรวมอาจไม่ตรงเพราะการปัดเศษ “วันหนี้นิเวศโดยประมาณ” = 365 ÷ (EF/BC) คำนวณในหน้านี้</span><span class="en">Source: Global Footprint Network, National Footprint Accounts 2010 edition (the table in the case 2 slides). Totals may not add up due to rounding. “Approx. overshoot day” = 365 ÷ (EF/BC), computed on this page.</span></p>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h3><span class="th">จำลองสถานการณ์ถึงปี 2050</span><span class="en">Scenario to 2050</span><span class="demo-tag"><span class="th">แบบจำลองสาธิต</span><span class="en">teaching demo</span></span></h3>
+      <p class="th">เริ่มจากปี 2007 (ประชากร 6.7 พันล้านคน EF 2.7 gha/คน BC 1.8 gha/คน) ปรับอัตราการเปลี่ยนแปลงต่อปี แล้วดูว่าในปี 2050 ต้องใช้โลกกี่ใบ (เอกสารประกอบการสอนระบุว่าปี 2050 ต้องใช้โลกราว 2 ใบ)</p>
+      <p class="en">Start from 2007 (6.7 billion people, EF 2.7 gha/person, BC 1.8 gha/person), set the yearly rates of change, and see how many Earths we need in 2050 (the handout states about 2 Earths by 2050).</p>
+      <div class="controls">
+        <label class="ctl"><span class="th">ประชากรเพิ่ม (%/ปี)</span><span class="en">Population growth (%/yr)</span> <b data-o="sc_p"></b><input type="range" id="sc_p" min="-0.5" max="2" step="0.05" value="0.9"></label>
+        <label class="ctl"><span class="th">EF ต่อคน เปลี่ยน (%/ปี)</span><span class="en">EF per person change (%/yr)</span> <b data-o="sc_e"></b><input type="range" id="sc_e" min="-3" max="2" step="0.1" value="0"></label>
+        <label class="ctl"><span class="th">ศักยภาพชีวภาพรวมของโลก เปลี่ยน (%/ปี)</span><span class="en">Total biocapacity change (%/yr)</span> <b data-o="sc_b"></b><input type="range" id="sc_b" min="-1" max="1" step="0.05" value="0"></label>
+      </div>
+      <div class="stats" id="scStats"></div>
+      <canvas class="chart" id="scChart" style="height:240px"></canvas>
+    </div>
+
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card">
+        <h3><span class="th">ส่วนประกอบของรอยประทับ</span><span class="en">Footprint components</span></h3>
+        <p class="muted th">ปรับแต่ละด้าน (gha/คน) แล้วดูว่าต้องใช้โลกกี่ใบ เทียบกับ BC 1.8 gha/คน (ปี 2007)</p>
+        <p class="muted en">Change each component (gha/person) and see how many Earths it takes, against BC 1.8 gha/person (2007).</p>
+        <div class="row noprint" style="margin-bottom:6px"><button class="btn" data-fpp="2007">World 2007</button><button class="btn" data-fpp="1961">World 1961</button><button class="btn" data-fpp="halfc"><span class="th">ลดคาร์บอนครึ่งหนึ่ง</span><span class="en">Halve carbon</span></button></div>
+        <div id="fpComp"></div>
+        <div class="stats" id="fpCompStats"></div>
+      </div>
+      <div class="card">
+        <h3><span class="th">รอยประทับทางน้ำ: กาแฟและแฮมเบอร์เกอร์</span><span class="en">Water footprint: coffee and hamburgers</span></h3>
+        <div class="controls">
+          <label class="ctl"><span class="th">กาแฟ (แก้ว/วัน)</span><span class="en">Coffee (cups/day)</span> <b data-o="wf_c"></b><input type="range" id="wf_c" min="0" max="6" step="0.5" value="1"></label>
+          <label class="ctl"><span class="th">แฮมเบอร์เกอร์ (ชิ้น/สัปดาห์)</span><span class="en">Hamburgers (per week)</span> <b data-o="wf_h"></b><input type="range" id="wf_h" min="0" max="14" step="1" value="1"></label>
+        </div>
+        <div class="stats" id="wfStats"></div>
+        <p class="muted" style="font-size:.88rem"><span class="th">กาแฟวันละแก้ว (200 มล.) ไม่ได้ใช้น้ำแค่ 73 ลิตร/ปี แต่รวมน้ำที่ใช้ปลูก ผลิต และล้างแก้ว ≈ 140 ลิตร/แก้ว</span><span class="en">A daily 200 mL coffee is not just 73 L of water a year; growing, processing and washing up bring it to ≈ 140 L per cup.</span></p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px">
+      <h3><span class="th">ผลของฉันและเพื่อน (จากเว็บคำนวณรอยประทับ)</span><span class="en">My and my classmates' results (from footprint calculators)</span></h3>
+      <div class="controls">
+        <label class="ctl"><span class="th">ชื่อ/รหัสเล่น</span><span class="en">Name / nickname</span><input type="text" id="rc_name"></label>
+        <label class="ctl"><span class="th">เว็บที่ใช้</span><span class="en">Calculator</span><select id="rc_site"><option>footprintcalculator.org</option><option>footprint.wwf.org.uk</option><option>other</option></select></label>
+        <label class="ctl"><span class="th">จำนวนโลก (Earths)</span><span class="en">Number of Earths</span><input type="number" id="rc_earth" step="0.1" min="0"></label>
+        <label class="ctl"><span class="th">gha ต่อคน (ถ้ามี)</span><span class="en">gha per person (if shown)</span><input type="number" id="rc_gha" step="0.1" min="0"></label>
+        <label class="ctl"><span class="th">ด้านที่ใช้มากที่สุด</span><span class="en">Largest component</span><select id="rc_big"><option value="food">อาหาร · food</option><option value="transport">การเดินทาง · transport</option><option value="home">ที่อยู่อาศัย/พลังงาน · home/energy</option><option value="goods">สินค้าและบริการ · goods &amp; services</option><option value="other">อื่น ๆ · other</option></select></label>
+      </div>
+      <div class="row noprint"><button class="btn primary" id="rc_add"><span class="th">เพิ่มในตาราง</span><span class="en">Add to table</span></button><button class="btn" id="rc_csv">⬇ CSV</button><button class="btn" id="rc_clear"><span class="th">ล้างตาราง</span><span class="en">Clear table</span></button></div>
+      <div class="tablewrap"><table id="rcTable"></table></div>
+      <div class="stats" id="rcStats"></div>
+    </div>
+  </div>
+
+  <!-- T2 game / Doi Tiew -->
+  <div class="sub" data-sub="game">
+    <div class="lesson">
+      <div>
+        <details class="part" open>
+          <summary><span class="th">เกมและสถานการณ์จำลองเพื่อการจัดการป่า–ที่ทำกิน บ้านดอยติ้ว จ.น่าน</span><span class="en">Computer-assisted gaming &amp; simulation for forest–farmland management, Doi Tiew, Nan</span></summary>
+          <div class="body">
+            <h4><span class="th">บริบท</span><span class="en">Context</span></h4>
+            <ul class="th"><li>บ้านดอยติ้ว หมู่บ้านชาวม้ง ปลูกพืชและเลี้ยงวัวแบบปล่อย: ปี 1961 ราว 50 ครัวเรือน → ปี 2007 170 ครัวเรือน (~1,300 คน)</li><li>หน่วยงานป่าไม้: ศูนย์ศึกษาการพัฒนาต้นน้ำน้ำคาง (NKU) และอุทยานแห่งชาตินันทบุรี (NNP) ซึ่งพื้นที่ลดลง 46% (84,126 → 45,331 เฮกตาร์)</li><li>ผู้เลี้ยงวัวและเจ้าหน้าที่ปลูกป่ามีมุมมองต่างกัน 2 แบบ และไม่มีการพูดคุยกัน</li></ul>
+            <ul class="en"><li>Doi Tiew is a Hmong village that grows crops and raises cattle extensively: about 50 households in 1961 → 170 households (~1,300 people) in 2007.</li><li>Forest agencies: the Nam Khang watershed unit (NKU) and Nanthaburi National Park (NNP), whose area shrank by 46% (84,126 → 45,331 ha).</li><li>Herders and reforestation staff held two contrasting views and did not talk to each other.</li></ul>
+            <h4><span class="th">1. ศึกษาข้อมูลพื้นฐาน</span><span class="en">1. Baseline study</span></h4>
+            <ul class="th"><li>นิเวศ: แปลงตัวอย่าง 32 แปลงในการใช้ที่ดินต่างกัน (×3) วัดมวลชีวภาพเหนือดินแต่ละชั้น → การเลี้ยงวัวความหนาแน่นต่ำในแปลงปลูกป่ามีผลบวกต่อการฟื้นตัวของป่า</li><li>การเปลี่ยนแปลงการใช้ที่ดิน: ภาพดาวเทียม + GIS</li><li>สัมภาษณ์เชิงลึก ~80 คน: ชาวบ้าน เจ้าหน้าที่ปลูกป่า เจ้าหน้าที่อุทยาน ปศุสัตว์ พ่อค้าวัว ฯลฯ → จำแนกเกษตรกร 4 ประเภท (A–D) และวิเคราะห์ผู้มีส่วนเกี่ยวข้อง (importance/influence)</li></ul>
+            <ul class="en"><li>Ecology: 32 plots in different land uses (×3), above-ground biomass by layer → low-intensity grazing in reforestation plots helped forest regeneration.</li><li>Land-use change: satellite images + GIS.</li><li>In-depth interviews with ~80 people: villagers, foresters, park rangers, livestock officers, cattle traders, etc. → 4 farmer types (A–D) and a stakeholder analysis (importance/influence).</li></ul>
+            <h4><span class="th">2. สร้างแบบจำลองเพื่อการเรียนรู้</span><span class="en">2. A model for learning</span></h4>
+            <p class="th">แผนภาพการเปลี่ยนสถานะของพืชพรรณ (ป่าทึบ ป่ารุ่นสอง ไร่ร้างแบบต่าง ๆ ข้าวไร่ ข้าวโพด ลิ้นจี่) ภายใต้การเลี้ยงวัวและไฟ (ความหนาแน่นสูง = มากกว่า 1 หน่วยปศุสัตว์ (250 กก.) ต่อเฮกตาร์) ถูกเขียนเป็นแบบจำลองตัวแทน (agent-based model) บน CORMAS ใช้คู่กับเกมสวมบทบาทสมมุติ (companion modelling)</p>
+            <p class="en">A state-transition diagram of vegetation (dense forest, secondary forest, several fallow types, upland rice, maize, lychee) under cattle grazing and fire (high intensity = more than 1 livestock unit (250 kg) per ha) was coded as an agent-based model in CORMAS and used with a role-playing game (companion modelling).</p>
+            <h4><span class="th">3. ใช้เครื่องมือในการประชุมเชิงปฏิบัติการ 3 ครั้ง</span><span class="en">3. Three workshops</span></h4>
+            <div class="tablewrap"><table>
+              <tr><th></th><th><span class="th">วัตถุประสงค์</span><span class="en">Purpose</span></th><th><span class="th">ผู้เข้าร่วม / สถานการณ์</span><span class="en">Participants / scenarios</span></th></tr>
+              <tr><td>WS1 (Sep 2008)</td><td><span class="th">วันที่ 1 เข้าใจการตัดสินใจเลี้ยงวัวของเกษตรกร; วันที่ 2 สื่อสาร เรียนรู้ร่วมกัน สร้างความไว้วางใจกับเจ้าหน้าที่ปลูกป่า</span><span class="en">Day 1: herders' decisions on cattle; day 2: communication, co-learning and trust with foresters</span></td><td><span class="th">ผู้เลี้ยงวัว 14 / 8 คน, เจ้าหน้าที่ NKU 3 คน; S1–S4</span><span class="en">Herders 14 / 8, NKU foresters 3; S1–S4</span></td></tr>
+              <tr><td>WS2 (Mar 2009)</td><td><span class="th">ร่วมวางแผนการจัดการร่วมกับผู้มีส่วนเกี่ยวข้อง</span><span class="en">Co-management action plan with stakeholders</span></td><td><span class="th">ผู้เลี้ยงวัว 5, NKU 2, NNP 3, ปศุสัตว์อำเภอ 1; S5–S6 (รายเดี่ยว/รวมกลุ่ม)</span><span class="en">Herders 5, NKU 2, NNP 3, district livestock 1; S5–S6 (individual/collective)</span></td></tr>
+              <tr><td>WS3 (Aug 2009)</td><td><span class="th">เรียนรู้ร่วมกันระหว่างผู้เล่นเก่าและใหม่ ใช้แบบจำลองด้วยตัวเองมากขึ้น</span><span class="en">Shared learning between former and new players, more autonomous use of the model</span></td><td><span class="th">ผู้เลี้ยงวัว 10; S7–S8</span><span class="en">Herders 10; S7–S8</span></td></tr>
+            </table></div>
+            <div class="callout blue"><b><span class="th">ผลลัพธ์</span><span class="en">Outcomes</span></b>
+              <ul class="th" style="margin-bottom:0"><li>นำผลเกมไปทำโปสเตอร์และประชุมหมู่บ้าน เปรียบเทียบกลุ่มผู้เล่นด้วยกราฟ</li><li>ได้แผนปฏิบัติการร่วม: แปลงหญ้ารูซี่ (<i>Brachiaria ruziziensis</i>) 10 เฮกตาร์ หมุนเวียนตามฤดูกาล — รั้วจากเจ้าหน้าที่ป่าไม้ เมล็ดพันธุ์จากปศุสัตว์อำเภอ วัวจากผู้เลี้ยง 3 ราย</li><li>เกษตรกรเรียนรู้วิธีเลี้ยงวัวแบบใหม่จากการสังเกตและพูดคุย และตระหนักถึงปัญหาการขาดแคลนพื้นที่เลี้ยงวัว</li></ul>
+              <ul class="en" style="margin-bottom:0"><li>Game results were shown on posters and at a village meeting, comparing player groups with graphs.</li><li>A joint action plan: a 10-ha ruzi grass (<i>Brachiaria ruziziensis</i>) pasture with seasonal rotation — fence from the foresters, seed from the district livestock office, cattle from 3 herders.</li><li>Farmers learned new cattle-raising practices by watching and talking, and became aware of a coming shortage of grazing land.</li></ul></div>
+            <p class="muted" style="font-size:.88rem"><span class="th">อ่านเพิ่ม: Dumrongrojwatthana, P., Le Page, C., Gajaseni, N. &amp; Trébuil, G. (2011) Journal of Land Use Science 6(2–3): 101–120; พงษ์ชัย ดำรงโรจน์วัฒนา และคณะ (2559) วารสาร TSJLD 1(2): 49–67 (ดูหน้า เอกสาร PDF)</span><span class="en">Further reading: Dumrongrojwatthana, P., Le Page, C., Gajaseni, N. &amp; Trébuil, G. (2011) Journal of Land Use Science 6(2–3): 101–120; Dumrongrojwatthana et al. (2016) TSJLD 1(2): 49–67 (see PDF documents).</span></p>
+          </div>
+        </details>
+      </div>
+      <aside><div class="vid" data-v="6"></div><div class="vidcap"></div>
+        <div class="card" style="margin-top:12px"><h4><span class="th">ลองเล่นเกมจำลองอื่น ๆ</span><span class="en">Try other simulation games</span></h4>
+          <p style="margin:0"><a href="#more"><span class="th">ตัวอย่างแบบจำลองอื่น ๆ →</span><span class="en">More model examples →</span></a></p></div></aside>
+    </div>
+  </div>
+
+  <!-- T2 activities -->
+  <div class="sub" data-sub="act">
+    <div class="card">
+      <h3><span class="th">กิจกรรม 1: แบบจำลองนี้เป็นประเภทใด?</span><span class="en">Activity 1: what type of model is this?</span></h3>
+      <div class="sorter" id="sortType"></div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <h3><span class="th">กิจกรรม 2: งานนี้อยู่ในขั้นตอนใดของการสร้างแบบจำลอง? (กรณีระบบนิเวศจำลองและกรณีศึกษา)</span><span class="en">Activity 2: which modelling step is this? (microcosm lab and case studies)</span></h3>
+      <div class="sorter" id="sortStep"></div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <h3><span class="th">กิจกรรม 3: เพื่อการเรียนรู้ หรือ เพื่อการคาดการณ์?</span><span class="en">Activity 3: for learning or for prediction?</span></h3>
+      <div class="sorter" id="sortPurpose"></div>
+    </div>
+  </div>
+
+  <!-- T2 discussion -->
+  <div class="sub" data-sub="disc">
+    <div class="card">
+      <h3><span class="th">คำถามอภิปราย</span><span class="en">Discussion questions</span></h3>
+      <p class="muted"><span class="th">คำตอบบันทึกไว้ในเบราว์เซอร์ของเครื่องนี้เท่านั้น กด “พิมพ์ / บันทึก PDF” เพื่อส่งงาน</span><span class="en">Answers are saved only in this browser. Use “Print / save PDF” to hand in.</span></p>
+      <div class="controls"><label class="ctl"><span class="th">ชื่อ–กลุ่ม (ไม่บังคับ)</span><span class="en">Name / group (optional)</span><input type="text" data-ans="t2_name"></label></div>
+      <div id="t2Disc"></div>
+      <div class="row noprint"><button class="btn primary" data-print="t2"><span class="th">พิมพ์ / บันทึก PDF</span><span class="en">Print / save PDF</span></button></div>
+    </div>
+  </div>
+
+  <!-- T2 quiz -->
+  <div class="sub" data-sub="quiz"><div id="quiz2"></div></div>
+</section>
+
+<!-- ================= VIDEOS ================= -->
+<section class="page" id="p-videos">
+  <div class="pagehead"><h2><span class="th">วิดีโอบรรยาย</span><span class="en">Lecture videos</span></h2></div>
+  <p><span class="th">Playlist “Ecology-2026” ช่อง Man and Environment —</span><span class="en">Playlist “Ecology-2026”, channel Man and Environment —</span> <a href="https://www.youtube.com/playlist?list=PLSkhCc7k9KW5VD1hKmVct38A_XB73Reww" target="_blank" rel="noopener"><span class="th">เปิดใน YouTube ↗</span><span class="en">open on YouTube ↗</span></a></p>
+  <div class="vidlist" id="allVids"></div>
+</section>
+
+<!-- ================= MORE MODELS ================= -->
+<section class="page" id="p-more">
+  <div class="pagehead"><h2><span class="th">ตัวอย่างแบบจำลองอื่น ๆ</span><span class="en">More model examples</span></h2></div>
+  <p class="muted th">แบบจำลองแบบมีส่วนร่วม เกมและสถานการณ์จำลองจากงานวิจัยของห้องปฏิบัติการ TENRM ที่นิสิตเปิดเล่นและศึกษาเพิ่มเติมได้</p>
+  <p class="muted en">Participatory models, games and simulations from TENRM Lab research that you can open and explore.</p>
+  <div class="grid g2">
+    <a class="card linkcard" href="https://gamerepocu.github.io/gamerepocu/" target="_blank" rel="noopener">
+      <div class="ic">🎲</div>
+      <div><h3 style="margin:0 0 .3em"><span class="th">TENRM Lab — คลังเกม ↗</span><span class="en">TENRM Lab — game collection ↗</span></h3>
+        <p class="th" style="margin:0">เกมเพื่อการเรียนรู้ด้านสิ่งแวดล้อม 14 เกมจากงานวิจัย 5 ประเด็น: ความหลากหลายทางชีวภาพ เกษตรและภูมิอากาศ น้ำและพื้นที่ชุ่มน้ำ ป่าและชุมชน พื้นที่สีเขียวในเมือง (ไทย/อังกฤษ) เช่น เกมถ้ำเขาช้างหาย Herptile ESs Farmer versus Climate change วางแผนปลูกป่า (Manage-For-Nan) Toxic Game</p>
+        <p class="en" style="margin:0">14 learning games from research on 5 themes: biodiversity, agriculture and climate, water and wetlands, forests and communities, urban green space (Thai/English), e.g. Khao Chang Hai cave, Herptile ESs, Farmer versus Climate change, Manage-For-Nan, Toxic Game.</p>
+        <p class="muted" style="margin:.3em 0 0;font-size:.85rem">gamerepocu.github.io/gamerepocu</p></div>
+    </a>
+    <a class="card linkcard" href="https://tenrm.github.io/ReHab_modify/" target="_blank" rel="noopener" id="rehabLink">
+      <div class="ic">🐦</div>
+      <div><h3 style="margin:0 0 .3em"><span class="th">ReHab Online — เกมป่าชุมชนกับนกหายาก ↗</span><span class="en">ReHab Online — community forest and a rare bird ↗</span></h3>
+        <p class="th" style="margin:0">เกมที่ใช้ในบทเรียน “บทเรียนจาก ReHab Scenario 1” ผู้เก็บหาของป่าตัดสินใจว่าจะเก็บที่ใด ผลกระทบต่อมวลชีวภาพและการทำรังของนก ใช้ได้ทั้งภาษาไทยและอังกฤษ</p>
+        <p class="en" style="margin:0">The game behind “lessons from ReHab scenario 1”: harvesters decide where to collect forest products, affecting biomass and the nesting of a rare bird. Thai and English.</p>
+        <p class="muted" style="margin:.3em 0 0;font-size:.85rem">tenrm.github.io/ReHab_modify</p></div>
+    </a>
+  </div>
+  <h3><span class="th">เว็บคำนวณรอยประทับทางนิเวศ</span><span class="en">Ecological footprint calculators</span></h3>
+  <ul>
+    <li><a href="https://www.footprintcalculator.org/" target="_blank" rel="noopener">footprintcalculator.org</a> — Global Footprint Network</li>
+    <li><a href="https://footprint.wwf.org.uk/" target="_blank" rel="noopener">footprint.wwf.org.uk</a> — WWF UK</li>
+    <li><a href="https://www.footprintnetwork.org/" target="_blank" rel="noopener">footprintnetwork.org</a> — <span class="th">ข้อมูลรายประเทศ</span><span class="en">country data</span></li>
+  </ul>
+</section>
+
+<!-- ================= DOCS ================= -->
+<section class="page" id="p-docs">
+  <div class="pagehead"><h2><span class="th">เอกสาร PDF</span><span class="en">PDF documents</span></h2></div>
+  <div class="grid g2">
+    <div class="card">
+      <h3><span class="th">หัวข้อที่ 1 · การจัดการระบบนิเวศ</span><span class="en">Topic 1 · Ecosystem management</span></h3>
+      <div id="docs1"></div>
+    </div>
+    <div class="card">
+      <h3><span class="th">หัวข้อที่ 2 · แบบจำลองทางนิเวศ</span><span class="en">Topic 2 · Ecological modelling</span></h3>
+      <div id="docs2"></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:14px">
+    <h3><span class="th">เอกสารอ่านเพิ่มเติม (ในระบบ MyCourseVille)</span><span class="en">Further reading (on MyCourseVille; in Thai)</span></h3>
+    <ul>
+      <li>พงษ์ศักดิ์ วิทวัสชุติกุล และคณะ (2553) แบบจำลองมูลค่าความหลากหลายทางชีวภาพของระบบนิเวศป่าต้นน้ำ. กรมอุทยานแห่งชาติ สัตว์ป่า และพันธุ์พืช.</li>
+      <li>กลุ่มวิจัยต้นน้ำ (ม.ป.ป.) คู่มือการใช้แบบจำลองสำหรับประเมินค่าเสียหายทางสิ่งแวดล้อมบางประการหลังการทำลายป่าไม้. สำนักอนุรักษ์และจัดการต้นน้ำ กรมอุทยานแห่งชาติ สัตว์ป่า และพันธุ์พืช.</li>
+      <li>เดชรัต สุขกำเนิด (2553) เศรษฐศาสตร์ที่ไร้เศรษฐธรรม: ข้อวิพากษ์แบบจำลองการคิดมูลค่าความเสียหาย.</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0"><span class="th">เนื้อหาและสไลด์: รศ.ดร.พงษ์ชัย ดำรงโรจน์วัฒนา ภาควิชาชีววิทยา คณะวิทยาศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย (pongchai.d@chula.ac.th) · รายวิชา 2303221 นิเวศวิทยา</span><span class="en">Content and slides: Assoc. Prof. Dr. Pongchai Dumrongrojwatthana, Department of Biology, Faculty of Science, Chulalongkorn University (pongchai.d@chula.ac.th) · Course 2303221 Ecology</span></p>
+    <p style="margin:.3em 0 0"><span class="th">แบบจำลองที่มีป้าย “แบบจำลองสาธิต” สร้างขึ้นเพื่อการเรียนรู้ ไม่ใช่ข้อมูลภาคสนาม · คำตอบและตารางที่กรอกเก็บในเบราว์เซอร์ของเครื่องนี้เท่านั้น</span><span class="en">Models tagged “teaching demo” are built for learning, not from field data · Answers and tables you enter are kept only in this browser.</span></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var KEY='eco2303221-';
+var store={get:function(k,d){try{var v=localStorage.getItem(KEY+k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+           set:function(k,v){try{localStorage.setItem(KEY+k,JSON.stringify(v))}catch(e){}}};
+var lang='th';
+function L(th,en){return lang==='en'?en:th}
+function T(th,en){return '<span class="th">'+th+'</span><span class="en">'+en+'</span>'}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function fmt(n,d){if(n==null||!isFinite(n))return '–';d=d==null?0:d;return Number(n).toLocaleString(lang==='en'?'en-US':'th-TH',{minimumFractionDigits:d,maximumFractionDigits:d})}
+function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim()}
+function num(id){var v=parseFloat($('#'+id).value);return isFinite(v)?v:0}
+var renderers=[];
+function onRender(f){renderers.push(f)}
+function renderAll(){renderers.forEach(function(f){try{f()}catch(e){console.error(e)}})}
+
+/* ---------- language ---------- */
+function setLang(l){
+  lang=(l==='en')?'en':'th';
+  document.documentElement.lang=lang;
+  $('#langBtn').textContent=lang==='th'?'EN':'ไทย';
+  document.title=L('นิเวศวิทยา 2303221 · Ecology Webapp','2303221 Ecology · Webapp');
+  store.set('lang',lang);
+  renderAll();
+}
+$('#langBtn').addEventListener('click',function(){setLang(lang==='th'?'en':'th')});
+
+/* ---------- router ---------- */
+function route(){
+  var h=(location.hash||'#home').slice(1).split('/'), p=h[0], s=h[1];
+  if(!document.getElementById('p-'+p)) p='home';
+  $$('section.page').forEach(function(x){x.classList.toggle('on',x.id==='p-'+p)});
+  $$('#mainNav a').forEach(function(a){a.classList.toggle('on',a.dataset.p===p)});
+  var grp=$('#p-'+p+' .subnav');
+  if(grp){
+    var subs=$$('button',grp).map(function(b){return b.dataset.s});
+    if(subs.indexOf(s)<0) s=store.get('sub-'+p,subs[0]);
+    if(subs.indexOf(s)<0) s=subs[0];
+    $$('button',grp).forEach(function(b){b.classList.toggle('on',b.dataset.s===s)});
+    $$('#p-'+p+' .sub').forEach(function(d){d.classList.toggle('on',d.dataset.sub===s)});
+    store.set('sub-'+p,s);
+  }
+  window.scrollTo(0,0);
+  renderAll();
+}
+$$('.subnav').forEach(function(g){
+  var p=g.closest('section').id.slice(2);
+  g.addEventListener('click',function(e){var b=e.target.closest('button');if(b) location.hash=p+'/'+b.dataset.s});
+});
+window.addEventListener('hashchange',route);
+var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(renderAll,150)});
+
+/* ---------- range outputs ---------- */
+function bindOut(id,fn){var el=$('#'+id),o=$('[data-o="'+id+'"]');function u(){if(o)o.textContent=fn?fn(+el.value):el.value}el.addEventListener('input',u);u()}
+
+/* ---------- charts ---------- */
+function niceTicks(a,b,n){var span=b-a;if(span<=0)span=Math.abs(a)||1;var st=span/n,mag=Math.pow(10,Math.floor(Math.log10(st))),f=st/mag;
+  var step=(f<1.5?1:f<3?2:f<7?5:10)*mag,s=Math.floor(a/step+1e-9)*step,e=Math.ceil(b/step-1e-9)*step,out=[];
+  for(var v=s;v<=e+step*1e-6;v+=step) out.push(+v.toFixed(10));return out}
+function fmtAxis(v){var a=Math.abs(v);if(a>=1e6)return (v/1e6).toLocaleString('en-US',{maximumFractionDigits:1})+'M';if(a>=1e4)return (v/1e3).toLocaleString('en-US',{maximumFractionDigits:1})+'k';return v.toLocaleString('en-US',{maximumFractionDigits:3})}
+function lineChart(cv,o){
+  var w=cv.clientWidth,h=cv.clientHeight;if(!w||!h)return;
+  var dpr=window.devicePixelRatio||1;cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr);
+  var c=cv.getContext('2d');c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,w,h);
+  var muted=css('--muted'),line=css('--line'),P={l:58,r:14,t:12,b:44};
+  var xs=[],ys=[];o.series.forEach(function(s){s.pts.forEach(function(p){xs.push(p[0]);ys.push(p[1])})});(o.hlines||[]).forEach(function(l){ys.push(l.y)});
+  if(!xs.length)return;
+  var x0=o.xMin!=null?o.xMin:Math.min.apply(null,xs),x1=o.xMax!=null?o.xMax:Math.max.apply(null,xs);
+  var y0=o.yMin!=null?o.yMin:Math.min(0,Math.min.apply(null,ys)),y1=o.yMax!=null?o.yMax:Math.max.apply(null,ys);
+  if(y1<=y0)y1=y0+1;if(x1<=x0)x1=x0+1;
+  var yt=niceTicks(y0,y1,5);y0=yt[0];y1=yt[yt.length-1];
+  var X=function(x){return P.l+(x-x0)/(x1-x0)*(w-P.l-P.r)},Y=function(y){return h-P.b-(y-y0)/(y1-y0)*(h-P.t-P.b)};
+  c.font='12px Sarabun, system-ui, sans-serif';c.lineWidth=1;
+  yt.forEach(function(v){c.strokeStyle=line;c.beginPath();c.moveTo(P.l,Y(v)+.5);c.lineTo(w-P.r,Y(v)+.5);c.stroke();c.fillStyle=muted;c.textAlign='right';c.textBaseline='middle';c.fillText(fmtAxis(v),P.l-6,Y(v))});
+  niceTicks(x0,x1,Math.max(3,Math.min(8,Math.floor(w/90)))).forEach(function(v){if(v<x0-1e-9||v>x1+1e-9)return;c.fillStyle=muted;c.textAlign='center';c.textBaseline='top';c.fillText(fmtAxis(v),X(v),h-P.b+6)});
+  if(o.xLabel){c.textAlign='center';c.textBaseline='bottom';c.fillText(o.xLabel,(P.l+w-P.r)/2,h-2)}
+  if(o.yLabel){c.save();c.translate(12,(P.t+h-P.b)/2);c.rotate(-Math.PI/2);c.textAlign='center';c.textBaseline='middle';c.fillText(o.yLabel,0,0);c.restore()}
+  (o.hlines||[]).forEach(function(l){c.save();c.strokeStyle=l.color||muted;c.setLineDash([5,4]);c.beginPath();c.moveTo(P.l,Y(l.y));c.lineTo(w-P.r,Y(l.y));c.stroke();c.restore();
+    if(l.label){c.fillStyle=l.color||muted;c.textAlign='right';c.textBaseline='bottom';c.fillText(l.label,w-P.r-2,Y(l.y)-2)}});
+  o.series.forEach(function(s){if(!s.pts.length)return;c.save();c.strokeStyle=s.color;c.lineWidth=s.width||2;c.lineJoin='round';if(s.dash)c.setLineDash(s.dash);
+    c.beginPath();s.pts.forEach(function(p,i){var px=X(p[0]),py=Y(Math.max(y0,Math.min(y1,p[1])));i?c.lineTo(px,py):c.moveTo(px,py)});c.stroke();
+    if(s.dots){c.fillStyle=s.color;s.pts.forEach(function(p){c.beginPath();c.arc(X(p[0]),Y(p[1]),3,0,7);c.fill()})}c.restore()});
+}
+function legend(el,items){el.innerHTML=items.map(function(i){return '<span><i style="background:'+i.color+'"></i>'+i.label+'</span>'}).join('')}
+function col(n){return css('--c'+n)}
+function bars(el,rows,unit){var mx=Math.max.apply(null,rows.map(function(r){return r.v}).concat([1e-9]));
+  el.innerHTML=rows.map(function(r){return '<div class="bar"><span>'+r.label+'</span><div class="track"><div class="fill" style="width:'+(100*Math.max(0,r.v)/mx).toFixed(1)+'%;background:'+(r.color||col(2))+'"></div></div><span class="val">'+fmt(r.v,r.d==null?0:r.d)+(unit||'')+'</span></div>'}).join('')}
+function stats(el,arr){el.innerHTML=arr.map(function(s){return '<div class="stat"><div class="k">'+s.k+'</div><div class="v">'+s.v+'</div>'+(s.u?'<div class="u">'+s.u+'</div>':'')+'</div>'}).join('')}
+
+/* ---------- videos ---------- */
+var PL='PLSkhCc7k9KW5VD1hKmVct38A_XB73Reww';
+var VIDS=[
+ {id:'QLTnACNOiF8',dur:'25:55',yt:'01 Ecosystem Management 2025 - Part1',th:'การจัดการระบบนิเวศ ตอนที่ 1: ทำไมต้องจัดการระบบนิเวศ',en:'Ecosystem management, part 1: why manage ecosystems',go:'#t1/lesson'},
+ {id:'4J3bdL_cDpE',dur:'24:15',yt:'02 Ecosystem Management 2025 - Part2',th:'การจัดการระบบนิเวศ ตอนที่ 2: แนวคิดและหลักการ',en:'Ecosystem management, part 2: concepts and principles',go:'#t1/lesson'},
+ {id:'4Aa6LxGIv5U',dur:'37:56',yt:'03 Ecosystem Management 2025 - Part3',th:'การจัดการระบบนิเวศ ตอนที่ 3: กระบวนการ P-D-C-A',en:'Ecosystem management, part 3: the P-D-C-A process',go:'#t1/lesson'},
+ {id:'N_IBsfGrYak',dur:'23:56',yt:'04 Introduction to modelling',th:'ความรู้เบื้องต้นเกี่ยวกับแบบจำลองทางนิเวศ',en:'Introduction to ecological modelling',go:'#t2/lesson'},
+ {id:'ILEBPAB0IvA',dur:'13:08',yt:'05 Case_ForestValue 2021',th:'กรณีศึกษา: แบบจำลองมูลค่าป่าไม้',en:'Case study: the forest value model',go:'#t2/forest'},
+ {id:'bVz8V0fe-n0',dur:'1:06:12',yt:'Gaming and Simulation Case Studies',th:'กรณีศึกษา: เกมและสถานการณ์จำลอง',en:'Case studies: gaming and simulation',go:'#t2/game'}];
+function vidHTML(i){var v=VIDS[i];return '<div class="vid" data-play="'+i+'" role="button" tabindex="0" aria-label="'+esc(v.yt)+'"><img loading="lazy" alt="" onerror="this.style.visibility=\'hidden\'" src="https://i.ytimg.com/vi/'+v.id+'/hqdefault.jpg"><div class="play"><i></i></div><span class="dur">'+v.dur+'</span></div>'}
+function capHTML(i,withGo){var v=VIDS[i];return '<div class="vidcap">'+(i+1)+'. '+T(v.th,v.en)+'</div><div class="muted" style="font-size:.82rem">'+esc(v.yt)+' · <a href="https://www.youtube.com/watch?v='+v.id+'&list='+PL+'" target="_blank" rel="noopener">YouTube ↗</a>'+(withGo?' · <a href="'+v.go+'">'+T('ไปที่บทเรียน','go to lesson')+'</a>':'')+'</div>'}
+$$('.vid[data-v]').forEach(function(el){var i=+el.dataset.v-1;el.outerHTML=vidHTML(i)});
+$$('aside .vidcap').forEach(function(el){var v=el.previousElementSibling;var i=+v.dataset.play;el.outerHTML=capHTML(i,false)});
+['homeVids','allVids'].forEach(function(id){$('#'+id).innerHTML=VIDS.map(function(v,i){return '<div>'+vidHTML(i)+capHTML(i,true)+'</div>'}).join('')});
+function play(el){var v=VIDS[+el.dataset.play];el.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+v.id+'?autoplay=1&rel=0" title="'+esc(v.yt)+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';el.removeAttribute('data-play');el.style.cursor='default'}
+document.addEventListener('click',function(e){var el=e.target.closest('.vid[data-play]');if(el)play(el)});
+document.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('.vid[data-play]')){e.preventDefault();play(e.target)}});
+
+/* ---------- commons game ---------- */
+['cm_r','cm_K','cm_N','cm_d','cm_g','cm_q','cm_T'].forEach(function(id){bindOut(id);$('#'+id).addEventListener('input',drawCommons)});
+function commonsRun(p,rule){
+  var R=0.8*p.K,msy=p.r*p.K/4,out={R:[[0,R]],H:[],cum:0,collapse:null};
+  for(var t=0;t<p.T;t++){
+    var demand=p.N*p.d*Math.pow(1+p.g/100,t),H;
+    if(rule==='A')H=demand;else if(rule==='B')H=Math.min(demand,p.q*msy);else H=Math.min(demand,(p.r/2)*R);
+    var growth=p.r*R*(1-R/p.K);H=Math.max(0,Math.min(H,R+growth));
+    R=Math.max(0,R+growth-H);
+    if(R<0.01*p.K&&out.collapse==null)out.collapse=t+1;
+    out.H.push([t+1,H]);out.R.push([t+1,R]);out.cum+=H;
+  }
+  out.final=R;return out;
+}
+function drawCommons(){
+  if(!$('#cmSim').offsetParent)return;
+  var p={r:num('cm_r'),K:num('cm_K'),N:num('cm_N'),d:num('cm_d'),g:num('cm_g'),q:num('cm_q'),T:num('cm_T')};
+  var rules=[{k:'A',th:'(A) ต่างคนต่างเก็บ',en:'(A) Open access',c:col(5)},{k:'B',th:'(B) โควตาคงที่',en:'(B) Fixed quota',c:col(3)},{k:'C',th:'(C) ปรับตัวแบบ P-D-C-A',en:'(C) Adaptive P-D-C-A',c:col(1)}];
+  var res=rules.map(function(r){return commonsRun(p,r.k)});
+  legend($('#cmLeg'),rules.map(function(r){return {color:r.c,label:T(r.th,r.en)}}).concat([{color:css('--muted'),label:'K/2 (MSY)'}]));
+  lineChart($('#cmChart'),{series:rules.map(function(r,i){return {pts:res[i].R,color:r.c,width:i===0?2.6:2}}).reverse(),xLabel:L('ปี','Year'),yLabel:L('ทรัพยากรคงเหลือ R','Resource stock R'),yMin:0,yMax:p.K,hlines:[{y:p.K/2,label:'K/2'}]});
+  var msy=p.r*p.K/4;
+  lineChart($('#cmChartH'),{series:rules.map(function(r,i){return {pts:res[i].H,color:r.c,width:i===0?2.6:2}}).reverse(),xLabel:L('ปี','Year'),yLabel:L('ผลผลิตรวม/ปี H','Total harvest/yr H'),yMin:0,hlines:[{y:msy,label:'MSY = rK/4 = '+fmt(msy,0)}]});
+  var head='<tr><th>'+T('กติกา','Rule')+'</th><th class="num">'+T('ผลผลิตสะสม','Total harvest')+'</th><th class="num">'+T('เฉลี่ย/คน/ปี','Mean per user per yr')+'</th><th class="num">'+T('ทรัพยากรปีสุดท้าย','Final stock')+'</th><th class="num">'+T('ล่ม (R &lt; 1% K) ปีที่','Collapse (R &lt; 1% K) in year')+'</th></tr>';
+  $('#cmTable').innerHTML=head+rules.map(function(r,i){var o=res[i];return '<tr><td><span style="color:'+r.c+'">●</span> '+T(r.th,r.en)+'</td><td class="num">'+fmt(o.cum,0)+'</td><td class="num">'+fmt(o.cum/p.N/p.T,1)+'</td><td class="num">'+fmt(o.final,0)+' ('+fmt(100*o.final/p.K,0)+'%)</td><td class="num">'+(o.collapse?o.collapse:T('ไม่ล่ม','none'))+'</td></tr>'}).join('');
+}
+onRender(drawCommons);
+$('#cmMode').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;$$('#cmMode button').forEach(function(x){x.classList.toggle('on',x===b)});
+  $('#cmSim').classList.toggle('hide',b.dataset.m!=='sim');$('#cmPlay').classList.toggle('hide',b.dataset.m!=='play');renderAll()});
+/* play mode */
+var PG;
+function pgReset(){var N=+$('#pl_N').value,K=1000,r=0.4,msy=r*K/4;PG={N:N,K:K,r:r,msy:msy,t:0,R:0.8*K,you:0,others:0,hist:[[0,0.8*K]],yh:[],oh:[],beh:$('#pl_beh').value,over:false};
+  var mx=Math.max(10,Math.round(4*msy/N));$('#pl_h').max=mx;$('#pl_h').value=Math.round(msy/N);$('#pl_h').dispatchEvent(new Event('input'));$('#pl_go').disabled=false;$('#plMsg').textContent='';drawPlay()}
+function pgStep(){if(PG.over)return;var h=+$('#pl_h').value,N=PG.N,o;
+  if(PG.beh==='greedy')o=(PG.msy/N)*Math.pow(1.05,PG.t);else if(PG.beh==='quota')o=PG.msy/N;else o=h;
+  var want=h+(N-1)*o,growth=PG.r*PG.R*(1-PG.R/PG.K),avail=Math.max(0,PG.R+growth),f=want>avail?avail/want:1;
+  var yh=h*f,oh=o*f;PG.R=Math.max(0,avail-want*f);PG.you+=yh;PG.others+=oh;PG.t++;PG.hist.push([PG.t,PG.R]);PG.yh.push([PG.t,yh]);PG.oh.push([PG.t,oh]);
+  if(PG.t>=30||PG.R<0.01*PG.K){PG.over=true;$('#pl_go').disabled=true}drawPlay()}
+function drawPlay(){if(!PG)return;
+  stats($('#plStats'),[{k:L('ปีที่','Year'),v:PG.t+' / 30'},{k:L('ทรัพยากรคงเหลือ','Stock left'),v:fmt(PG.R,0),u:fmt(100*PG.R/PG.K,0)+'% K'},{k:L('ผลผลิตสะสมของคุณ','Your total'),v:fmt(PG.you,0)},{k:L('เฉลี่ยของผู้ใช้คนอื่น','Average other user'),v:fmt(PG.others,0)},{k:'MSY/N',v:fmt(PG.msy/PG.N,1),u:L('หน่วย/คน/ปี','units/user/yr')}]);
+  if($('#plChart').offsetParent)lineChart($('#plChart'),{series:[{pts:PG.hist,color:col(1)},{pts:PG.yh.map(function(p){return [p[0],p[1]*10]}),color:col(2),dash:[4,3]},{pts:PG.oh.map(function(p){return [p[0],p[1]*10]}),color:col(5),dash:[2,3]}],xMin:0,xMax:30,yMin:0,yMax:PG.K,xLabel:L('ปี — เส้นทึบ: ทรัพยากร · เส้นประ: ผลผลิตของคุณ/คนอื่น ×10','Year — solid: stock · dashed: your / others\' harvest ×10'),hlines:[{y:PG.K/2,label:'K/2'}]});
+  if(PG.over){var ok=PG.R>=0.25*PG.K;$('#plMsg').innerHTML=(PG.R<0.01*PG.K?T('ทรัพยากรล่มในปีที่ '+PG.t+' — ไม่มีใครเก็บได้อีกต่อไป','The resource collapsed in year '+PG.t+' — nobody can harvest any more'):T('ครบ 30 ปี','30 years done'))+' · '+(ok?T('ทรัพยากรยังเหลือพอให้รุ่นต่อไป','enough is left for the next generation'):T('ทรัพยากรเหลือน้อย ลองเล่นใหม่โดยตกลงกติกากับคนอื่น','little is left — try again with a shared rule'));$('#plMsg').style.color=ok?css('--ok'):css('--bad')}}
+bindOut('pl_h');$('#pl_go').addEventListener('click',pgStep);$('#pl_reset').addEventListener('click',pgReset);$('#pl_beh').addEventListener('change',pgReset);$('#pl_N').addEventListener('change',pgReset);
+pgReset();onRender(drawPlay);
+
+/* ---------- logistic lab ---------- */
+['lg_r','lg_K','lg_T'].forEach(function(id){bindOut(id);$('#'+id).addEventListener('input',drawLogistic)});$('#lg_x0').addEventListener('input',drawLogistic);
+$$('[data-lgr]').forEach(function(b){b.addEventListener('click',function(){var r=+b.dataset.lgr;$('#lg_r').value=r;$('#lg_T').value=r<0.1?1000:60;['lg_r','lg_T'].forEach(function(id){$('#'+id).dispatchEvent(new Event('input'))})})});
+function drawLogistic(){
+  if(!$('#lgChart').offsetParent)return;
+  var r=num('lg_r'),K=num('lg_K'),T0=num('lg_T'),x0s=$('#lg_x0').value.split(/[,\s]+/).map(Number).filter(function(v){return isFinite(v)&&v>=0}).slice(0,6);
+  var colors=[col(1),col(2),col(3),col(4),col(5),col(6)];
+  var series=x0s.map(function(x,i){var pts=[[0,x]];for(var t=1;t<=T0;t++){x=x+r*x*(1-x/K);if(x<0||!isFinite(x))x=0;pts.push([t,x])}return {pts:pts,color:colors[i],width:1.6}});
+  legend($('#lgLeg'),x0s.map(function(x,i){return {color:colors[i],label:'X<sub>0</sub> = '+fmt(x,0)}}).concat([{color:css('--muted'),label:'K'}]));
+  lineChart($('#lgChart'),{series:series,xLabel:'t',yLabel:L('ขนาดประชากร x','Population x'),yMin:0,hlines:[{y:K,label:'K = '+fmt(K,0)}]});
+  var n;if(r<1)n=T('0 &lt; r &lt; 1: ประชากรเข้าสู่ K อย่างราบเรียบ ไม่ว่าเริ่มต่ำกว่าหรือสูงกว่า K','0 &lt; r &lt; 1: the population approaches K smoothly, from below or above.');
+  else if(r<2)n=T('1 &lt; r &lt; 2: ประชากรเกิน K แล้วแกว่งลดลงจนเข้าสู่ K (damped oscillation)','1 &lt; r &lt; 2: the population overshoots K and oscillates down to it (damped oscillation).');
+  else if(r<2.57)n=T('2 &lt; r &lt; 2.57: ประชากรแกว่งเป็นรอบซ้ำ 2, 4, 8 ค่า ไม่หยุดที่ K','2 &lt; r &lt; 2.57: the population cycles among 2, 4, 8 values and never settles at K.');
+  else if(r<=3)n=T('2.57 &lt; r ≤ 3: chaos — เปลี่ยนค่าเริ่มต้นนิดเดียว ผลต่างกันมาก คาดการณ์ระยะยาวไม่ได้','2.57 &lt; r ≤ 3: chaos — a tiny change in the start gives very different results; long-term prediction fails.');
+  else n=T('r &gt; 3: ประชากรติดลบในสมการ (แสดงเป็น 0 = สูญพันธุ์)','r &gt; 3: the equation goes negative (shown as 0 = extinction).');
+  $('#lgNote').innerHTML=n;
+}
+onRender(drawLogistic);
+
+/* ---------- forest value A ---------- */
+var FA=[{th:'ทำให้อากาศร้อนมากขึ้น',en:'Hotter air',v:45453.45},{th:'น้ำสูญเสียจากการแผดเผาของรังสีดวงอาทิตย์',en:'Water lost to solar heating',v:52800},{th:'ทำให้ฝนตกน้อยลง',en:'Less rain',v:5400},{th:'ทำให้ดินสูญหาย',en:'Soil loss',v:1800},{th:'ทำให้ธาตุอาหารสูญหาย',en:'Nutrient loss',v:4064.15},{th:'ทำให้ดินไม่ดูดซับน้ำฝน',en:'Soil no longer absorbs rain',v:600}];
+$('#faChecks').innerHTML='<div class="grid g2">'+FA.map(function(f,i){return '<label class="check"><input type="checkbox" checked data-fa="'+i+'"> <span>'+T(f.th,f.en)+' <span class="muted">('+f.v.toLocaleString('en-US',{minimumFractionDigits:2})+')</span></span></label>'}).join('')+'</div>';
+['fa_area','fa_years','fa_type'].forEach(function(id){$('#'+id).addEventListener('input',drawFA)});$('#faChecks').addEventListener('change',drawFA);
+function drawFA(){
+  var area=Math.max(0,num('fa_area')),yrs=Math.max(1,num('fa_years')),direct=+$('#fa_type').value;
+  var rows=FA.map(function(f,i){return {label:T(f.th,f.en),v:$('[data-fa="'+i+'"]').checked?f.v:0,d:2,color:col(2)}});
+  rows.push({label:T('ค่าเสียหายทางตรง (ชนิดป่า)','Direct damage (forest type)'),v:direct,d:2,color:col(3)});
+  var per=rows.reduce(function(a,r){return a+r.v},0),tot=per*area*yrs,rule=150000*area*yrs;
+  stats($('#faStats'),[{k:L('รวมต่อไร่ต่อปี','Per rai per year'),v:fmt(per,2),u:L('บาท','baht')},{k:L('ค่าเสียหายทั้งหมด','Total damage'),v:fmt(tot,0),u:L('บาท','baht')+' ('+fmt(area,1)+' '+L('ไร่','rai')+' × '+fmt(yrs,0)+' '+L('ปี','yr')+')'},{k:L('ตามอัตรากรมป่าไม้ 150,000 บาท/ไร่','At the RFD rate of 150,000 baht/rai'),v:fmt(rule,0),u:L('บาท','baht')}]);
+  bars($('#faBars'),rows,'');
+}
+onRender(drawFA);
+
+/* ---------- forest value B ---------- */
+var LU=[['ป่าดงดิบ – ระบายน้ำได้ดี','Evergreen forest – well drained',55],['ป่าดงดิบ – ระบายน้ำได้ช้า','Evergreen forest – poorly drained',28],['ป่าเบญจพรรณ – ระบายน้ำได้ดี','Mixed deciduous forest – well drained',48],['ป่าเบญจพรรณ – ระบายน้ำได้ช้า','Mixed deciduous forest – poorly drained',25],['ป่าเต็งรัง – ระบายน้ำได้ดี','Dry dipterocarp forest – well drained',41],['ป่าเต็งรัง – ระบายน้ำได้ช้า','Dry dipterocarp forest – poorly drained',21],['สวนหลังบ้าน – ชั้นดินลึก','Multilayer home garden – deep soil',51],['สวนหลังบ้าน – ชั้นดินตื้น','Multilayer home garden – shallow soil',25],['สวนผสมผสาน – ชั้นดินลึก','Intercropping – deep soil',42],['สวนผสมผสาน – ชั้นดินตื้น','Intercropping – shallow soil',22],['สวนผลไม้ – ชั้นดินลึก','Fruit plantation – deep soil',32],['สวนผลไม้ – ชั้นดินตื้น','Fruit plantation – shallow soil',17],['ไร่เลื่อนลอยที่ปล่อยร้างมานาน','Long-abandoned shifting cultivation',24],['ไร่เลื่อนลอยที่ปล่อยทิ้ง 2–3 ปี','Shifting cultivation left for 2–3 years',18],['ไร่เลื่อนลอยที่ทำทุกปี','Shifting cultivation cropped every year',12],['พื้นที่เกษตรที่มีวัสดุคลุมดิน – ชั้นดินลึก','Farmland with mulch – deep soil',16],['พื้นที่เกษตรที่มีวัสดุคลุมดิน – ชั้นดินตื้น','Farmland with mulch – shallow soil',14],['พื้นดินว่างเปล่า','Bare land',13]];
+var fbMode='lu';
+function fillLU(){var s=$('#fb_lu'),v=s.value||'2';s.innerHTML=LU.map(function(l,i){return '<option value="'+i+'">'+esc(L(l[0],l[1]))+' — BDV '+l[2]+'</option>'}).join('');s.value=v}
+['fb_cc','fb_cs','fb_ba','fb_sd'].forEach(function(id){bindOut(id);$('#'+id).addEventListener('input',drawFB)});
+['fb_lu','fb_rain','fb_area','fb_pw','fb_pn','fb_ph','fb_ps'].forEach(function(id){$('#'+id).addEventListener('input',drawFB)});
+$('#fbMode').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;fbMode=b.dataset.m;$$('#fbMode button').forEach(function(x){x.classList.toggle('on',x===b)});$('#fbLU').classList.toggle('hide',fbMode!=='lu');$('#fbCalc').classList.toggle('hide',fbMode!=='calc');drawFB()});
+function bdvCalc(cc,cs,ba,sd){return 0.45*Math.pow(10.46+0.11*cc*cs,0.62)*Math.pow(25.16+45.26*ba*sd,0.59)}
+function bdvLevel(b){if(b>42)return [L('สูง','high'),col(1)];if(b>=39)return [L('ค่อนข้างสูง','rather high'),col(6)];if(b>=31)return [L('ปานกลาง','medium'),col(3)];if(b>=14)return [L('ค่อนข้างต่ำ','rather low'),col(5)];return [L('ต่ำ','low'),col(5)]}
+function impacts(B,rain,pr){var z=function(v){return Math.max(0,v)};
+  var o={Td:z(0.3468*B-0.0036*B*B-5.8054),Sr:z(172.82-0.23*rain+6.04*B),Sd:B>0?z(72.20*Math.log(B)-203.65):0,N:z(23999*B-228.11*B*B-572611),P:z(8.15*B-0.08*B*B-186.42),K:z(0.0307*B-0.0003*B*B-0.7373),Run:z(4.08*B-30.67)};
+  o.mSoil=o.Sd>0?pr.ps:0;o.mWater=o.Sr*pr.pw;o.mFert=o.N/1000*pr.pn;o.mRun=o.Run*pr.pw;o.mHeat=o.Td*pr.ph;o.total=o.mSoil+o.mWater+o.mFert+o.mRun+o.mHeat;return o}
+function drawFB(){
+  var B=fbMode==='lu'?LU[+$('#fb_lu').value][2]:bdvCalc(num('fb_cc'),num('fb_cs'),num('fb_ba'),num('fb_sd'));
+  var rain=num('fb_rain'),area=Math.max(0,num('fb_area')),pr={pw:num('fb_pw'),pn:num('fb_pn'),ph:num('fb_ph'),ps:num('fb_ps')};
+  var o=impacts(B,rain,pr),lv=bdvLevel(B);
+  stats($('#fbStats'),[{k:'BDV',v:fmt(B,1),u:'<span style="color:'+lv[1]+'">● '+L('ระดับความหลากหลาย: ','diversity level: ')+lv[0]+'</span>'},{k:L('ค่าเสียหายต่อไร่ต่อปี','Damage per rai per year'),v:fmt(o.total,0),u:L('บาท','baht')},{k:L('รวม ','Total for ')+fmt(area,1)+L(' ไร่',' rai'),v:fmt(o.total*area,0),u:L('บาท/ปี','baht/yr')},{k:L('อุณหภูมิอากาศสูงขึ้น','Air temperature rise'),v:fmt(o.Td,2)+' °C'}]);
+  var rows=[[T('อากาศร้อนขึ้น (Td)','Hotter air (Td)'),fmt(o.Td,2)+' °C',o.mHeat],[T('น้ำสูญหาย ดินไม่ดูดซับน้ำฝน (Sr)','Water lost, soil not absorbing rain (Sr)'),fmt(o.Sr,1)+' '+L('มม./ปี','mm/yr'),o.mWater],[T('น้ำท่าไหลเพิ่มขึ้น (InRunoff)','Extra stream runoff (InRunoff)'),fmt(o.Run,1)+' '+L('มม./ปี','mm/yr'),o.mRun],[T('ดินสูญหาย (Sd)','Soil loss (Sd)'),fmt(o.Sd,1)+' '+L('กก./ไร่/ปี','kg/rai/yr'),o.mSoil],[T('ปุ๋ยสูญหาย: N / P / K','Nutrients lost: N / P / K'),fmt(o.N/1000,2)+' '+L('กก.','kg')+' / '+fmt(o.P,2)+' '+L('ก.','g')+' / '+fmt(o.K,4)+' '+L('ก.','g')+' '+L('ต่อไร่ต่อปี','per rai per yr'),o.mFert]];
+  $('#fbTable').innerHTML='<tr><th>'+T('ผลกระทบ','Impact')+'</th><th class="num">'+T('ปริมาณ','Amount')+'</th><th class="num">'+T('มูลค่า (บาท/ไร่/ปี)','Value (baht/rai/yr)')+'</th></tr>'+rows.map(function(r){return '<tr><td>'+r[0]+'</td><td class="num">'+r[1]+'</td><td class="num">'+fmt(r[2],0)+'</td></tr>'}).join('')+'<tr><th>'+T('รวม','Total')+'</th><th></th><th class="num">'+fmt(o.total,0)+'</th></tr>'
+   +'<tr><td colspan="3" class="muted" style="font-size:.85rem">'+T('เทียบตาราง 6 ในเอกสาร (บาท/ไร่/ปี): ป่าดิบเขา 86,634.16 · ป่าเบญจพรรณ 125,221.56 · ป่าเต็งรัง 81,964.31 · สวนสัก 83,927.44 · สวนสนสามใบ 70,939.88','Table 6 of the report (baht/rai/yr): hill evergreen 86,634.16 · mixed deciduous 125,221.56 · dry dipterocarp 81,964.31 · teak 83,927.44 · pine 70,939.88')+'</td></tr>';
+  var all=LU.map(function(l,i){return {label:esc(L(l[0],l[1]))+' <span class="muted">('+l[2]+')</span>',v:impacts(l[2],rain,pr).total,color:(fbMode==='lu'&&+$('#fb_lu').value===i)?col(3):col(2)}});
+  bars($('#fbBars'),all,'');
+}
+onRender(function(){fillLU();drawFB()});
+
+/* ---------- footprint ---------- */
+var FY=[1961,1965,1970,1975,1980,1985,1990,1995,2000,2005,2007];
+var FD={pop:[3.1,3.3,3.7,4.1,4.4,4.8,5.3,5.7,6.1,6.5,6.7],ef:[2.4,2.5,2.8,2.8,2.8,2.6,2.7,2.6,2.5,2.7,2.7],crop:[1.1,1.1,1.0,0.9,0.8,0.8,0.7,0.7,0.6,0.6,0.6],graz:[.4,.4,.3,.3,.3,.2,.2,.2,.2,.2,.2],forest:[.4,.4,.4,.4,.4,.3,.3,.3,.3,.3,.3],fish:[.1,.1,.1,.1,.1,.1,.1,.1,.1,.1,.1],carbon:[.3,.5,.9,1.0,1.1,1.1,1.2,1.2,1.2,1.4,1.4],built:[.1,.1,.1,.1,.1,.1,.1,.1,.1,.1,.1],bc:[3.7,3.5,3.1,2.9,2.6,2.4,2.3,2.1,2.0,1.8,1.8],ratio:[0.63,0.73,0.88,0.97,1.06,1.07,1.18,1.24,1.29,1.45,1.51]};
+var COMP=[['crop','พื้นที่เพาะปลูก','Cropland'],['graz','ทุ่งเลี้ยงสัตว์','Grazing land'],['forest','ป่าไม้','Forest'],['fish','แหล่งประมง','Fishing grounds'],['carbon','คาร์บอน','Carbon'],['built','สิ่งปลูกสร้าง','Built-up land']];
+function overshoot(ratio){if(ratio<=1)return L('ไม่เกิน','none');var d=Math.round(365/ratio);var dt=new Date(2001,0,d);return dt.toLocaleDateString(lang==='en'?'en-GB':'th-TH',{day:'numeric',month:'short'})}
+function drawFP(){
+  if(!$('#fpChart').offsetParent)return;
+  var S=[{k:'ef',th:'รอยประทับรวม (EF)',en:'Total footprint (EF)',c:col(5)},{k:'bc',th:'ศักยภาพชีวภาพ (BC)',en:'Biocapacity (BC)',c:col(1)},{k:'carbon',th:'คาร์บอน',en:'Carbon',c:col(4),dash:[5,4]},{k:'crop',th:'พื้นที่เพาะปลูก',en:'Cropland',c:col(3),dash:[5,4]}];
+  legend($('#fpLeg'),S.map(function(s){return {color:s.c,label:T(s.th,s.en)}}));
+  lineChart($('#fpChart'),{series:S.map(function(s){return {pts:FY.map(function(y,i){return [y,FD[s.k][i]]}),color:s.c,dash:s.dash,dots:true}}),xLabel:L('ปี ค.ศ.','Year'),yLabel:L('gha ต่อคน','gha per person'),yMin:0});
+  var rows=[['pop','ประชากรโลก (พันล้าน)','World population (billion)']].concat([['ef','รอยประทับรวม','Total ecological footprint']]).concat(COMP.map(function(c){return [c[0],'&nbsp;&nbsp;'+c[1],'&nbsp;&nbsp;'+c[2]]})).concat([['bc','ศักยภาพชีวภาพรวม','Total biocapacity'],['ratio','EF ÷ BC (จำนวนโลก)','EF ÷ BC (Earths)']]);
+  $('#fpTable').innerHTML='<tr><th></th>'+FY.map(function(y){return '<th class="num">'+y+'</th>'}).join('')+'</tr>'+rows.map(function(r){return '<tr><td>'+T(r[1],r[2])+'</td>'+FD[r[0]].map(function(v){return '<td class="num">'+v.toFixed(r[0]==='ratio'?2:1)+'</td>'}).join('')+'</tr>'}).join('')
+   +'<tr><td>'+T('วันหนี้นิเวศโดยประมาณ','Approx. overshoot day')+'</td>'+FD.ratio.map(function(v){return '<td class="num">'+overshoot(v)+'</td>'}).join('')+'</tr>';
+}
+onRender(drawFP);
+['sc_p','sc_e','sc_b'].forEach(function(id){bindOut(id);$('#'+id).addEventListener('input',drawSC)});
+function drawSC(){
+  var p=num('sc_p')/100,e=num('sc_e')/100,b=num('sc_b')/100,pts=[],last;
+  for(var y=2007;y<=2050;y++){var n=y-2007,pop=6.7*Math.pow(1+p,n),ef=2.7*Math.pow(1+e,n),bct=1.8*6.7*Math.pow(1+b,n),bc=bct/pop,ea=ef/bc;pts.push([y,ea]);last={pop:pop,ef:ef,bc:bc,ea:ea}}
+  stats($('#scStats'),[{k:L('ประชากร 2050','Population 2050'),v:fmt(last.pop,1),u:L('พันล้านคน','billion')},{k:L('EF ต่อคน 2050','EF per person 2050'),v:fmt(last.ef,2),u:'gha'},{k:L('BC ต่อคน 2050','BC per person 2050'),v:fmt(last.bc,2),u:'gha'},{k:L('ต้องใช้โลก (2050)','Earths needed (2050)'),v:fmt(last.ea,2),u:L('วันหนี้นิเวศ ≈ ','overshoot day ≈ ')+overshoot(last.ea)}]);
+  if($('#scChart').offsetParent)lineChart($('#scChart'),{series:[{pts:FY.map(function(y,i){return [y,FD.ratio[i]]}),color:col(3),dots:true},{pts:pts,color:col(5)}],xLabel:L('ปี ค.ศ. (จุด = ข้อมูล 1961–2007, เส้นแดง = สถานการณ์จำลอง)','Year (dots = data 1961–2007, red line = scenario)'),yLabel:L('จำนวนโลก','Earths'),yMin:0,hlines:[{y:1,label:L('1 โลก','1 Earth')}]});
+}
+onRender(drawSC);
+var FPC=store.get('fpc',null)||{crop:.6,graz:.2,forest:.3,fish:.1,carbon:1.4,built:.1};
+$('#fpComp').innerHTML=COMP.map(function(c){return '<label class="ctl">'+T(c[1],c[2])+' <b data-o="fc_'+c[0]+'"></b><input type="range" id="fc_'+c[0]+'" min="0" max="3" step="0.05" value="'+FPC[c[0]]+'"></label>'}).join('');
+COMP.forEach(function(c){bindOut('fc_'+c[0],function(v){return v.toFixed(2)});$('#fc_'+c[0]).addEventListener('input',drawComp)});
+$$('[data-fpp]').forEach(function(b){b.addEventListener('click',function(){var k=b.dataset.fpp;COMP.forEach(function(c){var el=$('#fc_'+c[0]);if(k==='2007')el.value=FD[c[0]][10];else if(k==='1961')el.value=FD[c[0]][0];else if(c[0]==='carbon')el.value=(+el.value/2).toFixed(2);el.dispatchEvent(new Event('input'))})})});
+function drawComp(){var v={},tot=0,big=null;COMP.forEach(function(c){v[c[0]]=num('fc_'+c[0]);tot+=v[c[0]];if(!big||v[c[0]]>v[big[0]])big=c});store.set('fpc',v);
+  stats($('#fpCompStats'),[{k:L('รอยประทับรวม','Total footprint'),v:fmt(tot,2),u:L('gha ต่อคน','gha per person')},{k:L('ต้องใช้โลก','Earths needed'),v:fmt(tot/1.8,2),u:'BC = 1.8 gha'},{k:L('ด้านที่ใหญ่ที่สุด','Largest component'),v:'<span style="font-size:1rem">'+L(big[1],big[2])+'</span>',u:fmt(100*v[big[0]]/(tot||1),0)+'%'}])}
+onRender(drawComp);
+['wf_c','wf_h'].forEach(function(id){bindOut(id);$('#'+id).addEventListener('input',drawWF)});
+function drawWF(){var c=num('wf_c')*140*365,h=num('wf_h')*2400*52;stats($('#wfStats'),[{k:L('กาแฟ','Coffee'),v:fmt(c,0),u:L('ลิตร/ปี','L/yr')},{k:L('แฮมเบอร์เกอร์','Hamburgers'),v:fmt(h,0),u:L('ลิตร/ปี','L/yr')},{k:L('รวม','Total'),v:fmt((c+h)/1000,1),u:L('ลูกบาศก์เมตร/ปี','m³/yr')}])}
+onRender(drawWF);
+/* record sheet */
+var REC=store.get('rec',[]);
+var BIG={food:['อาหาร','Food'],transport:['การเดินทาง','Transport'],home:['ที่อยู่อาศัย/พลังงาน','Home/energy'],goods:['สินค้าและบริการ','Goods & services'],other:['อื่น ๆ','Other']};
+function drawRec(){
+  var t=$('#rcTable');
+  if(!REC.length){t.innerHTML='<tr><td class="muted">'+T('ยังไม่มีข้อมูล — กรอกผลของคุณและเพื่อนแล้วกด “เพิ่มในตาราง”','No rows yet — enter your and your classmates\' results, then press “Add to table”.')+'</td></tr>';$('#rcStats').innerHTML='';return}
+  t.innerHTML='<tr><th>#</th><th>'+T('ชื่อ','Name')+'</th><th>'+T('เว็บ','Calculator')+'</th><th class="num">'+T('โลก','Earths')+'</th><th class="num">gha</th><th>'+T('ด้านที่ใช้มากที่สุด','Largest')+'</th><th class="noprint"></th></tr>'+REC.map(function(r,i){return '<tr><td>'+(i+1)+'</td><td>'+esc(r.name)+'</td><td>'+esc(r.site)+'</td><td class="num">'+fmt(r.earth,2)+'</td><td class="num">'+(r.gha?fmt(r.gha,2):'–')+'</td><td>'+T(BIG[r.big][0],BIG[r.big][1])+'</td><td class="noprint"><button class="btn" data-rdel="'+i+'" style="padding:1px 8px">✕</button></td></tr>'}).join('');
+  var e=REC.map(function(r){return r.earth}).filter(isFinite),mean=e.reduce(function(a,b){return a+b},0)/(e.length||1),cnt={};REC.forEach(function(r){cnt[r.big]=(cnt[r.big]||0)+1});var top=Object.keys(cnt).sort(function(a,b){return cnt[b]-cnt[a]})[0];
+  stats($('#rcStats'),[{k:L('จำนวนคน','People'),v:REC.length},{k:L('จำนวนโลกเฉลี่ย','Mean Earths'),v:fmt(mean,2)},{k:L('ต่ำสุด – สูงสุด','Min – max'),v:fmt(Math.min.apply(null,e),1)+' – '+fmt(Math.max.apply(null,e),1)},{k:L('ด้านที่พบบ่อยที่สุด','Most common largest'),v:'<span style="font-size:1rem">'+L(BIG[top][0],BIG[top][1])+'</span>',u:cnt[top]+' '+L('คน','people')}]);
+}
+$('#rc_add').addEventListener('click',function(){var earth=parseFloat($('#rc_earth').value);if(!isFinite(earth)){$('#rc_earth').focus();return}
+  REC.push({name:$('#rc_name').value.trim()||('#'+(REC.length+1)),site:$('#rc_site').value,earth:earth,gha:parseFloat($('#rc_gha').value)||null,big:$('#rc_big').value});store.set('rec',REC);$('#rc_name').value='';$('#rc_earth').value='';$('#rc_gha').value='';drawRec()});
+$('#rcTable').addEventListener('click',function(e){var b=e.target.closest('[data-rdel]');if(!b)return;REC.splice(+b.dataset.rdel,1);store.set('rec',REC);drawRec()});
+$('#rc_clear').addEventListener('click',function(){if(!REC.length)return;REC=[];store.set('rec',REC);drawRec()});
+$('#rc_csv').addEventListener('click',function(){var lines=[['name','calculator','earths','gha','largest']].concat(REC.map(function(r){return [r.name,r.site,r.earth,r.gha==null?'':r.gha,r.big]}));
+  var csv='﻿'+lines.map(function(l){return l.map(function(v){v=String(v);return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v}).join(',')}).join('\r\n');
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='footprint_results.csv';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)});
+onRender(drawRec);
+
+/* ---------- sorting activities ---------- */
+function sorter(id,cats,items){
+  var el=$('#'+id),st=store.get('sort-'+id,{}),checked=false;
+  function render(){
+    el.innerHTML=items.map(function(it,i){var cls=checked&&st[i]!=null?(st[i]===it.a?' right':' wrong'):'';
+      return '<div class="item'+cls+'"><div class="txt">'+T(it.th,it.en)+'</div><div class="opts">'+cats.map(function(c){return '<button data-i="'+i+'" data-k="'+c.k+'"'+(st[i]===c.k?' class="on"':'')+'>'+T(c.th,c.en)+'</button>'}).join('')+'</div></div>'}).join('')
+      +'<div class="row noprint" style="margin-top:8px"><button class="btn primary" data-act="check">'+T('ตรวจคำตอบ','Check answers')+'</button><button class="btn" data-act="reset">'+T('เริ่มใหม่','Reset')+'</button></div><div class="result"></div>';
+    if(checked){var n=items.filter(function(it,i){return st[i]===it.a}).length;var r=$('.result',el);r.innerHTML=T('ถูก '+n+' จาก '+items.length+' ข้อ','Correct: '+n+' of '+items.length)+(n<items.length?T(' — ข้อที่ขอบแดงยังไม่ถูก ลองใหม่',' — red-edged items are not right yet; try again'):' 🎉');r.style.color=n===items.length?css('--ok'):css('--warn')}
+  }
+  el.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+    if(b.dataset.act==='check'){checked=true}else if(b.dataset.act==='reset'){st={};checked=false}else{st[b.dataset.i]=b.dataset.k;checked=false}
+    store.set('sort-'+id,st);render()});
+  onRender(render);
+}
+sorter('sortPDCA',[{k:'P',th:'P วางแผน',en:'P Plan'},{k:'D',th:'D ปฏิบัติ',en:'D Do'},{k:'C',th:'C ตรวจสอบ',en:'C Check'},{k:'A',th:'A ทบทวน',en:'A Act'}],[
+ {a:'P',th:'วิเคราะห์ผู้มีส่วนเกี่ยวข้องด้วยเทคนิค importance/influence',en:'Analyse stakeholders with the importance/influence technique'},
+ {a:'C',th:'ประเมินว่าพื้นที่ป่าเพิ่มขึ้นไม่น้อยกว่าร้อยละ 0.5 ในเวลา 5 ปีหรือไม่',en:'Assess whether forest area grew by at least 0.5% in 5 years'},
+ {a:'D',th:'ดำเนินกิจกรรมฟื้นฟูตามแผน ภายใต้ระยะเวลา งบประมาณ และกำลังคนที่มี',en:'Carry out restoration as planned, within the time, budget and staff available'},
+ {a:'A',th:'สรุปว่าสิ่งใดควรคงไว้ สิ่งใดต้องปรับ แล้วกลับไปวางแผนใหม่',en:'Decide what to keep and what to change, then go back to planning'},
+ {a:'P',th:'ประเมินสถานภาพระบบนิเวศและภัยคุกคาม เพื่อให้ได้ข้อมูลพื้นฐาน',en:'Assess ecosystem status and threats to get baseline data'},
+ {a:'D',th:'เกิดน้ำท่วมระหว่างดำเนินงาน จึงใช้มาตรการรองรับเหตุสุดวิสัยและปรับแผน',en:'A flood hits during the work, so the contingency measures are used and the plan adjusted'},
+ {a:'C',th:'นับจำนวนศูนย์เรียนรู้ที่เพิ่มขึ้นในปีนี้ เทียบกับเป้าหมาย 20 แห่งต่อปี',en:'Count this year\'s new learning centres against the target of 20 per year'},
+ {a:'P',th:'กำหนดวัตถุประสงค์ กรอบเวลา ตัวชี้วัด งบประมาณ และผู้รับผิดชอบ',en:'Set objectives, time frame, indicators, budget and people in charge'},
+ {a:'A',th:'สร้างมาตรฐานการดำเนินงานให้โครงการอื่นในอนาคต',en:'Set operating standards for future projects'},
+ {a:'P',th:'จัดลำดับความสำคัญของมาตรการ ระยะสั้น ระยะกลาง ระยะยาว',en:'Rank measures for the short, medium and long term'}]);
+sorter('sortWV',[{k:'PM',th:'Planetary management',en:'Planetary management'},{k:'ST',th:'Stewardship',en:'Stewardship'},{k:'EW',th:'Environmental wisdom',en:'Environmental wisdom'}],[
+ {a:'EW',th:'เราเป็นส่วนหนึ่งของธรรมชาติและพึ่งพิงธรรมชาติทั้งหมด ธรรมชาติมีอยู่เพื่อทุกชีวิต',en:'We are a part of and totally dependent on nature, and nature exists for all species.'},
+ {a:'PM',th:'ด้วยความคิดสร้างสรรค์และเทคโนโลยี เราจะไม่มีวันขาดแคลนทรัพยากร',en:'Because of our ingenuity and technology, we will not run out of resources.'},
+ {a:'ST',th:'เรามีความรับผิดชอบเชิงจริยธรรมในการเป็นผู้ดูแลโลกด้วยความใส่ใจ',en:'We have an ethical responsibility to be caring managers, or stewards, of the earth.'},
+ {a:'PM',th:'ศักยภาพการเติบโตทางเศรษฐกิจโดยพื้นฐานแล้วไม่มีขีดจำกัด',en:'The potential for economic growth is essentially unlimited.'},
+ {a:'EW',th:'ทรัพยากรมีจำกัดและไม่ควรใช้อย่างสิ้นเปลือง',en:'Resources are limited and should not be wasted.'},
+ {a:'ST',th:'ทรัพยากรอาจไม่หมด แต่ไม่ควรใช้อย่างสิ้นเปลือง',en:'We will probably not run out of resources, but they should not be wasted.'},
+ {a:'PM',th:'มนุษย์แยกจากธรรมชาติ และจัดการธรรมชาติเพื่อตอบความต้องการที่เพิ่มขึ้นได้',en:'We are apart from the rest of nature and can manage nature to meet our increasing needs and wants.'},
+ {a:'EW',th:'ความสำเร็จขึ้นกับการเรียนรู้ว่าธรรมชาติค้ำจุนตัวเองอย่างไร แล้วนำบทเรียนนั้นมาใช้ในความคิดและการกระทำ',en:'Our success depends on learning how nature sustains itself and integrating such lessons into the ways we think and act.'},
+ {a:'ST',th:'ความสำเร็จขึ้นกับการจัดการระบบค้ำจุนชีวิตของโลก เพื่อประโยชน์ของเราและของธรรมชาติ',en:'Our success depends on how well we manage the earth\'s life-support systems for our benefit and for the rest of nature.'}]);
+sorter('sortShift',[{k:'F',th:'FROM (แบบเดิม)',en:'FROM (old)'},{k:'T',th:'TO (การจัดการระบบนิเวศ)',en:'TO (ecosystem management)'}],[
+ {a:'T',th:'Multiple scales',en:'Multiple scales'},{a:'F',th:'Individual species',en:'Individual species'},{a:'T',th:'Adaptive management',en:'Adaptive management'},{a:'F',th:'Short-term perspective',en:'Short-term perspective'},
+ {a:'T',th:'Humans: integral part of ecosystems',en:'Humans: integral part of ecosystems'},{a:'F',th:'Managing commodities',en:'Managing commodities'},{a:'T',th:'Ecosystems',en:'Ecosystems'},{a:'F',th:'Management separated from research',en:'Management separated from research'},
+ {a:'F',th:'Small spatial scale',en:'Small spatial scale'},{a:'T',th:'Long-term perspective',en:'Long-term perspective'},{a:'F',th:'Humans: independent of ecosystems',en:'Humans: independent of ecosystems'},{a:'T',th:'Sustaining production potential for goods and services',en:'Sustaining production potential for goods and services'}]);
+sorter('sortType',[{k:'M',th:'คณิตศาสตร์',en:'Mathematical'},{k:'C',th:'ทางความคิด',en:'Conceptual'},{k:'P',th:'เชิงกายภาพ',en:'Physical'},{k:'X',th:'คอมพิวเตอร์',en:'Computational'}],[
+ {a:'M',th:'x<sub>t+1</sub> = x<sub>t</sub> + r·x<sub>t</sub>(1 − x<sub>t</sub>/K)',en:'x<sub>t+1</sub> = x<sub>t</sub> + r·x<sub>t</sub>(1 − x<sub>t</sub>/K)'},
+ {a:'P',th:'Biosphere II ระบบนิเวศจำลองขนาด 12,700 ตร.ม.',en:'Biosphere II, a 12,700 m² closed ecosystem'},
+ {a:'C',th:'คำนิยาม “ต้นไม้ = สูงเกิน 1.3 ม. และ DBH เกิน 4.5 ซม.”',en:'The definition “tree = taller than 1.3 m and DBH above 4.5 cm”'},
+ {a:'X',th:'แบบจำลองตัวแทน (agent-based) บน CORMAS ที่เชื่อมกับแผนที่ GIS',en:'An agent-based model in CORMAS linked to GIS maps'},
+ {a:'C',th:'Causal loop diagram ของประชากรกระต่าย: การเกิด – การตาย',en:'A causal loop diagram of a rabbit population: births – deaths'},
+ {a:'P',th:'ระบบนิเวศน้ำจำลองในตู้ (microcosm) ของนิสิต',en:'The students\' aquatic microcosm in a tank'},
+ {a:'M',th:'การสูญเสียไนโตรเจน (%) = 0.05(22.32 BA − 1.55)',en:'Nitrogen loss (%) = 0.05(22.32 BA − 1.55)'},
+ {a:'C',th:'แผนภาพการเปลี่ยนสถานะของสังคมพืชภายใต้การเลี้ยงวัวและไฟ',en:'A state-transition diagram of vegetation under grazing and fire'},
+ {a:'P',th:'แบบจำลองภูมิประเทศ 3 มิติ',en:'A 3-D terrain model'},
+ {a:'X',th:'โปรแกรม Visual Basic คำนวณค่าเสียหายหลังการทำลายป่า',en:'A Visual Basic program that computes damage after forest destruction'}]);
+var STEPS=[1,2,3,4,5,6].map(function(n){return {k:String(n),th:'ขั้น '+n,en:'Step '+n}});
+sorter('sortStep',STEPS,[
+ {a:'2',th:'นิสิตร่างแผนภาพ (pictorial diagram) ว่าจะใช้ตัวแปรใด และบันทึกค่าอะไร',en:'Students sketch a pictorial diagram of which variables to use and what to record'},
+ {a:'5',th:'บันทึกปริมาณแพลงก์ตอนพืชและพฤติกรรมสิ่งมีชีวิตในวันที่ 6–21',en:'Record phytoplankton and animal behaviour on days 6–21'},
+ {a:'1',th:'แต่ละกลุ่มคิดคำถามที่จะใช้ระบบนิเวศจำลองหาคำตอบ',en:'Each group decides the question the microcosm should answer'},
+ {a:'4',th:'ช่วง 5 วันแรก ปลาตายก่อนปิดระบบ จึงปรับปัจจัยบางอย่าง',en:'In the first 5 days fish die before the system is closed, so some factors are adjusted'},
+ {a:'6',th:'นำเสนอโปสเตอร์ผลการทดลองให้เพื่อนในชั้นเรียน',en:'Present a poster of the results to the class'},
+ {a:'3',th:'จัดเตรียมปัจจัยกายภาพและชีวภาพ แล้วประกอบเป็นระบบนิเวศน้ำจำลอง',en:'Prepare the physical and biological factors and assemble the aquatic microcosm'},
+ {a:'4',th:'ใช้ข้อมูลภาคสนามจากป่าหลายแห่งที่เคยมีการวิจัย มาเทียบกับผลของแบบจำลองมูลค่าป่าไม้',en:'Compare the forest value model with field data from many previously studied forests'},
+ {a:'1',th:'ตั้งคำถามว่ามนุษย์ใช้ทรัพยากรเกินขีดความสามารถรองรับของโลกหรือไม่',en:'Ask whether humans use more than Earth\'s carrying capacity'},
+ {a:'5',th:'ทดลองให้ผู้เลี้ยงวัวจัดการวัวแบบรายเดี่ยวและแบบรวมกลุ่มในเกม',en:'Let herders manage cattle individually and collectively in the game'},
+ {a:'6',th:'ขอข้อมูลจากประเทศอื่นเพิ่มเติมเพื่อปรับปรุงแบบจำลองรอยประทับ',en:'Ask other countries for more data to improve the footprint model'},
+ {a:'3',th:'เขียนโปรแกรมคอมพิวเตอร์ที่มีหน้าจอกรอกข้อมูลและแสดงผล',en:'Write a computer program with input screens and result displays'},
+ {a:'4',th:'ให้ผู้มีส่วนเกี่ยวข้องร่วมพิจารณาว่าผลของแบบจำลองยอมรับได้หรือไม่ (social validation)',en:'Stakeholders judge together whether the results are acceptable (social validation)'}]);
+sorter('sortPurpose',[{k:'H',th:'เพื่อการเรียนรู้ (heuristic)',en:'For learning (heuristic)'},{k:'P',th:'เพื่อการคาดการณ์ (predictive)',en:'For prediction (predictive)'}],[
+ {a:'P',th:'ต้องการข้อมูลปริมาณมาก คุณภาพสูง และความเข้าใจระบบในระดับสูง',en:'Needs a lot of high-quality data and deep understanding of the system'},
+ {a:'H',th:'ใช้ได้แม้ข้อมูลยังน้อย เพื่อช่วยให้ผู้ใช้เข้าใจระบบและพูดคุยกัน',en:'Works even with little data, to help users understand the system and talk'},
+ {a:'H',th:'เกมสวมบทบาท ReHab ที่ใช้สอนนิสิตเรื่องทรัพย์สินร่วม',en:'The ReHab role-playing game used to teach students about the commons'},
+ {a:'P',th:'World3 (The Limits to Growth) ที่จำลองอนาคตของประชากรและทรัพยากรโลก',en:'World3 (The Limits to Growth), projecting the future of world population and resources'},
+ {a:'H',th:'เว็บคำนวณรอยประทับทางนิเวศเพื่อสร้างความตระหนักให้บุคคลทั่วไป',en:'A web footprint calculator to raise public awareness'},
+ {a:'H',th:'เกมจำลองที่ดอยติ้วเพื่อให้ผู้เลี้ยงวัวและเจ้าหน้าที่ป่าไม้เรียนรู้ร่วมกัน',en:'The Doi Tiew game, for herders and foresters to learn together'}]);
+
+/* ---------- discussion ---------- */
+var DISC={t1:[
+ ['มีวัฒนธรรม ประเพณี หรือความเชื่ออะไรบ้าง ที่ช่วยให้มนุษย์กับระบบนิเวศอยู่ร่วมกันได้ ยกตัวอย่างจากท้องถิ่นของคุณ','Which cultures, traditions or beliefs help people and ecosystems live together? Give an example from your own area.'],
+ ['การพัฒนาด้านวัตถุและการพัฒนาด้านจิตใจ อะไรจะช่วยแก้ปัญหาที่เกิดขึ้นในระบบนิเวศหรือสิ่งแวดล้อมในปัจจุบัน','Material or spiritual development: which would help solve today\'s ecosystem and environmental problems?'],
+ ['การจัดการระบบนิเวศ…เป็นการจัดการระบบนิเวศ หรือจัดการคน? และจัดการเพื่อใคร (คน ↔ ธรรมชาติ)','Is ecosystem management about managing ecosystems or managing people? And for whom (people ↔ nature)?'],
+ ['เราเข้าใจ “ธรรมชาติ” และนำความรู้มาจัดการธรรมชาติได้มากน้อยเพียงใด คุณเห็นด้วยกับโลกทัศน์แบบใดมากที่สุด เพราะอะไร','How well do we understand nature and use that knowledge to manage it? Which worldview do you agree with most, and why?'],
+ ['ถ้าไม่ทำอะไรเลย ระบบนิเวศจะเสื่อมโทรมและส่งผลย้อนกลับต่อสังคมมนุษย์ เราจะรับสภาพนั้นได้หรือไม่ และควรทำอย่างไร','If we do nothing, ecosystems degrade and feed back on society. Could we accept that, and what should we do?'],
+ ['จากเกมทรัพย์สินร่วม: กติกาใดให้ผลผลิตสะสมสูงสุดในระยะยาว ในชีวิตจริงต้องมีอะไรบ้างกติกานั้นจึงจะได้ผล (เชื่อมกับ P-D-C-A และการมีส่วนร่วม)','From the commons game: which rule gives the largest long-run harvest? What would that rule need to work in real life (link to P-D-C-A and participation)?']],
+ t2:[
+ ['เปรียบเทียบแบบจำลองรอยประทับทางนิเวศกับแบบจำลองมูลค่าป่าไม้: มาตราพื้นที่ มาตราเวลา วัตถุประสงค์ ผู้ใช้ และวิธีตรวจสอบความถูกต้อง เหมือนและต่างกันอย่างไร','Compare the ecological footprint model with the forest value model: spatial and temporal scale, purpose, users and validation. How are they alike and different?'],
+ ['แบบจำลองมูลค่าป่าไม้ควรนำมาใช้ฟ้องร้อง หรือใช้เพื่อการอ้างอิง เพราะอะไร และควรปรับปรุงอย่างไรให้เป็นธรรม','Should the forest value model be used in lawsuits or as a reference? Why, and how could it be made fairer?'],
+ ['รอยประทับทางนิเวศของคุณเป็นเท่าไร (กี่โลก) ด้านใดใช้มากที่สุด เมื่อเทียบกับเพื่อนแล้วเป็นอย่างไร','What is your ecological footprint (how many Earths)? Which part is largest? How do you compare with classmates?'],
+ ['โลกมีขีดจำกัดในการรองรับประชากรมนุษย์หรือไม่ เราใช้พื้นที่บนโลกมากกว่าเพื่อนร่วมโลกคนอื่น หรือสิ่งมีชีวิตชนิดอื่นหรือไม่','Does Earth have a limit for the human population? Do we use more of the planet than other people, or other species?'],
+ ['แล้วเราจะทำอย่างไร — ดูแลโลกด้วยตัวเอง รอให้คนอื่นมาดูแล หรือรอให้ธรรมชาติปรับสู่สมดุลใหม่? เสนอสิ่งที่คุณทำได้จริง 3 ข้อ','So what will we do — care for the Earth ourselves, wait for others, or wait for nature to reach a new balance? Propose 3 things you can actually do.'],
+ ['กรณีดอยติ้ว: ทำไมการสร้างแบบจำลองอย่างมีส่วนร่วมจึงช่วยลดความขัดแย้งระหว่างผู้เลี้ยงวัวกับเจ้าหน้าที่ป่าไม้ได้','Doi Tiew: why can participatory modelling ease conflict between herders and foresters?']]};
+['t1','t2'].forEach(function(k){$('#'+k+'Disc').innerHTML=DISC[k].map(function(q,i){return '<div class="answer" style="margin:12px 0"><div style="font-weight:600;margin-bottom:4px">'+(i+1)+'. '+T(q[0],q[1])+'</div><textarea data-ans="'+k+'_q'+(i+1)+'"></textarea></div>'}).join('')});
+var ANS=store.get('answers',{});
+$$('[data-ans]').forEach(function(el){el.value=ANS[el.dataset.ans]||'';el.addEventListener('input',function(){ANS[el.dataset.ans]=el.value;store.set('answers',ANS)})});
+$$('[data-print]').forEach(function(b){b.addEventListener('click',function(){window.print()})});
+
+/* ---------- quiz ---------- */
+var Q1=[
+ ['Hardin (1968) อธิบาย “โศกนาฏกรรมทรัพย์สินร่วม” ว่าอย่างไร','What did Hardin (1968) mean by the “tragedy of the commons”?',[['ทรัพย์สินที่หลายคนถือครองร่วมกันจะถูกใช้มากเกินไปจนเสื่อมโทรม','Property held in common by many people is overused until it deteriorates'],['ทรัพยากรของรัฐมักถูกปล่อยทิ้งไว้ไม่มีใครใช้','State resources tend to be left unused'],['ภัยธรรมชาติทำลายทรัพย์สินของชุมชน','Natural disasters destroy community property'],['ทรัพยากรที่มีเจ้าของเสื่อมเร็วกว่าทรัพยากรร่วม','Owned resources degrade faster than shared ones']],0,'ตัวอย่างในสไลด์: การจับจองพื้นที่ป่าทำการเกษตร การเก็บของป่า การทำประมง','Slide examples: clearing forest for farms, collecting forest products, fishing.'],
+ ['ข้อใด <u>ไม่ใช่</u> เป้าหมายของการจัดการระบบนิเวศ','Which is <u>not</u> a goal of ecosystem management?',[['คงไว้ซึ่งโครงสร้างและหน้าที่การทำงานของระบบนิเวศ','Keep ecosystem structure and functions'],['คงไว้ซึ่งระดับความหลากหลายทางชีวภาพที่เหมาะสม','Keep appropriate levels of biodiversity'],['ทำให้ผลผลิตทางเศรษฐกิจระยะสั้นสูงที่สุด','Maximise short-term economic output'],['ตอบสนองคนรุ่นปัจจุบันโดยรักษาโอกาสของรุ่นลูกหลาน','Meet present needs while keeping options for future generations']],2,'เป้าหมายคือการใช้ประโยชน์อย่างยั่งยืน ไม่ใช่ผลผลิตระยะสั้นสูงสุด','The goal is sustainable use, not maximum short-term output.'],
+ ['การจัดการระบบนิเวศเปลี่ยนกระบวนทัศน์ “จาก…ไปสู่…” ข้อใดถูกต้อง','Which paradigm shift (“from … to …”) is correct for ecosystem management?',[['จากระบบนิเวศ → ชนิดพันธุ์เดี่ยว','From ecosystems → individual species'],['จากมุมมองระยะยาว → ระยะสั้น','From long-term → short-term'],['จากชนิดพันธุ์เดี่ยว → ระบบนิเวศ','From individual species → ecosystems'],['จากการจัดการแบบปรับตัว → แยกการจัดการออกจากการวิจัย','From adaptive management → management separated from research']],2,'FROM: species, small scale, short-term, humans independent, management separate from research, commodities → TO: ecosystems, multiple scales, long-term, humans integral, adaptive management, sustaining production potential.','FROM: species, small scale, short-term, humans independent, management separate from research, commodities → TO: ecosystems, multiple scales, long-term, humans integral, adaptive management, sustaining production potential.'],
+ ['“เราเป็นส่วนหนึ่งของธรรมชาติและพึ่งพิงธรรมชาติทั้งหมด ธรรมชาติมีอยู่เพื่อทุกชีวิต” เป็นโลกทัศน์แบบใด','“We are part of and totally dependent on nature, and nature exists for all species” belongs to which worldview?',[['Planetary management','Planetary management'],['Stewardship','Stewardship'],['Environmental wisdom','Environmental wisdom'],['Homo economicus','Homo economicus']],2,'Environmental wisdom เน้นเรียนรู้จากธรรมชาติว่าค้ำจุนตัวเองอย่างไร','Environmental wisdom stresses learning how nature sustains itself.'],
+ ['บทเรียนสำคัญจากโครงการ Biosphere II คือข้อใด','What is the key lesson from Biosphere II?',[['มนุษย์ควบคุมระบบนิเวศปิดได้สมบูรณ์ด้วยเทคโนโลยี','Technology let humans fully control a closed ecosystem'],['แม้ลงทุนราว 200 ล้านดอลลาร์ ก็ควบคุมวงจรก๊าซ (เช่น CO₂) ไม่ได้','Even with about US$200 million, the gas cycles (e.g. CO₂) could not be controlled'],['ระบบนิเวศจำลองไม่มีประโยชน์ทางวิทยาศาสตร์เลย','Model ecosystems have no scientific value'],['ไบโอมทะเลทรายเป็นส่วนที่ล้มเหลวเพียงส่วนเดียว','Only the desert biome failed']],1,'Biosphere II สะท้อนข้อจำกัดของโลกทัศน์ planetary management แต่ยังให้ความรู้ด้าน biogeochemical cycle','Biosphere II shows the limits of the planetary-management view, yet it advanced knowledge of biogeochemical cycles.'],
+ ['การวิเคราะห์ผู้มีส่วนเกี่ยวข้อง (importance/influence) อยู่ในขั้นตอนใดของ P-D-C-A','Stakeholder analysis (importance/influence) belongs to which P-D-C-A step?',[['Plan','Plan'],['Do','Do'],['Check','Check'],['Act','Act']],0,'การประเมินสถานภาพระบบนิเวศและผู้มีส่วนเกี่ยวข้องทำในขั้นวางแผน','Assessing the ecosystem and its stakeholders is part of planning.'],
+ ['“พื้นที่ป่าเพิ่มขึ้นไม่น้อยกว่าร้อยละ 0.5 ในเวลา 5 ปี” เป็นตัวอย่างของอะไร','“Forest area up by at least 0.5% in 5 years” is an example of what?',[['ภัยคุกคามของระบบนิเวศ','A threat to the ecosystem'],['ตัวชี้วัดที่ใช้ในขั้น Check','An indicator used in the Check step'],['มาตรการทางกฎหมาย','A legal measure'],['กิจกรรม CEPA','A CEPA activity']],1,'ขั้น Check ประเมินผลตามตัวชี้วัดที่กำหนดไว้ในแผน','The Check step evaluates against the indicators set in the plan.'],
+ ['การจัดการแบบปรับตัว (adaptive management) หมายถึงข้อใด','What does adaptive management mean?',[['ยึดแผนเดิมโดยไม่เปลี่ยนแปลง','Stick to the original plan no matter what'],['ยอมรับความผิดพลาด ติดตามผล และปรับวิธีการอยู่เสมอ','Accept mistakes, monitor results and keep adjusting methods'],['ให้ผู้เชี่ยวชาญตัดสินใจเพียงฝ่ายเดียว','Let experts decide alone'],['ปล่อยให้ระบบนิเวศฟื้นตัวเองโดยไม่ติดตาม','Leave the ecosystem to recover without monitoring']],1,'เป็นคุณสมบัติสำคัญของนักจัดการ และเชื่อมกับวงจร P-D-C-A','A key quality of managers, linked to the P-D-C-A cycle.'],
+ ['วิธีการหลักทางอนุรักษ์วิทยาที่ใช้ในการจัดการระบบนิเวศ ได้แก่ข้อใด','Which are the main conservation-biology methods used in ecosystem management?',[['การปกปัก ใช้อย่างยั่งยืน ฟื้นฟู/สร้างทดแทน','Preservation, sustainable use, restoration/replacement'],['การเก็บภาษี การจับกุม การโฆษณา','Taxes, arrests, advertising'],['การสร้างเขื่อน ถนน และเหมือง','Dams, roads and mines'],['การกำจัดชนิดพันธุ์ที่ไม่มีประโยชน์','Removing useless species']],0,'ภาษีและการจับกุมเป็นมาตรการทางกฎหมาย/เศรษฐศาสตร์ที่ใช้ประกอบ','Taxes and arrests are supporting legal/economic measures.'],
+ ['CEPA ย่อมาจากอะไร','What does CEPA stand for?',[['Conservation, Ecology, Policy, Agriculture','Conservation, Ecology, Policy, Agriculture'],['Communication, Capacity building, Education, Participation, Awareness raising','Communication, Capacity building, Education, Participation, Awareness raising'],['Check, Evaluate, Plan, Act','Check, Evaluate, Plan, Act'],['Carbon, Energy, Pollution, Area','Carbon, Energy, Pollution, Area']],1,'กิจกรรม CEPA ควรอยู่ในแผนการจัดการระบบนิเวศ','CEPA activities belong in the management plan.'],
+ ['ตัวอย่างป่าชายเลนกับนากุ้งแสดงให้เห็นเรื่องใด','What does the mangrove versus shrimp farm example show?',[['นากุ้งมีมูลค่าสูงกว่าเสมอทั้งต่อเอกชนและสังคม','Shrimp farms are always worth more to both owners and society'],['เมื่อนับมูลค่าสาธารณะและต้นทุนที่สังคมต้องจ่าย ป่าชายเลนมีมูลค่ามากกว่า','Once public values and social costs are counted, the mangrove is worth more'],['ป่าชายเลนไม่มีมูลค่าทางเศรษฐกิจ','Mangroves have no economic value'],['ต้นทุนการฟื้นฟูนากุ้งต่ำมาก','Restoring shrimp farms is cheap']],1,'ชี้ถึงการขาดการให้มูลค่าระบบนิเวศที่เหมาะสม และความจำเป็นที่นักนิเวศกับนักเศรษฐศาสตร์ต้องร่วมมือกัน','It shows the lack of proper ecosystem valuation and why ecologists and economists must work together.'],
+ ['แนวคิดแบบ bio-centric / eco-centric เน้นเรื่องใด','What does the bio-centric / eco-centric approach focus on?',[['การใช้ประโยชน์ของมนุษย์เป็นหลัก','Human use first'],['สุขภาพของระบบนิเวศ: กระบวนการ หน้าที่ ความยืดหยุ่น (resilience)','Ecological health: processes, functions, resilience'],['การเติบโตของ GDP','GDP growth'],['การอนุรักษ์ชนิดพันธุ์เดียว','Conserving a single species']],1,'ตรงข้ามกับ anthropocentric ที่เน้นการใช้ประโยชน์ของมนุษย์','The opposite of the anthropocentric approach, which focuses on human use.']];
+var Q2=[
+ ['แบบจำลอง (model) หมายถึงข้อใด','What is a model?',[['สิ่งที่เป็นตัวแทนสภาพความเป็นจริง ที่มีความซับซ้อนน้อยกว่า','A representation of reality that is less complex'],['สำเนาที่เหมือนธรรมชาติทุกประการ','An exact copy of nature'],['โปรแกรมคอมพิวเตอร์เท่านั้น','Only a computer program'],['ข้อมูลภาคสนามที่ยังไม่วิเคราะห์','Raw field data']],0,'แบบจำลองไม่จำเป็นต้องเป็นคอมพิวเตอร์ อาจเป็นสมการ แผนภาพ หรือสิ่งที่จับต้องได้','A model need not be a computer program; it can be an equation, a diagram or a physical object.'],
+ ['ในสมการ x<sub>t+1</sub> = x<sub>t</sub> + r·x<sub>t</sub>(1 − x<sub>t</sub>/K) ค่า K คืออะไร','In x<sub>t+1</sub> = x<sub>t</sub> + r·x<sub>t</sub>(1 − x<sub>t</sub>/K), what is K?',[['อัตราการสืบพันธุ์','Reproduction rate'],['ขีดความสามารถในการรองรับ (carrying capacity)','Carrying capacity'],['ประชากรเริ่มต้น','Starting population'],['เวลา','Time']],1,'r คืออัตราการสืบพันธุ์ ส่วน K คือขีดความสามารถในการรองรับ','r is the reproduction rate; K is the carrying capacity.'],
+ ['Causal loop diagram และ stock–flow diagram จัดเป็นแบบจำลองประเภทใด','Causal loop and stock–flow diagrams are which type of model?',[['แบบจำลองเชิงกายภาพ','Physical model'],['แบบจำลองทางความคิดแบบแผนภาพ (system dynamics)','Conceptual diagram models (system dynamics)'],['แบบจำลองเชิงพื้นที่','Spatial model'],['เกมสวมบทบาท','Role-playing game']],1,'เป็นแผนภาพของ system dynamics model','They are diagrams used in system dynamics models.'],
+ ['แบบจำลองตัวแทน (agent-based model) ที่ใช้ข้อมูล GIS เป็นแบบจำลองประเภทใด','An agent-based model using GIS data is which kind?',[['Non-spatial computational model','Non-spatial computational model'],['Spatial computational model','Spatial computational model'],['Narrative model','Narrative model'],['Physical model','Physical model']],1,'แบบจำลองคอมพิวเตอร์แบ่งเป็น non-spatial และ spatial ตามการอ้างอิงเชิงพื้นที่','Computational models are split into non-spatial and spatial by their use of spatial data.'],
+ ['แบบจำลองเพื่อการคาดการณ์ (predictive model) ต่างจากแบบจำลองเพื่อการเรียนรู้ (heuristic) อย่างไร','How does a predictive model differ from a heuristic (learning) model?',[['ต้องการข้อมูลน้อยกว่า','It needs less data'],['ต้องการข้อมูลปริมาณ/คุณภาพสูงและความเข้าใจระบบสูง','It needs much good data and deep understanding of the system'],['ไม่ต้องตรวจสอบความถูกต้อง','It needs no validation'],['ใช้ได้เฉพาะในห้องเรียน','It only works in class']],1,'Perry &amp; Bond (2004)','Perry &amp; Bond (2004).'],
+ ['ตามเอกสารประกอบการสอน ขั้นตอนใดอาจกล่าวได้ว่าสำคัญที่สุดในการสร้างแบบจำลอง','According to the handout, which step can be called the most important?',[['การสร้างแบบจำลองทางความคิด','Building the conceptual model'],['การเขียนโปรแกรม','Writing the program'],['การเผยแพร่','Publishing'],['การวาดกราฟ','Drawing graphs']],0,'เพราะทำให้รู้ว่าต้องการข้อมูลอะไร และวางแผนเก็บข้อมูลได้เหมาะสม','Because it tells you which data are needed and how to plan data collection.'],
+ ['Social validation คืออะไร','What is social validation?',[['การเปรียบเทียบกับข้อมูลดาวเทียม','Comparing with satellite data'],['ให้ผู้มีส่วนเกี่ยวข้อง/ผู้ใช้ร่วมพิจารณาว่าผลของแบบจำลองยอมรับได้หรือไม่','Stakeholders/users jointly judge whether the model results are acceptable'],['การโพสต์แบบจำลองในสื่อสังคม','Posting the model on social media'],['การนับจำนวนผู้ใช้แบบจำลอง','Counting model users']],1,'เป็นที่ยอมรับโดยเฉพาะในแบบจำลองเพื่อการเรียนรู้ (Moss 2008)','Accepted especially for learning models (Moss 2008).'],
+ ['ข้อใดเป็นข้อจำกัดของแบบจำลอง','Which is a limitation of models?',[['จำลองซ้ำได้หลายครั้ง','They can be run many times'],['เป็นเพียงตัวแทนของระบบ ตัวแปรอาจไม่ครอบคลุม','They only represent the system; variables may be missing'],['ช่วยการตัดสินใจ','They support decisions'],['ส่งเสริมการเรียนรู้','They support learning']],1,'ผู้สร้างยังต้องมีทักษะการคิดเป็นระบบและประสบการณ์','Builders also need systems thinking and experience.'],
+ ['แบบจำลองมูลค่าป่าไม้ตีค่าผลกระทบเป็นเงินด้วยวิธีใด','How does the forest value model turn impacts into money?',[['ราคาตลาดของไม้ซุงเท่านั้น','Only the market price of logs'],['ต้นทุนทดแทน (replacement cost) เช่น ค่ารถบรรทุกน้ำ/ดิน ปุ๋ย ค่าไฟเครื่องปรับอากาศ','Replacement cost, e.g. hiring water/soil trucks, fertilizer, air-conditioning electricity'],['ความเต็มใจจ่ายของนักท่องเที่ยว','Tourists\' willingness to pay'],['ราคาคาร์บอนเครดิต','Carbon credit prices']],1,'คิดค่าใช้จ่ายที่ต้องใช้เพื่อทดแทนสิ่งที่สูญเสียไป','It counts what it would cost to replace what was lost.'],
+ ['กรมป่าไม้ใช้มูลค่า 150,000 บาท/ไร่ เพื่ออะไร','What did the Royal Forest Department use 150,000 baht/rai for?',[['จ่ายค่าชดเชยให้เกษตรกร','Compensating farmers'],['ฟ้องคดีแพ่งเรียกค่าเสียหายจากผู้บุกรุกป่า','Civil suits for damages against forest encroachers'],['ซื้อที่ดินคืนจากเอกชน','Buying land back from private owners'],['ขายคาร์บอนเครดิต','Selling carbon credits']],1,'ฟ้องเกษตรกรกว่า 2,000 ราย จึงเกิดคำถามด้านความถูกต้องและความยุติธรรม','More than 2,000 farmers were sued, raising questions of accuracy and justice.'],
+ ['รอยประทับทางนิเวศมีหน่วยเป็นอะไร','What is the unit of the ecological footprint?',[['ตันคาร์บอนต่อปี','Tonnes of carbon per year'],['เฮกตาร์ (โลก) ต่อคน (1 เฮกตาร์ = 6.25 ไร่)','(Global) hectares per person (1 ha = 6.25 rai)'],['ลิตรต่อคน','Litres per person'],['บาทต่อไร่','Baht per rai']],1,'เป็นพื้นที่ทั้งบกและน้ำที่ใช้ผลิตและรองรับของเสีย','It is the land and water area used for production and waste absorption.'],
+ ['ปี 2007 อัตราส่วน EF ÷ BC = 1.51 หมายความว่าอย่างไร','In 2007 EF ÷ BC = 1.51. What does that mean?',[['มนุษย์ใช้ทรัพยากรเท่ากับโลกราว 1.5 ใบ','Humanity used about 1.5 Earths'],['โลกยังเหลือศักยภาพอีก 51%','Earth still has 51% spare capacity'],['ประชากรเพิ่มขึ้น 51%','Population grew by 51%'],['รอยประทับลดลง 1.51 เท่า','The footprint fell 1.51-fold']],0,'เกิน 1 คือใช้เกินกว่าที่โลกผลิตและรองรับได้ในหนึ่งปี','Above 1 means using more than Earth can produce and absorb in a year.'],
+ ['กรณีดอยติ้ว จ.น่าน ใช้เครื่องมือใดในการเรียนรู้ร่วมกันระหว่างผู้เลี้ยงวัวและเจ้าหน้าที่ป่าไม้','In the Doi Tiew case, which tool did herders and foresters use to learn together?',[['แบบสอบถามทางไปรษณีย์','A postal questionnaire'],['เกมสวมบทบาทสมมุติร่วมกับแบบจำลองตัวแทนบนคอมพิวเตอร์ (CORMAS)','A role-playing game with a computer agent-based model (CORMAS)'],['ภาพถ่ายดาวเทียมเพียงอย่างเดียว','Satellite images only'],['การออกกฎหมายใหม่','A new law']],1,'Companion modelling: นำไปสู่แผนร่วม เช่น แปลงหญ้ารูซี่หมุนเวียนตามฤดูกาล','Companion modelling led to a joint plan, e.g. a seasonally rotated ruzi pasture.'],
+ ['กาแฟ 1 แก้ว มีรอยประทับทางน้ำประมาณเท่าใด (ตามเอกสาร)','About how much water does one cup of coffee take (per the handout)?',[['0.2 ลิตร','0.2 litres'],['14 ลิตร','14 litres'],['140 ลิตร','140 litres'],['2,400 ลิตร','2,400 litres']],2,'2,400 ลิตรคือแฮมเบอร์เกอร์ 1 ชิ้น','2,400 litres is one hamburger.']];
+function quiz(id,data){
+  var el=$('#'+id),ans={};
+  function render(){
+    var n=Object.keys(ans).length,ok=Object.keys(ans).filter(function(k){return ans[k]===data[k][3]}).length;
+    el.innerHTML='<div class="score"><b>'+T('คะแนน','Score')+': '+ok+' / '+data.length+'</b><span class="muted">'+T('ตอบแล้ว '+n+' ข้อ','answered '+n)+'</span><span class="spacer"></span><button class="btn noprint" data-qr="1">'+T('เริ่มใหม่','Restart')+'</button></div>'
+     +data.map(function(q,i){var done=ans[i]!=null;return '<div class="q'+(done?' done':'')+'"><div class="qt">'+(i+1)+'. '+T(q[0],q[1])+'</div>'+q[2].map(function(o,j){var c='';if(done){if(j===q[3])c=' right';else if(j===ans[i])c=' wrong'}return '<button class="op'+c+'" data-q="'+i+'" data-o="'+j+'"'+(done?' disabled':'')+'>'+String.fromCharCode(97+j)+') '+T(o[0],o[1])+'</button>'}).join('')+'<div class="ex">'+(done?(ans[i]===q[3]?'<b style="color:var(--ok)">'+T('ถูกต้อง','Correct')+'</b> — ':'<b style="color:var(--bad)">'+T('ยังไม่ถูก','Not quite')+'</b> — '):'')+T(q[4],q[5])+'</div></div>'}).join('')
+     +(n===data.length?'<div class="callout '+(id==='quiz1'?'green':'blue')+'"><b>'+T('ทำครบแล้ว: ได้ '+ok+' จาก '+data.length+' ข้อ','All done: '+ok+' of '+data.length+' correct')+'</b></div>':'');
+  }
+  el.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;if(b.dataset.qr){ans={};render();return}if(b.dataset.q!=null&&ans[b.dataset.q]==null){ans[b.dataset.q]=+b.dataset.o;render()}});
+  onRender(render);
+}
+quiz('quiz1',Q1);quiz('quiz2',Q2);
+
+/* ---------- documents ---------- */
+var DOCS={docs1:[
+ ['01_EcosystemManagement_Part1.pdf','สไลด์ การจัดการระบบนิเวศ ตอนที่ 1','Slides: ecosystem management, part 1','22','3.4'],
+ ['02_EcosystemManagement_Part2.pdf','สไลด์ การจัดการระบบนิเวศ ตอนที่ 2','Slides: ecosystem management, part 2','15','2.8'],
+ ['03_EcosystemManagement_Part3.pdf','สไลด์ การจัดการระบบนิเวศ ตอนที่ 3','Slides: ecosystem management, part 3','30','7.8']],
+ docs2:[
+ ['04_Introduction_to_modelling.pdf','สไลด์ ความรู้เบื้องต้นเกี่ยวกับแบบจำลองทางนิเวศ','Slides: introduction to ecological modelling','39','6.1'],
+ ['Handout_Intro_Ecological_Modelling.pdf','เอกสารประกอบ หัวข้อความรู้เบื้องต้นเกี่ยวกับแบบจำลองทางนิเวศ','Handout: introduction to ecological modelling','36','3.2'],
+ ['05_Case1_ForestValue.pdf','สไลด์ กรณีที่ 1 แบบจำลองมูลค่าของระบบนิเวศป่าไม้','Slides: case 1, forest ecosystem value model','14','2.4'],
+ ['06_Case2_EcologicalFootprint.pdf','สไลด์ กรณีที่ 2 แบบจำลองรอยประทับทางนิเวศ','Slides: case 2, ecological footprint model','22','4.3'],
+ ['Article_EcologicalFootprint_PD.pdf','บทความ รอยประทับทางนิเวศ (พงษ์ชัย ดำรงโรจน์วัฒนา)','Article: ecological footprint (Pongchai Dumrongrojwatthana, Thai)','2','0.2'],
+ ['07_Case_DoiTiew_Nan_2021.pdf','สไลด์ เกมและสถานการณ์จำลอง บ้านดอยติ้ว จ.น่าน','Slides: gaming & simulation at Doi Tiew, Nan','25','6.2'],
+ ['TSJLD2016_DoiTiew_Companion_Modelling.pdf','บทความ แบบจำลองเพื่อนคู่คิดเพื่อการจัดการทรัพยากรที่ดินและป่าไม้ (TSJLD 2016)','Article: companion modelling for land and forest management (TSJLD 2016, Thai)','19','1.1']]};
+Object.keys(DOCS).forEach(function(id){$('#'+id).innerHTML=DOCS[id].map(function(d){return '<div class="doc"><div class="ic">PDF</div><div><a href="pdf/'+d[0]+'" target="_blank" rel="noopener">'+T(d[1],d[2])+'</a><div class="muted" style="font-size:.82rem">'+d[3]+' '+T('หน้า','pages')+' · '+d[4]+' MB</div></div></div>'}).join('')});
+
+/* ---------- bilingual <option>s ("ไทย · English — suffix") ---------- */
+var OPTS=$$('select option').filter(function(o){return o.textContent.indexOf(' · ')>0}).map(function(o){var t=o.textContent,suf='',i=t.indexOf(' — ');if(i>0){suf=t.slice(i);t=t.slice(0,i)}var a=t.split(' · ');return {o:o,th:a[0],en:a[1],suf:suf}});
+onRender(function(){OPTS.forEach(function(x){x.o.textContent=(lang==='en'?x.en:x.th)+x.suf})});
+
+/* ---------- init ---------- */
+var qp=(location.search.match(/[?&]lang=(th|en)/)||[])[1];
+lang=qp||store.get('lang',null)||'th';
+document.documentElement.lang=lang;$('#langBtn').textContent=lang==='th'?'EN':'ไทย';
+route();
+})();
+</script>
+
+
+
+
+
+
+</body>
+</html>
