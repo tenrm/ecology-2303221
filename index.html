@@ -294,7 +294,7 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--muted);f
       <h3><span class="th">แบบจำลองทางนิเวศวิทยา</span><span class="en">Ecological modelling</span></h3>
       <p class="muted th">ความหมาย ประเภท ประโยชน์ ข้อจำกัด ขั้นตอนการสร้างแบบจำลอง และกรณีศึกษา: มูลค่าป่าไม้ รอยประทับทางนิเวศ และเกมจำลองที่ดอยติ้ว จ.น่าน</p>
       <p class="muted en">Definition, types, benefits, limits, the modelling steps, and case studies: forest value, ecological footprint and the role-playing game at Doi Tiew, Nan.</p>
-      <div class="chips"><span class="chip">VDO ×3</span><span class="chip">Logistic</span><span class="chip"><span class="th">มูลค่าป่าไม้</span><span class="en">Forest value</span></span><span class="chip">Ecological footprint</span><span class="chip"><span class="th">แบบทดสอบ</span><span class="en">Quiz</span></span></div>
+      <div class="chips"><span class="chip">VDO ×4</span><span class="chip">Logistic</span><span class="chip"><span class="th">มูลค่าป่าไม้</span><span class="en">Forest value</span></span><span class="chip">Ecological footprint</span><span class="chip"><span class="th">แบบทดสอบ</span><span class="en">Quiz</span></span></div>
     </a>
   </div>
 
@@ -314,7 +314,7 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--muted);f
       <h3 style="margin:0"><span class="th">วิดีโอบรรยาย (Ecology-2026)</span><span class="en">Lecture videos (Ecology-2026)</span></h3>
       <a href="https://www.youtube.com/playlist?list=PLSkhCc7k9KW5VD1hKmVct38A_XB73Reww" target="_blank" rel="noopener"><span class="th">เปิด playlist ใน YouTube ↗</span><span class="en">Open the playlist on YouTube ↗</span></a>
     </div>
-    <p class="muted"><span class="th">6 คลิป ประมาณ 3 ชั่วโมง 31 นาที</span><span class="en">6 clips, about 3 h 31 min in total</span></p>
+    <p class="muted"><span class="th">7 คลิป ประมาณ 3 ชั่วโมง 28 นาที</span><span class="en">7 clips, about 3 h 28 min in total</span></p>
     <div class="vidlist" id="homeVids"></div>
   </div>
 </section>
@@ -890,8 +890,8 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--muted);f
           </div>
         </details>
       </div>
-      <aside>
-        <div class="card">
+      <aside><div class="vid" data-v="6"></div><div class="vidcap"></div>
+        <div class="card" style="margin-top:12px">
           <h4><span class="th">ลองคำนวณรอยประทับของตนเอง</span><span class="en">Calculate your own footprint</span></h4>
           <ul style="margin-bottom:0">
             <li><a href="https://www.footprintcalculator.org/" target="_blank" rel="noopener">footprintcalculator.org</a> <small class="muted">(Global Footprint Network)</small></li>
@@ -990,7 +990,7 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--muted);f
           </div>
         </details>
       </div>
-      <aside><div class="vid" data-v="6"></div><div class="vidcap"></div>
+      <aside><div class="vid" data-v="7"></div><div class="vidcap"></div>
         <div class="card" style="margin-top:12px"><h4><span class="th">ลองเล่นเกมจำลองอื่น ๆ</span><span class="en">Try other simulation games</span></h4>
           <p style="margin:0"><a href="#more"><span class="th">ตัวอย่างแบบจำลองอื่น ๆ →</span><span class="en">More model examples →</span></a></p></div></aside>
     </div>
@@ -1209,7 +1209,8 @@ var VIDS=[
  {id:'4Aa6LxGIv5U',dur:'37:56',yt:'03 Ecosystem Management 2025 - Part3',th:'การจัดการระบบนิเวศ ตอนที่ 3: กระบวนการ P-D-C-A',en:'Ecosystem management, part 3: the P-D-C-A process',go:'#t1/lesson'},
  {id:'N_IBsfGrYak',dur:'23:56',yt:'04 Introduction to modelling',th:'ความรู้เบื้องต้นเกี่ยวกับแบบจำลองทางนิเวศ',en:'Introduction to ecological modelling',go:'#t2/lesson'},
  {id:'ILEBPAB0IvA',dur:'13:08',yt:'05 Case_ForestValue 2021',th:'กรณีศึกษา: แบบจำลองมูลค่าป่าไม้',en:'Case study: the forest value model',go:'#t2/forest'},
- {id:'bVz8V0fe-n0',dur:'1:06:12',yt:'Gaming and Simulation Case Studies',th:'กรณีศึกษา: เกมและสถานการณ์จำลอง',en:'Case studies: gaming and simulation',go:'#t2/game'}];
+ {id:'eefHTECoNWQ',dur:'16:29',yt:'06 Case_Ecological Footprint Model',th:'กรณีศึกษา: แบบจำลองรอยประทับทางนิเวศ',en:'Case study: the ecological footprint model',go:'#t2/footprint'},
+ {id:'bVz8V0fe-n0',dur:'1:06:12',yt:'Gaming and Simulation Case Studies',th:'กรณีศึกษา: แบบจำลองอื่น ๆ ที่ใช้งานจริง',en:'Case studies: other models in real use',go:'#t2/game'}];
 function vidHTML(i){var v=VIDS[i];return '<div class="vid" data-play="'+i+'" role="button" tabindex="0" aria-label="'+esc(v.yt)+'"><img loading="lazy" alt="" onerror="this.style.visibility=\'hidden\'" src="https://i.ytimg.com/vi/'+v.id+'/hqdefault.jpg"><div class="play"><i></i></div><span class="dur">'+v.dur+'</span></div>'}
 function capHTML(i,withGo){var v=VIDS[i];return '<div class="vidcap">'+(i+1)+'. '+T(v.th,v.en)+'</div><div class="muted" style="font-size:.82rem">'+esc(v.yt)+' · <a href="https://www.youtube.com/watch?v='+v.id+'&list='+PL+'" target="_blank" rel="noopener">YouTube ↗</a>'+(withGo?' · <a href="'+v.go+'">'+T('ไปที่บทเรียน','go to lesson')+'</a>':'')+'</div>'}
 $$('.vid[data-v]').forEach(function(el){var i=+el.dataset.v-1;el.outerHTML=vidHTML(i)});
